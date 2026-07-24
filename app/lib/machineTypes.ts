@@ -29,6 +29,13 @@ export type BackupStrategy =
   | "hosts-triple-mirror"
   | "eternal-redundancy";
 
+export type BandwidthTier =
+  | "shared-100m"
+  | "shared-1g"
+  | "dedicated-1g"
+  | "quantum-10g"
+  | "beyond-100g";
+
 export type FirewallRuleAction = "allow" | "drop";
 export type FirewallProtocol = "tcp" | "udp" | "icmp";
 
@@ -60,7 +67,7 @@ export interface Machine {
   cpuCores: number;
   cpuMode: CpuMode;
   memoryTier: MemoryTier;
-  bandwidthTier: string;
+  bandwidthTier: BandwidthTier;
   os: OperatingSystem;
   initialPolicy: FirewallInitialPolicy;
   slaLevel: SlaLevel;
@@ -79,3 +86,14 @@ export interface Machine {
 export const MAX_FIREWALL_RULES = 50;
 export const MAX_SPEED_HISTORY = 5;
 export const PROVISIONING_DURATION_MS = 6000;
+
+export const BANDWIDTH_CAPS: Record<
+  BandwidthTier,
+  { maxDownloadMbps: number; maxUploadMbps: number }
+> = {
+  "shared-100m": { maxDownloadMbps: 98, maxUploadMbps: 18 },
+  "shared-1g": { maxDownloadMbps: 940, maxUploadMbps: 180 },
+  "dedicated-1g": { maxDownloadMbps: 980, maxUploadMbps: 480 },
+  "quantum-10g": { maxDownloadMbps: 9800, maxUploadMbps: 5000 },
+  "beyond-100g": { maxDownloadMbps: 798000, maxUploadMbps: 396000 },
+};

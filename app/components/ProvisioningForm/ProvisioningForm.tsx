@@ -23,6 +23,7 @@ import type {
   MemoryTier,
   SlaLevel,
   BackupStrategy,
+  BandwidthTier,
 } from "~/lib/machineTypes";
 
 interface ProvisioningFormProps {
@@ -145,7 +146,7 @@ export function ProvisioningForm({
   const [region, setRegion] = useState<Region>("localhost-1A");
   const [cpuMode, setCpuMode] = useState<CpuMode>("1x");
   const [memory, setMemory] = useState<MemoryTier>("4GB");
-  const [bandwidth, setBandwidth] = useState(
+  const [bandwidth, setBandwidth] = useState<BandwidthTier>(
     isEnterprise ? "dedicated-1g" : "shared-100m",
   );
   const [os, setOs] = useState<OperatingSystem>("ubuntu-24.04");
@@ -375,7 +376,7 @@ export function ProvisioningForm({
                     <Select
                       variant="secondary"
                       selectedKey={bandwidth}
-                      onSelectionChange={(k) => setBandwidth(k as string)}
+                      onSelectionChange={(k) => setBandwidth(k as BandwidthTier)}
                     >
                       <Select.Trigger>
                         <Select.Value />

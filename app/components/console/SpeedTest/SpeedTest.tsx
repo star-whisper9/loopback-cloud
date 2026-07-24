@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useT } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
-import { MAX_SPEED_HISTORY, type SpeedTestResult } from "~/lib/machineTypes";
+import { MAX_SPEED_HISTORY, BANDWIDTH_CAPS, type SpeedTestResult } from "~/lib/machineTypes";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 type Phase = "idle" | "ping" | "download" | "upload" | "done";
@@ -33,13 +33,13 @@ export function SpeedTest() {
 
   const runTest = useCallback(() => {
     if (!machine || isStopped) return;
-    const pingMs = 0.01 + Math.random() * 0.04;
-    const deviceMem =
-      typeof navigator !== "undefined"
-        ? ((navigator as any).deviceMemory ?? 8)
-        : 8;
-    const downloadMbps = deviceMem * 1024 + (Math.random() - 0.5) * 200;
-    const uploadMbps = downloadMbps / 8 + (Math.random() - 0.5) * 50;
+    const caps = BANDWIDTH_CAPS[machine.bandwidthTier];
+
+    const pingMs = Math.max(0.001, 0.001 + Math.random() * 0.004);
+
+    const jitter = 0.82 + Math.random() * 0.17;
+    const downloadMbps = Math.round(caps.maxDownloadMbps * jitter);
+    const uploadMbps = Math.round(caps.maxUploadMbps * jitter);
 
     const phases: Phase[] = ["ping", "download", "upload"];
     let idx = 0;
