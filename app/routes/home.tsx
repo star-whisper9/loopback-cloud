@@ -8,6 +8,7 @@ import { Pricing } from "~/components/Pricing/Pricing";
 import { FAQ } from "~/components/FAQ/FAQ";
 import { CTA } from "~/components/CTA/CTA";
 import { Footer } from "~/components/Footer/Footer";
+import { ScrollToTop } from "~/components/ScrollToTop/ScrollToTop";
 import { useLocale } from "~/i18n/useT";
 
 export function meta({ matches }: Route.MetaArgs) {
@@ -42,6 +43,7 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
