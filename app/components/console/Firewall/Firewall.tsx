@@ -276,6 +276,8 @@ export function Firewall() {
                     {t("console.firewall.fieldName")}
                   </Label>
                   <Input
+                    variant="secondary"
+                    fullWidth
                     value={name}
                     onChange={(e) =>
                       setName((e.target as HTMLInputElement).value)
@@ -292,6 +294,8 @@ export function Firewall() {
                     {t("console.firewall.fieldSource")}
                   </Label>
                   <Input
+                    variant="secondary"
+                    fullWidth
                     value={source}
                     onChange={(e) =>
                       setSource((e.target as HTMLInputElement).value)
@@ -309,6 +313,7 @@ export function Firewall() {
                       {t("console.firewall.fieldProtocol")}
                     </Label>
                     <Select
+                      variant="secondary"
                       selectedKey={protocol}
                       onSelectionChange={(k) =>
                         setProtocol(k as FirewallProtocol)
@@ -339,6 +344,8 @@ export function Firewall() {
                       {t("console.firewall.fieldPort")}
                     </Label>
                     <Input
+                      variant="secondary"
+                      fullWidth
                       value={port}
                       onChange={(e) =>
                         setPort((e.target as HTMLInputElement).value)
@@ -356,6 +363,7 @@ export function Firewall() {
                     {t("console.firewall.fieldAction")}
                   </Label>
                   <Select
+                    variant="secondary"
                     selectedKey={action}
                     onSelectionChange={(k) =>
                       setAction(k as FirewallRuleAction)
