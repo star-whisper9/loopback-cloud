@@ -297,7 +297,7 @@ const zh = {
       toastAdded: "规则已添加",
       toastDeleted: "规则已删除（3 秒内可撤销）",
       undo: "撤销",
-      emptyWarnAllDrop: "未开放任何对外端口，实例无法接收入站 TCP 连接",
+      emptyWarnAllDrop: "未开放任何对外端口，实例无法接收入站连接",
       emptyWarnNoStrategy: "未配置防火墙策略，实例不受保护",
       stoppedOverlay: "实例已停机，防火墙运行中止",
       honestyNote:

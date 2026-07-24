@@ -296,7 +296,7 @@ const en: Dict = {
       stoppedCta: "Start Instance",
     },
     speedTest: {
-      start: "Start Speed Test",
+      start: "Start",
       running: "Testing…",
       ping: "Ping",
       download: "Download",
@@ -337,7 +337,7 @@ const en: Dict = {
       toastDeleted: "Rule deleted (undo within 3 seconds)",
       undo: "Undo",
       emptyWarnAllDrop:
-        "No inbound ports open — the instance can't accept inbound TCP",
+        "No inbound ports open — the instance can't accept inbound connection",
       emptyWarnNoStrategy:
         "No firewall policy configured — the instance is unprotected",
       stoppedOverlay: "Instance is stopped — firewall halted",
