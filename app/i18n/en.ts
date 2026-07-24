@@ -172,7 +172,7 @@ const en: Dict = {
   },
   cta: {
     title: "Ready?",
-    subtitle: "One command, and the cloud is at your feet.",
+    subtitle: "One click, and the cloud is at your feet.",
     button: "Start free now",
   },
   footer: {

@@ -146,7 +146,7 @@ const zh = {
   },
   cta: {
     title: "准备好了吗？",
-    subtitle: "一行命令，云就在你脚下。",
+    subtitle: "一次点击，云就在你脚下。",
     button: "立即免费开通",
   },
   footer: {
