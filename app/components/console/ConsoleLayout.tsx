@@ -5,6 +5,7 @@ import { Play, Square, Trash2, ArrowLeft, Activity, Gauge, Shield } from "lucide
 import { useT, useLocale } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
+import { ProvisioningAnimation } from "./ProvisioningAnimation";
 
 const TABS = [
   { id: "dashboard", icon: Activity },
@@ -145,35 +146,41 @@ export function ConsoleLayout() {
       </header>
 
       {/* Tab bar */}
-      <nav className="border-b border-white/10">
-        <div className="mx-auto flex max-w-6xl gap-1 px-6">
-          {TABS.map(({ id, icon: Icon }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setTab(id)}
-              className={cn(
-                "flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm transition-colors",
-                tab === id
-                  ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-                  : "border-transparent text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              {t(
-                `console.layout.tab${id.charAt(0).toUpperCase()}${id.slice(1)}` as any,
-              )}
-            </button>
-          ))}
-        </div>
-      </nav>
+      {machine.status !== "provisioning" && (
+        <>
+          <nav className="border-b border-white/10">
+            <div className="mx-auto flex max-w-6xl gap-1 px-6">
+              {TABS.map(({ id, icon: Icon }) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setTab(id)}
+                  className={cn(
+                    "flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm transition-colors",
+                    tab === id
+                      ? "border-[var(--color-accent)] text-[var(--color-accent)]"
+                      : "border-transparent text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
+                  )}
+                >
+                  <Icon className="h-4 w-4" />
+                  {t(
+                    `console.layout.tab${id.charAt(0).toUpperCase()}${id.slice(1)}` as any,
+                  )}
+                </button>
+              ))}
+            </div>
+          </nav>
 
-      {/* Tab content */}
-      <main className="mx-auto max-w-6xl px-6 py-8">
-        {tab === "dashboard" && <div className="min-h-[50vh]" />}
-        {tab === "speedtest" && <div className="min-h-[50vh]" />}
-        {tab === "firewall" && <div className="min-h-[50vh]" />}
-      </main>
+          {/* Tab content */}
+          <main className="mx-auto max-w-6xl px-6 py-8">
+            {tab === "dashboard" && <div className="min-h-[50vh]" />}
+            {tab === "speedtest" && <div className="min-h-[50vh]" />}
+            {tab === "firewall" && <div className="min-h-[50vh]" />}
+          </main>
+        </>
+      )}
+
+      {machine.status === "provisioning" && <ProvisioningAnimation />}
     </div>
   );
 }
