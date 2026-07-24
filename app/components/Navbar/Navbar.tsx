@@ -50,7 +50,7 @@ export function Navbar() {
             {t("nav.pricing")}
           </a>
           <a
-            href="#docs"
+            href="#faq"
             className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             {t("nav.docs")}

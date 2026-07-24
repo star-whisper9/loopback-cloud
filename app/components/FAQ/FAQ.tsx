@@ -22,7 +22,7 @@ export function FAQ() {
   ] as const;
 
   return (
-    <section ref={ref} className="mx-auto max-w-3xl px-6 py-20">
+    <section ref={ref} className="mx-auto max-w-3xl px-6 py-20" id="faq">
       <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-fg md:text-4xl">
         {t("faq.sectionTitle")}
       </h2>
