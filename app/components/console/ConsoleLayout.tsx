@@ -6,6 +6,7 @@ import { useT, useLocale } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
 import { ProvisioningAnimation } from "./ProvisioningAnimation";
+import { Dashboard } from "./Dashboard/Dashboard";
 
 const TABS = [
   { id: "dashboard", icon: Activity },
@@ -173,7 +174,7 @@ export function ConsoleLayout() {
 
           {/* Tab content */}
           <main className="mx-auto max-w-6xl px-6 py-8">
-            {tab === "dashboard" && <div className="min-h-[50vh]" />}
+            {tab === "dashboard" && <Dashboard />}
             {tab === "speedtest" && <div className="min-h-[50vh]" />}
             {tab === "firewall" && <div className="min-h-[50vh]" />}
           </main>
