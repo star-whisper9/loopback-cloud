@@ -1,10 +1,10 @@
-import { ShieldCheck, Gauge, Lock, Activity, Cpu } from "lucide-react";
+import { ShieldCheck, Gauge, Lock, Activity, Cpu, Footprints } from "lucide-react";
 import { GlareCard } from "@/components/ui/glare-card";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
 
-const ICONS = [ShieldCheck, Gauge, Lock, Activity, Cpu] as const;
+const ICONS = [ShieldCheck, Gauge, Lock, Activity, Cpu, Footprints] as const;
 
 export function SellingPoints() {
   const t = useT();
@@ -25,6 +25,8 @@ export function SellingPoints() {
     t("sellingPoints.items.3.principle"),
     t("sellingPoints.items.4.title"),
     principle4,
+    t("sellingPoints.items.5.title"),
+    t("sellingPoints.items.5.principle"),
   ];
 
   return (

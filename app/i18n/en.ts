@@ -64,6 +64,10 @@ const en: Dict = {
         principleNoCores:
           "Take as many cores and as much RAM as you want. You can have it all.",
       },
+      {
+        title: 'Zero-Latency "On-Site" Ops',
+        principle: "Just walk over and kick the host — instant physical reset.",
+      },
     ],
   },
   devQuotes: {
@@ -175,7 +179,7 @@ const en: Dict = {
     slogan: "0 latency, 0 cost, absolutely secure — the cloud under your feet.",
     disclaimer1:
       "All nodes of this service run on your own computer. Loopback Cloud assumes no responsibility for increased electricity bills caused by your prolonged uptime.",
-    disclaimer2: "HCP No. 2026-0000001. All rights reserved locally.",
+    disclaimer2: "HCP No. 2026-799325. All rights reserved locally.",
     links: { about: "About", blog: "Blog", status: "Status" },
   },
   lang: {
