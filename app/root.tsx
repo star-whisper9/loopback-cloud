@@ -17,6 +17,7 @@ import { I18nProvider } from "./i18n/I18nProvider";
 import { MachineProvider } from "./lib/useMachine";
 
 export const links: Route.LinksFunction = () => [
+  { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
