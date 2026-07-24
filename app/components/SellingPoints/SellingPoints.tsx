@@ -2,12 +2,18 @@ import { ShieldCheck, Gauge, Lock, Activity, Cpu } from "lucide-react";
 import { GlareCard } from "@/components/ui/glare-card";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
+import { useCores } from "~/lib/useCores";
 
 const ICONS = [ShieldCheck, Gauge, Lock, Activity, Cpu] as const;
 
 export function SellingPoints() {
   const t = useT();
+  const cores = useCores();
   const [ref, inView] = useInView<HTMLDivElement>();
+  const principle4 =
+    cores !== undefined
+      ? t("sellingPoints.items.4.principle", { cores: String(cores) })
+      : t("sellingPoints.items.4.principleNoCores");
   const items = [
     t("sellingPoints.items.0.title"),
     t("sellingPoints.items.0.principle"),
@@ -18,7 +24,7 @@ export function SellingPoints() {
     t("sellingPoints.items.3.title"),
     t("sellingPoints.items.3.principle"),
     t("sellingPoints.items.4.title"),
-    t("sellingPoints.items.4.principle"),
+    principle4,
   ];
 
   return (

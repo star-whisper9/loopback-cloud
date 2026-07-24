@@ -1,18 +1,24 @@
 import { Accordion } from "@heroui/react";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
+import { useCores } from "~/lib/useCores";
 import { cn } from "~/lib/utils";
 
 export function FAQ() {
   const t = useT();
+  const cores = useCores();
   const [ref, inView] = useInView<HTMLDivElement>();
+  const k8sA =
+    cores !== undefined
+      ? t("faq.items.5.a", { cores: String(cores) })
+      : t("faq.items.5.aNoCores");
   const items = [
     [t("faq.items.0.q"), t("faq.items.0.a")],
     [t("faq.items.1.q"), t("faq.items.1.a")],
     [t("faq.items.2.q"), t("faq.items.2.a")],
     [t("faq.items.3.q"), t("faq.items.3.a")],
     [t("faq.items.4.q"), t("faq.items.4.a")],
-    [t("faq.items.5.q"), t("faq.items.5.a")],
+    [t("faq.items.5.q"), k8sA],
   ] as const;
 
   return (

@@ -3,11 +3,17 @@ import { Button } from "@heroui/react";
 import { EvervaultCard } from "@/components/ui/evervault-card";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
+import { useCores } from "~/lib/useCores";
 import { cn } from "~/lib/utils";
 
 export function Pricing() {
   const t = useT();
+  const cores = useCores();
   const [ref, inView] = useInView<HTMLDivElement>();
+  const enterpriseCpuRow =
+    cores !== undefined
+      ? t("pricing.enterprise.rows.0", { cores: String(cores) })
+      : t("pricing.enterprise.cpuCoresFallback");
 
   const community = {
     name: t("pricing.community.name"),
@@ -31,7 +37,7 @@ export function Pricing() {
     cta: t("pricing.enterprise.cta"),
     popularBadge: t("pricing.enterprise.popularBadge"),
     rows: [
-      t("pricing.enterprise.rows.0"),
+      enterpriseCpuRow,
       t("pricing.enterprise.rows.1"),
       t("pricing.enterprise.rows.2"),
       t("pricing.enterprise.rows.3"),
