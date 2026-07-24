@@ -59,7 +59,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <LangSwitch />
           {machine !== null ? (
-            <Link to="/console">
+            <Link to="/console" className="inline-flex h-9">
               <MovingButton
                 as="span"
                 borderRadius="9999px"
@@ -71,16 +71,18 @@ export function Navbar() {
               </MovingButton>
             </Link>
           ) : (
-            <MovingButton
-              as="a"
-              href="#pricing"
-              borderRadius="9999px"
-              containerClassName="w-28 h-9 text-sm"
-              className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
-              borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
-            >
-              {t("nav.cta")}
-            </MovingButton>
+            <div className="inline-flex h-9">
+              <MovingButton
+                as="a"
+                href="#pricing"
+                borderRadius="9999px"
+                containerClassName="w-28 h-9 text-sm"
+                className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+                borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+              >
+                {t("nav.cta")}
+              </MovingButton>
+            </div>
           )}
         </div>
       </nav>

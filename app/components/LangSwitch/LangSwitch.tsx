@@ -9,7 +9,7 @@ export function LangSwitch({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/3 p-1",
+        "inline-flex h-9 items-center gap-1 rounded-full border border-white/10 bg-white/3 p-1",
         className,
       )}
     >
@@ -23,7 +23,7 @@ export function LangSwitch({ className }: { className?: string }) {
               document.cookie = `loopback-lang=${l}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
             }}
             className={cn(
-              "px-3 py-1 text-xs font-medium transition-colors rounded-full",
+              "flex h-full items-center justify-center rounded-full px-3 text-xs font-medium transition-colors",
               active ? "bg-accent text-black" : "text-fg-muted hover:text-fg",
             )}
           >
