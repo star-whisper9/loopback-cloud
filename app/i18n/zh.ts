@@ -166,7 +166,7 @@ const zh = {
       confirmDeleteBody: "删除后数据不可恢复，确定要删除这台机器吗？",
       back: "返回首页",
       tabDashboard: "Dashboard",
-      tabSpeedTest: "测速",
+      tabSpeedtest: "测速",
       tabFirewall: "云防火墙",
       instanceId: "实例 ID",
       publicIp: "公网 IP",

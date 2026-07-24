@@ -14,6 +14,7 @@ import { type Locale } from "./i18n/types";
 import zh from "./i18n/zh";
 import en, { type Dict } from "./i18n/en";
 import { I18nProvider } from "./i18n/I18nProvider";
+import { MachineProvider } from "./lib/useMachine";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -76,7 +77,9 @@ export default function App() {
   }
   return (
     <I18nProvider locale={data.locale} dict={data.dict}>
-      <Outlet />
+      <MachineProvider>
+        <Outlet />
+      </MachineProvider>
     </I18nProvider>
   );
 }

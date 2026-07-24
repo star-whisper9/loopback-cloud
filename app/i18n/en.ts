@@ -192,7 +192,7 @@ const en: Dict = {
       confirmDeleteBody: "Data cannot be recovered after deletion. Are you sure you want to delete this machine?",
       back: "Back to Home",
       tabDashboard: "Dashboard",
-      tabSpeedTest: "Speed Test",
+      tabSpeedtest: "Speed Test",
       tabFirewall: "Cloud Firewall",
       instanceId: "Instance ID",
       publicIp: "Public IP",
