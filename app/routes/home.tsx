@@ -13,9 +13,15 @@ import { useLocale } from "~/i18n/useT";
 
 export function meta({ matches }: Route.MetaArgs) {
   const rootMatch = matches.find((m) => m?.id === "root");
-  const locale = (rootMatch?.loaderData as { locale?: string } | undefined)?.locale ?? "zh";
+  const locale =
+    (rootMatch?.loaderData as { locale?: string } | undefined)?.locale ?? "zh";
   return [
-    { title: locale === "en" ? "Loopback Cloud · Local-First Quantum Cloud" : "环回云 · Loopback Cloud" },
+    {
+      title:
+        locale === "en"
+          ? "Loopback Cloud · Local-First Quantum Cloud"
+          : "环回云 · Loopback Cloud",
+    },
     {
       name: "description",
       content:

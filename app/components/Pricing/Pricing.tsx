@@ -53,33 +53,24 @@ export function Pricing() {
     c: typeof community & { popularBadge?: string };
     popular?: boolean;
   }) => (
-    <div className="relative flex flex-col h-full p-7 bg-[var(--color-surface)]/30">
+    <div className="relative flex flex-col h-full p-7 bg-surface/30">
       {popular && (
-        <span className="absolute right-5 top-5 rounded-full bg-[var(--color-accent)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-black z-10">
+        <span className="absolute right-5 top-5 rounded-full bg-accent px-2.5 py-1 text-[10px] font-bold tracking-wider text-black z-10">
           {c.popularBadge!}
         </span>
       )}
-      <span className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)]">
+      <span className="text-xs font-mono uppercase tracking-widest text-accent">
         {c.tag}
       </span>
-      <h3 className="mt-3 text-2xl font-bold text-[var(--color-fg)]">
-        {c.name}
-      </h3>
+      <h3 className="mt-3 text-2xl font-bold text-fg">{c.name}</h3>
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-4xl font-bold text-[var(--color-fg)]">
-          {c.price}
-        </span>
-        <span className="text-sm text-[var(--color-fg-muted)]">
-          {c.priceNote}
-        </span>
+        <span className="text-4xl font-bold text-fg">{c.price}</span>
+        <span className="text-sm text-fg-muted">{c.priceNote}</span>
       </div>
       <ul className="mt-6 flex-1 space-y-3">
         {c.rows.map((r) => (
-          <li
-            key={r}
-            className="flex items-start gap-3 text-sm text-[var(--color-fg)]"
-          >
-            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-accent)]" />
+          <li key={r} className="flex items-start gap-3 text-sm text-fg">
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
             <span>{r}</span>
           </li>
         ))}
@@ -90,7 +81,7 @@ export function Pricing() {
             as="a"
             href="#cta"
             containerClassName="w-full h-11 text-sm"
-            className="bg-[var(--color-accent)] text-black border-transparent font-semibold hover:brightness-110 transition"
+            className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
             borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
           >
             {c.cta}
@@ -108,10 +99,10 @@ export function Pricing() {
 
   return (
     <section id="pricing" ref={ref} className="mx-auto max-w-6xl px-6 py-20">
-      <h2 className="mb-3 text-center text-3xl font-bold tracking-tight text-[var(--color-fg)] md:text-4xl">
+      <h2 className="mb-3 text-center text-3xl font-bold tracking-tight text-fg md:text-4xl">
         {t("pricing.sectionTitle")}
       </h2>
-      <p className="mb-12 text-center text-sm text-[var(--color-fg-muted)]">
+      <p className="mb-12 text-center text-sm text-fg-muted">
         {t("pricing.subtitle")}
       </p>
       <div className="grid items-stretch gap-6 md:grid-cols-2">

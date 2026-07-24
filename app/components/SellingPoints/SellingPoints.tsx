@@ -1,4 +1,11 @@
-import { ShieldCheck, Gauge, Lock, Activity, Cpu, Footprints } from "lucide-react";
+import {
+  ShieldCheck,
+  Gauge,
+  Lock,
+  Activity,
+  Cpu,
+  Footprints,
+} from "lucide-react";
 import { GlareCard } from "@/components/ui/glare-card";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
@@ -39,7 +46,7 @@ export function SellingPoints() {
 
   return (
     <section id="product" ref={ref} className="mx-auto max-w-6xl px-6 py-20">
-      <h2 className="mb-10 text-3xl font-bold tracking-tight text-[var(--color-fg)] md:text-4xl">
+      <h2 className="mb-10 text-3xl font-bold tracking-tight text-fg md:text-4xl">
         {t("sellingPoints.sectionTitle")}
       </h2>
       <div
@@ -54,7 +61,7 @@ export function SellingPoints() {
           const title = items[idx * 2];
           const principle = items[idx * 2 + 1];
           return (
-            <div key={idx} className="h-[220px]">
+            <div key={idx} className="h-55">
               <GlareCard className="h-full w-full">
                 <div className="relative flex h-full flex-col gap-3 p-6">
                   <img
@@ -63,12 +70,16 @@ export function SellingPoints() {
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-45"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-                  <span className="relative z-[1] text-[var(--color-accent)] drop-shadow-[0_0_8px_var(--color-accent)]">
+                  <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+                  <span className="relative z-1 text-accent drop-shadow-[0_0_8px_var(--color-accent)]">
                     <Icon className="h-7 w-7" />
                   </span>
-                  <h3 className="relative z-[1] text-lg font-semibold leading-tight text-[var(--color-fg)] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{title}</h3>
-                  <p className="relative z-[1] mt-auto text-sm text-[var(--color-fg-muted)] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">{principle}</p>
+                  <h3 className="relative z-1 text-lg font-semibold leading-tight text-fg drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                    {title}
+                  </h3>
+                  <p className="relative z-1 mt-auto text-sm text-fg-muted drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                    {principle}
+                  </p>
                 </div>
               </GlareCard>
             </div>

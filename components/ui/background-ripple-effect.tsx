@@ -20,7 +20,10 @@ export const BackgroundRippleEffect = ({
       )}
     >
       <DivGrid
-        className={cn("mask-radial-from-20% mask-radial-at-top opacity-600", className)}
+        className={cn(
+          "mask-radial-from-20% mask-radial-at-top opacity-600",
+          className,
+        )}
         rows={rows}
         cols={cols}
         cellSize={cellSize}
@@ -63,7 +66,7 @@ const DivGrid = ({
   };
 
   return (
-    <div className={cn("relative z-[3]", className)} style={gridStyle}>
+    <div className={cn("relative z-3", className)} style={gridStyle}>
       {cells.map((idx) => (
         <div
           key={idx}

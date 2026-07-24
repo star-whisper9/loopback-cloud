@@ -23,8 +23,8 @@ export function ScrollToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       className={cn(
         "fixed bottom-16 right-16 z-50 flex h-12 w-12 items-center justify-center rounded-full",
-        "border border-[var(--color-accent)]/40 bg-[var(--color-surface)]/90 backdrop-blur-sm",
-        "text-[var(--color-accent)] shadow-[0_0_20px_-6px_var(--color-accent)]",
+        "border border-accent/40 bg-surface/90 backdrop-blur-sm",
+        "text-accent shadow-[0_0_20px_-6px_var(--color-accent)]",
         "transition-all duration-300",
         visible
           ? "opacity-100 translate-y-0"

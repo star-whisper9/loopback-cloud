@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useInView<T extends Element>(opts?: { threshold?: number; once?: boolean }) {
+export function useInView<T extends Element>(opts?: {
+  threshold?: number;
+  once?: boolean;
+}) {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   const { threshold = 0.18, once = true } = opts ?? {};
@@ -23,7 +26,7 @@ export function useInView<T extends Element>(opts?: { threshold?: number; once?:
           }
         }
       },
-      { threshold }
+      { threshold },
     );
     obs.observe(el);
     return () => obs.disconnect();

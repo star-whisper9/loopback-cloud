@@ -7,22 +7,34 @@ export type NestedKey<T> = T extends readonly (infer U)[]
     ? `${number}.${NestedKey<U>}`
     : `${number}`
   : T extends object
-    ? { [K in keyof T & string]: T[K] extends object ? `${K}.${NestedKey<T[K]>}` : K }[keyof T & string]
+    ? {
+        [K in keyof T & string]: T[K] extends object
+          ? `${K}.${NestedKey<T[K]>}`
+          : K;
+      }[keyof T & string]
     : never;
 
-export type TranslationFn = (key: NestedKey<Dict>, params?: Record<string, string | number>) => string;
+export type TranslationFn = (
+  key: NestedKey<Dict>,
+  params?: Record<string, string | number>,
+) => string;
 
 export function createT(dict: Dict): TranslationFn {
   return (key, params) => {
     const parts = key.split(".");
     let cur: unknown = dict;
     for (const p of parts) {
-      if (cur === null || typeof cur !== "object" || !(p in (cur as Record<string, unknown>))) {
+      if (
+        cur === null ||
+        typeof cur !== "object" ||
+        !(p in (cur as Record<string, unknown>))
+      ) {
         throw new Error(`i18n missing key: ${key}`);
       }
       cur = (cur as Record<string, unknown>)[p];
     }
-    if (typeof cur !== "string") throw new Error(`i18n key is not a string leaf: ${key}`);
+    if (typeof cur !== "string")
+      throw new Error(`i18n key is not a string leaf: ${key}`);
     if (!params) return cur;
     let out = cur;
     for (const [k, v] of Object.entries(params)) {

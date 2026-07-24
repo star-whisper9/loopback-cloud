@@ -33,8 +33,15 @@ const DICTS: Record<Locale, Dict> = { zh, en };
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
   const cookieHeader = request.headers.get("Cookie") ?? "";
-  const cookieLang = cookieHeader.split(";").map(s => s.trim()).find(s => s.startsWith("loopback-lang="))?.split("=")[1];
-  const acceptLanguages = (request.headers.get("Accept-Language") ?? "").split(",").map(s => s.split(";")[0].trim()).filter(Boolean);
+  const cookieLang = cookieHeader
+    .split(";")
+    .map((s) => s.trim())
+    .find((s) => s.startsWith("loopback-lang="))
+    ?.split("=")[1];
+  const acceptLanguages = (request.headers.get("Accept-Language") ?? "")
+    .split(",")
+    .map((s) => s.split(";")[0].trim())
+    .filter(Boolean);
   const locale = resolveLocale({ url, cookie: cookieLang, acceptLanguages });
   return { locale, dict: DICTS[locale] };
 }
@@ -60,9 +67,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const data = useRouteLoaderData<typeof loader>("root") as RootLoaderData | undefined;
+  const data = useRouteLoaderData<typeof loader>("root") as
+    RootLoaderData | undefined;
   if (!data) {
-    throw new Error("TODO: root loader data missing — investigate SSR loader wiring");
+    throw new Error(
+      "TODO: root loader data missing — investigate SSR loader wiring",
+    );
   }
   return (
     <I18nProvider locale={data.locale} dict={data.dict}>

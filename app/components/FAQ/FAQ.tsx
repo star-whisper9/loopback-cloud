@@ -23,7 +23,7 @@ export function FAQ() {
 
   return (
     <section ref={ref} className="mx-auto max-w-3xl px-6 py-20">
-      <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-[var(--color-fg)] md:text-4xl">
+      <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-fg md:text-4xl">
         {t("faq.sectionTitle")}
       </h2>
       <div
