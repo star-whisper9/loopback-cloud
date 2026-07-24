@@ -4,7 +4,7 @@ import { useT } from "~/i18n/useT";
 import { useMachine } from "~/lib/useMachine";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { Spotlight } from "@/components/ui/spotlight";
-import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 import { HeroBanner } from "./HeroBanner";
 
 export function Hero() {
@@ -12,7 +12,7 @@ export function Hero() {
   const machine = useMachine();
   return (
     <section id="top" className="relative overflow-hidden">
-      <BackgroundRippleEffect />
+      <BackgroundBeams />
       <Spotlight
         className="-top-40 left-0 md:-top-20 md:left-60"
         fill="white"
