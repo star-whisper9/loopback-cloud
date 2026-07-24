@@ -2,9 +2,11 @@ import { createContext, useContext } from "react";
 import type { Dict } from "./en";
 import type { Locale } from "./types";
 
-export type NestedKey<T> = T extends object
-  ? { [K in keyof T & string]: T[K] extends object ? `${K}.${NestedKey<T[K]>}` : K }[keyof T & string]
-  : never;
+export type NestedKey<T> = T extends readonly (infer U)[]
+  ? `${number}.${NestedKey<U>}`
+  : T extends object
+    ? { [K in keyof T & string]: T[K] extends object ? `${K}.${NestedKey<T[K]>}` : K }[keyof T & string]
+    : never;
 
 export type TranslationFn = (key: NestedKey<Dict>, params?: Record<string, string | number>) => string;
 
