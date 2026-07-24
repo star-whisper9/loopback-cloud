@@ -3,7 +3,9 @@ import type { Dict } from "./en";
 import type { Locale } from "./types";
 
 export type NestedKey<T> = T extends readonly (infer U)[]
-  ? `${number}.${NestedKey<U>}`
+  ? U extends object
+    ? `${number}.${NestedKey<U>}`
+    : `${number}`
   : T extends object
     ? { [K in keyof T & string]: T[K] extends object ? `${K}.${NestedKey<T[K]>}` : K }[keyof T & string]
     : never;
