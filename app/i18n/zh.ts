@@ -14,12 +14,10 @@ const zh = {
     ctaPrimary: "立即免费开通",
     ctaSecondary: "查看文档",
     bannerFrames: {
-      leftTitle: "LOCALHOST",
-      leftSubtitle: "127.0.0.1",
-      kw1: "0$/MONTH",
-      kw2: "ANTI DDoS",
-      kw3: "LOW PING",
-      kw4: "HIGH SPEED",
+      kw1: { prefix: "最低", kw: "0元/月" },
+      kw2: { prefix: "军工级", kw: "高防" },
+      kw3: { prefix: "超低", kw: "延迟" },
+      kw4: { prefix: "超大", kw: "带宽" },
     },
   },
   sellingPoints: {

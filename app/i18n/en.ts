@@ -27,12 +27,10 @@ const en: Dict = {
     ctaPrimary: "Start Free Now",
     ctaSecondary: "View Docs",
     bannerFrames: {
-      leftTitle: "LOCALHOST",
-      leftSubtitle: "127.0.0.1",
-      kw1: "0$/MONTH",
-      kw2: "ANTI DDoS",
-      kw3: "LOW PING",
-      kw4: "HIGH SPEED",
+      kw1: { prefix: "0$/", kw: "MONTH" },
+      kw2: { prefix: "ANTI ", kw: "DDoS" },
+      kw3: { prefix: "LOW ", kw: "PING" },
+      kw4: { prefix: "HIGH ", kw: "SPEED" },
     },
   },
   sellingPoints: {

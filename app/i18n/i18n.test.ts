@@ -37,10 +37,10 @@ describe("t()", () => {
     expect(t("hero.badge")).toBe(zh.hero.badge);
   });
 
-  it("interpolates {{v}}", () => {
+  it("interpolates {{cores}}", () => {
     const t = createT(zh);
-    const out = t("hero.bannerFrames.kw1", { v: "0$" });
-    expect(out).toContain("0$");
+    const out = t("faq.items.5.a", { cores: "128" });
+    expect(out).toContain("128");
   });
 
   it("throws on missing key (Fail-Fast)", () => {
