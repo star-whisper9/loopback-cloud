@@ -5,10 +5,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteLoaderData,
 } from "react-router";
-
 import type { Route } from "./+types/root";
 import "./app.css";
+import { resolveLocale } from "./i18n/resolveLocale";
+import { type Locale } from "./i18n/types";
+import zh from "./i18n/zh";
+import en, { type Dict } from "./i18n/en";
+import { I18nProvider } from "./i18n/I18nProvider";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -22,6 +27,19 @@ export const links: Route.LinksFunction = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
   },
 ];
+
+const DICTS: Record<Locale, Dict> = { zh, en };
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const cookieHeader = request.headers.get("Cookie") ?? "";
+  const cookieLang = cookieHeader.split(";").map(s => s.trim()).find(s => s.startsWith("loopback-lang="))?.split("=")[1];
+  const acceptLanguages = (request.headers.get("Accept-Language") ?? "").split(",").map(s => s.split(";")[0].trim()).filter(Boolean);
+  const locale = resolveLocale({ url, cookie: cookieLang, acceptLanguages });
+  return { locale, dict: DICTS[locale] };
+}
+
+type RootLoaderData = Awaited<ReturnType<typeof loader>>;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,7 +60,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const data = useRouteLoaderData<typeof loader>("root") as RootLoaderData | undefined;
+  if (!data) {
+    throw new Error("TODO: root loader data missing — investigate SSR loader wiring");
+  }
+  return (
+    <I18nProvider locale={data.locale} dict={data.dict}>
+      <Outlet />
+    </I18nProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
