@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@heroui/react";
 import { useT } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
 import { MAX_SPEED_HISTORY, type SpeedTestResult } from "~/lib/machineTypes";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 type Phase = "idle" | "ping" | "download" | "upload" | "done";
 
@@ -131,12 +131,15 @@ export function SpeedTest() {
           )}
         </svg>
         {phase === "idle" || phase === "done" ? (
-          <Button
-            className="h-32 w-32 rounded-full text-lg font-bold"
-            onPress={runTest}
+          <HoverBorderGradient
+            containerClassName="h-40 w-40 sm:h-48 sm:w-48 rounded-full border-transparent bg-transparent hover:bg-transparent"
+            className="flex h-full w-full items-center justify-center rounded-full bg-[var(--color-surface)] text-lg font-bold text-white"
+            as="button"
+            onClick={runTest}
+            duration={0.8}
           >
             {t("console.speedTest.start")}
-          </Button>
+          </HoverBorderGradient>
         ) : (
           <div className="text-center">
             <p className="text-xs uppercase tracking-widest text-fg-muted">

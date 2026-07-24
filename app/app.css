@@ -201,6 +201,18 @@ body {
   }
 }
 
+@keyframes breath-halo {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.08);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

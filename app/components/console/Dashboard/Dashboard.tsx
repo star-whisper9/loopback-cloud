@@ -7,7 +7,7 @@ import { MiniChart } from "./MiniChart";
 import { cn } from "~/lib/utils";
 
 const WINDOW = 30;
-const TICK_MS = 2000;
+const TICK_MS = 1000;
 
 function fmtUptime(ms: number): string {
   const s = Math.floor(ms / 1000);

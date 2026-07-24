@@ -49,16 +49,18 @@ export function ConsoleLayout() {
     <div className="min-h-screen bg-bg">
       {/* Header */}
       <header className="border-b border-white/10 bg-surface">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)]" />
-            <span className="text-sm font-semibold text-fg">{t("brand")}</span>
-            <span className="font-mono text-xs text-fg-muted">
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)]" />
+            <span className="whitespace-nowrap text-sm font-semibold text-fg">
+              {t("brand")}
+            </span>
+            <span className="whitespace-nowrap font-mono text-xs text-fg-muted">
               {machine.id}
             </span>
             <span
               className={cn(
-                "rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
+                "whitespace-nowrap rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
                 isRunning
                   ? "bg-accent/20 text-accent"
                   : "bg-yellow-500/20 text-yellow-400",
@@ -71,15 +73,15 @@ export function ConsoleLayout() {
                   : t("console.layout.statusStopped")}
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
             {isRunning ? (
               <Button
                 size="sm"
                 variant="outline"
                 onPress={() => updateStatus("stopped")}
               >
-                <Square className="mr-1 h-3 w-3" />
-                {t("console.layout.stop")}
+                <Square className="h-3 w-3" />
+                <span className="hidden sm:inline">{t("console.layout.stop")}</span>
               </Button>
             ) : (
               machine.status === "stopped" && (
@@ -88,15 +90,15 @@ export function ConsoleLayout() {
                   variant="outline"
                   onPress={() => updateStatus("running")}
                 >
-                  <Play className="mr-1 h-3 w-3" />
-                  {t("console.layout.start")}
+                  <Play className="h-3 w-3" />
+                  <span className="hidden sm:inline">{t("console.layout.start")}</span>
                 </Button>
               )
             )}
             <AlertDialog>
               <Button size="sm" variant="outline">
-                <Trash2 className="mr-1 h-3 w-3" />
-                {t("console.layout.delete")}
+                <Trash2 className="h-3 w-3" />
+                <span className="hidden sm:inline">{t("console.layout.delete")}</span>
               </Button>
               <AlertDialog.Backdrop>
                 <AlertDialog.Container>
@@ -129,13 +131,13 @@ export function ConsoleLayout() {
               </AlertDialog.Backdrop>
             </AlertDialog>
             <Button size="sm" variant="outline" onPress={() => navigate("/")}>
-              <ArrowLeft className="mr-1 h-3 w-3" />
-              {t("console.layout.back")}
+              <ArrowLeft className="h-3 w-3" />
+              <span className="hidden sm:inline">{t("console.layout.back")}</span>
             </Button>
           </div>
         </div>
         {/* Instance info bar */}
-        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-1 px-6 pb-3 text-xs text-fg-muted">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-1 px-6 pb-3 text-xs text-fg-muted sm:flex sm:flex-wrap">
           <span>
             {t("console.layout.publicIp")}: {machine.publicIp}
           </span>
