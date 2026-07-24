@@ -1,0 +1,15 @@
+services:
+  loopback-cloud:
+    image: loopback-cloud:latest
+    container_name: loopback-cloud
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
