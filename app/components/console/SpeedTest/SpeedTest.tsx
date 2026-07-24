@@ -2,7 +2,11 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useT } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
-import { MAX_SPEED_HISTORY, BANDWIDTH_CAPS, type SpeedTestResult } from "~/lib/machineTypes";
+import {
+  MAX_SPEED_HISTORY,
+  BANDWIDTH_CAPS,
+  type SpeedTestResult,
+} from "~/lib/machineTypes";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 
 type Phase = "idle" | "ping" | "download" | "upload" | "done";
@@ -133,7 +137,7 @@ export function SpeedTest() {
         {phase === "idle" || phase === "done" ? (
           <HoverBorderGradient
             containerClassName="h-40 w-40 sm:h-48 sm:w-48 rounded-full border-transparent bg-transparent hover:bg-transparent"
-            className="flex h-full w-full items-center justify-center rounded-full bg-[var(--color-surface)] text-lg font-bold text-white"
+            className="flex h-full w-full items-center justify-center rounded-full bg-surface text-lg font-bold text-white"
             as="button"
             onClick={runTest}
             duration={0.8}

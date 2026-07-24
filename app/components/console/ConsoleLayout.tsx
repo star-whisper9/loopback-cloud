@@ -81,30 +81,28 @@ export function ConsoleLayout() {
           </div>
           <div className="flex flex-wrap items-center gap-2 sm:justify-end">
             {isRunning ? (
-              <Button
-                size="sm"
-                variant="outline"
-                onPress={stopMachine}
-              >
+              <Button size="sm" variant="outline" onPress={stopMachine}>
                 <Square className="h-3 w-3" />
-                <span className="hidden sm:inline">{t("console.layout.stop")}</span>
+                <span className="hidden sm:inline">
+                  {t("console.layout.stop")}
+                </span>
               </Button>
             ) : (
               machine.status === "stopped" && (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onPress={startMachine}
-                >
+                <Button size="sm" variant="outline" onPress={startMachine}>
                   <Play className="h-3 w-3" />
-                  <span className="hidden sm:inline">{t("console.layout.start")}</span>
+                  <span className="hidden sm:inline">
+                    {t("console.layout.start")}
+                  </span>
                 </Button>
               )
             )}
             <AlertDialog>
               <Button size="sm" variant="outline">
                 <Trash2 className="h-3 w-3" />
-                <span className="hidden sm:inline">{t("console.layout.delete")}</span>
+                <span className="hidden sm:inline">
+                  {t("console.layout.delete")}
+                </span>
               </Button>
               <AlertDialog.Backdrop>
                 <AlertDialog.Container>
@@ -138,7 +136,9 @@ export function ConsoleLayout() {
             </AlertDialog>
             <Button size="sm" variant="outline" onPress={() => navigate("/")}>
               <ArrowLeft className="h-3 w-3" />
-              <span className="hidden sm:inline">{t("console.layout.back")}</span>
+              <span className="hidden sm:inline">
+                {t("console.layout.back")}
+              </span>
             </Button>
           </div>
         </div>

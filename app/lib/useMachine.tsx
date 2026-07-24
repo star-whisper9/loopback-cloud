@@ -117,7 +117,9 @@ export function useMachine(): Machine | null {
 export function useHydratedMachine(): Machine | null {
   const raw = useMachine();
   const [hydrated, setHydrated] = useState(false);
-  useEffect(() => { setHydrated(true); }, []);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
   return hydrated ? raw : null;
 }
 
@@ -125,6 +127,20 @@ export function useMachineActions() {
   const ctx = useContext(MachineContext);
   if (!ctx)
     throw new Error("useMachineActions must be used inside <MachineProvider>");
-  const { createMachine, updateStatus, startMachine, stopMachine, deleteMachine, patchMachine } = ctx;
-  return { createMachine, updateStatus, startMachine, stopMachine, deleteMachine, patchMachine };
+  const {
+    createMachine,
+    updateStatus,
+    startMachine,
+    stopMachine,
+    deleteMachine,
+    patchMachine,
+  } = ctx;
+  return {
+    createMachine,
+    updateStatus,
+    startMachine,
+    stopMachine,
+    deleteMachine,
+    patchMachine,
+  };
 }

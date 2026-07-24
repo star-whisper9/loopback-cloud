@@ -376,7 +376,9 @@ export function ProvisioningForm({
                     <Select
                       variant="secondary"
                       selectedKey={bandwidth}
-                      onSelectionChange={(k) => setBandwidth(k as BandwidthTier)}
+                      onSelectionChange={(k) =>
+                        setBandwidth(k as BandwidthTier)
+                      }
                     >
                       <Select.Trigger>
                         <Select.Value />
@@ -453,7 +455,7 @@ export function ProvisioningForm({
                     <RadioGroup
                       value={policy}
                       onChange={(v) => setPolicy(v as FirewallInitialPolicy)}
-                      className="grid gap-2 sm:grid-cols-2 rounded-lg border border-white/10 bg-white/[0.02] p-4"
+                      className="grid gap-2 sm:grid-cols-2 rounded-lg border border-white/10 bg-white/2 p-4"
                     >
                       {POLICIES.map((p) => (
                         <Radio key={p} value={p} className={"mt-0"}>
@@ -483,7 +485,7 @@ export function ProvisioningForm({
                       </Label>
                       <Select
                         variant="secondary"
-                        className="!bg-white/[0.04] !border-white/10"
+                        className="bg-white/4! border-white/10!"
                         selectedKey={sla}
                         onSelectionChange={(k) => setSla(k as SlaLevel)}
                       >
@@ -509,7 +511,7 @@ export function ProvisioningForm({
                       </Label>
                       <Select
                         variant="secondary"
-                        className="!bg-white/[0.04] !border-white/10"
+                        className="bg-white/4! border-white/10!"
                         selectedKey={backup}
                         onSelectionChange={(k) =>
                           setBackup(k as BackupStrategy)

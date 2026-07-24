@@ -59,10 +59,10 @@ export const BackgroundBeams = React.memo(
     ];
     return (
       <div
-          className={cn(
-            "absolute inset-0 flex h-full w-full items-center justify-center",
-            className,
-          )}
+        className={cn(
+          "absolute inset-0 flex h-full w-full items-center justify-center",
+          className,
+        )}
       >
         <svg
           className="pointer-events-none absolute z-0 h-full w-full"
@@ -127,8 +127,16 @@ export const BackgroundBeams = React.memo(
               gradientUnits="userSpaceOnUse"
               gradientTransform="translate(352 34) rotate(90) scale(555 1560.62)"
             >
-              <stop offset="0.0666667" stopColor="#a1f50a" stopOpacity="0.08"></stop>
-              <stop offset="0.243243" stopColor="#a1f50a" stopOpacity="0.04"></stop>
+              <stop
+                offset="0.0666667"
+                stopColor="#a1f50a"
+                stopOpacity="0.08"
+              ></stop>
+              <stop
+                offset="0.243243"
+                stopColor="#a1f50a"
+                stopOpacity="0.04"
+              ></stop>
               <stop offset="0.43594" stopColor="#a1f50a" stopOpacity="0"></stop>
             </radialGradient>
           </defs>

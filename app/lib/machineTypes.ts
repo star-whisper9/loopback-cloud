@@ -30,11 +30,7 @@ export type BackupStrategy =
   | "eternal-redundancy";
 
 export type BandwidthTier =
-  | "shared-100m"
-  | "shared-1g"
-  | "dedicated-1g"
-  | "quantum-10g"
-  | "beyond-100g";
+  "shared-100m" | "shared-1g" | "dedicated-1g" | "quantum-10g" | "beyond-100g";
 
 export type FirewallRuleAction = "allow" | "drop";
 export type FirewallProtocol = "tcp" | "udp" | "icmp";
