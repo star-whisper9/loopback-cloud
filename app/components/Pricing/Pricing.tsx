@@ -95,10 +95,9 @@ export function Pricing() {
           </Link>
         ) : popular ? (
           <MovingButton
-            as="button"
             onClick={() => setFormMode("enterprise")}
             containerClassName="w-full h-11 text-sm"
-            className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+            className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition cursor-pointer"
             borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
           >
             {c.cta}
