@@ -52,7 +52,7 @@ export function Pricing() {
     c: typeof community & { popularBadge?: string };
     popular?: boolean;
   }) => (
-    <div className="relative flex flex-col h-full p-7">
+    <div className="relative flex flex-col h-full p-7 bg-[var(--color-surface)]/30">
       {popular && (
         <span className="absolute right-5 top-5 rounded-full bg-[var(--color-accent)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-black z-10">
           {c.popularBadge!}
@@ -61,10 +61,16 @@ export function Pricing() {
       <span className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)]">
         {c.tag}
       </span>
-      <h3 className="mt-3 text-2xl font-bold text-[var(--color-fg)]">{c.name}</h3>
+      <h3 className="mt-3 text-2xl font-bold text-[var(--color-fg)]">
+        {c.name}
+      </h3>
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-4xl font-bold text-[var(--color-fg)]">{c.price}</span>
-        <span className="text-sm text-[var(--color-fg-muted)]">{c.priceNote}</span>
+        <span className="text-4xl font-bold text-[var(--color-fg)]">
+          {c.price}
+        </span>
+        <span className="text-sm text-[var(--color-fg-muted)]">
+          {c.priceNote}
+        </span>
       </div>
       <ul className="mt-6 flex-1 space-y-3">
         {c.rows.map((r) => (
@@ -102,7 +108,7 @@ export function Pricing() {
         <div
           className={cn(
             "transition-all duration-500",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
           <EvervaultCard className="h-full w-full">
@@ -112,7 +118,7 @@ export function Pricing() {
         <div
           className={cn(
             "transition-all duration-500",
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
           <EvervaultCard className="h-full w-full">
