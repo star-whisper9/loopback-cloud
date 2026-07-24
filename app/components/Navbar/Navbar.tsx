@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { useT } from "~/i18n/useT";
+import { useMachine } from "~/lib/useMachine";
 import { LangSwitch } from "~/components/LangSwitch/LangSwitch";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { cn } from "~/lib/utils";
 
 export function Navbar() {
   const t = useT();
+  const machine = useMachine();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -55,16 +58,30 @@ export function Navbar() {
         </div>
         <div className="flex items-center gap-3">
           <LangSwitch />
-          <MovingButton
-            as="a"
-            href="#pricing"
-            borderRadius="9999px"
-            containerClassName="w-28 h-9 text-sm"
-            className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
-            borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
-          >
-            {t("nav.cta")}
-          </MovingButton>
+          {machine !== null ? (
+            <Link to="/console">
+              <MovingButton
+                as="span"
+                borderRadius="9999px"
+                containerClassName="w-28 h-9 text-sm"
+                className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+                borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+              >
+                {t("console.layout.gotoConsole")}
+              </MovingButton>
+            </Link>
+          ) : (
+            <MovingButton
+              as="a"
+              href="#pricing"
+              borderRadius="9999px"
+              containerClassName="w-28 h-9 text-sm"
+              className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+              borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+            >
+              {t("nav.cta")}
+            </MovingButton>
+          )}
         </div>
       </nav>
     </header>

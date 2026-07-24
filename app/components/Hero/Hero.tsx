@@ -1,5 +1,7 @@
 import { Button } from "@heroui/react";
+import { Link } from "react-router";
 import { useT } from "~/i18n/useT";
+import { useMachine } from "~/lib/useMachine";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { Spotlight } from "@/components/ui/spotlight";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
@@ -7,6 +9,7 @@ import { HeroBanner } from "./HeroBanner";
 
 export function Hero() {
   const t = useT();
+  const machine = useMachine();
   return (
     <section id="top" className="relative overflow-hidden">
       <BackgroundRippleEffect />
@@ -27,15 +30,28 @@ export function Hero() {
               {t("hero.subtitle")}
             </p>
             <div className="mt-8 flex items-center gap-3">
-              <MovingButton
-                as="a"
-                href="#pricing"
-                containerClassName="w-40 h-12 text-base"
-                className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
-                borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
-              >
-                {t("hero.ctaPrimary")}
-              </MovingButton>
+              {machine !== null ? (
+                <Link to="/console">
+                  <MovingButton
+                    as="span"
+                    containerClassName="w-40 h-12 text-base"
+                    className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+                    borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+                  >
+                    {t("console.layout.gotoConsole")}
+                  </MovingButton>
+                </Link>
+              ) : (
+                <MovingButton
+                  as="a"
+                  href="#pricing"
+                  containerClassName="w-40 h-12 text-base"
+                  className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
+                  borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+                >
+                  {t("hero.ctaPrimary")}
+                </MovingButton>
+              )}
               <a href="#docs">
                 <Button variant="outline" size="lg" className="font-semibold">
                   {t("hero.ctaSecondary")}
