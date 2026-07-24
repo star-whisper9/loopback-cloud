@@ -29,7 +29,7 @@ export function FAQ() {
       <div
         className={cn(
           "transition-opacity duration-500",
-          inView ? "opacity-100" : "opacity-0"
+          inView ? "opacity-100" : "opacity-0",
         )}
       >
         <Accordion>
@@ -42,7 +42,7 @@ export function FAQ() {
                 </Accordion.Trigger>
               </Accordion.Heading>
               <Accordion.Panel>
-                <Accordion.Body>{a}</Accordion.Body>
+                <Accordion.Body className="text-fg-muted">{a}</Accordion.Body>
               </Accordion.Panel>
             </Accordion.Item>
           ))}
