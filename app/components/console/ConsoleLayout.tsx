@@ -1,7 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { Button, AlertDialog } from "@heroui/react";
-import { Play, Square, Trash2, ArrowLeft, Activity, Gauge, Shield } from "lucide-react";
+import {
+  Play,
+  Square,
+  Trash2,
+  ArrowLeft,
+  Activity,
+  Gauge,
+  Shield,
+} from "lucide-react";
 import { useT, useLocale } from "~/i18n/useT";
 import { useMachine, useMachineActions } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
@@ -31,31 +39,28 @@ export function ConsoleLayout() {
   }, [machine, navigate]);
 
   const tab = (searchParams.get("tab") as TabId) || "dashboard";
-  const setTab = (id: TabId) =>
-    setSearchParams({ tab: id }, { replace: true });
+  const setTab = (id: TabId) => setSearchParams({ tab: id }, { replace: true });
 
   if (machine === null) return null;
 
   const isRunning = machine.status === "running";
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)]">
+    <div className="min-h-screen bg-bg">
       {/* Header */}
-      <header className="border-b border-white/10 bg-[var(--color-surface)]">
+      <header className="border-b border-white/10 bg-surface">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_12px_var(--color-accent)]" />
-            <span className="text-sm font-semibold text-[var(--color-fg)]">
-              {t("brand")}
-            </span>
-            <span className="font-mono text-xs text-[var(--color-fg-muted)]">
+            <span className="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)]" />
+            <span className="text-sm font-semibold text-fg">{t("brand")}</span>
+            <span className="font-mono text-xs text-fg-muted">
               {machine.id}
             </span>
             <span
               className={cn(
                 "rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider",
                 isRunning
-                  ? "bg-[var(--color-accent)]/20 text-[var(--color-accent)]"
+                  ? "bg-accent/20 text-accent"
                   : "bg-yellow-500/20 text-yellow-400",
               )}
             >
@@ -95,7 +100,7 @@ export function ConsoleLayout() {
               </Button>
               <AlertDialog.Backdrop>
                 <AlertDialog.Container>
-                  <AlertDialog.Dialog className="sm:max-w-[360px]">
+                  <AlertDialog.Dialog className="sm:max-w-90">
                     <AlertDialog.Header>
                       <AlertDialog.Heading>
                         {t("console.layout.confirmDeleteTitle")}
@@ -130,14 +135,13 @@ export function ConsoleLayout() {
           </div>
         </div>
         {/* Instance info bar */}
-        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-1 px-6 pb-3 text-xs text-[var(--color-fg-muted)]">
+        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-1 px-6 pb-3 text-xs text-fg-muted">
           <span>
             {t("console.layout.publicIp")}: {machine.publicIp}
           </span>
           <span>
             {t("console.layout.spec")}: {machine.cpuCores}
-            {locale === "zh" ? " 核" : " cores"} /{" "}
-            {machine.memoryTier}
+            {locale === "zh" ? " 核" : " cores"} / {machine.memoryTier}
           </span>
           <span>
             {t("console.layout.region")}: {machine.region}
@@ -161,8 +165,8 @@ export function ConsoleLayout() {
                   className={cn(
                     "flex items-center gap-1.5 border-b-2 px-4 py-3 text-sm transition-colors",
                     tab === id
-                      ? "border-[var(--color-accent)] text-[var(--color-accent)]"
-                      : "border-transparent text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
+                      ? "border-accent text-accent"
+                      : "border-transparent text-fg-muted hover:text-fg",
                   )}
                 >
                   <Icon className="h-4 w-4" />

@@ -47,10 +47,7 @@ export function Dashboard() {
               : 30 + Math.random() * 40;
         return [...prev.slice(-(WINDOW - 1)), base];
       });
-      setNetData((prev) => [
-        ...prev.slice(-(WINDOW - 1)),
-        Math.random() * 15,
-      ]);
+      setNetData((prev) => [...prev.slice(-(WINDOW - 1)), Math.random() * 15]);
       setNow(Date.now());
     }, TICK_MS);
     return () => clearInterval(timer);
@@ -74,7 +71,7 @@ export function Dashboard() {
   if (isStopped) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4">
-        <p className="text-xl font-bold text-[var(--color-fg)]">
+        <p className="text-xl font-bold text-fg">
           {t("console.dashboard.stoppedOverlay")}
         </p>
         <Button onPress={() => updateStatus("running")}>
@@ -111,14 +108,23 @@ export function Dashboard() {
         />
       </div>
 
-      <div className="space-y-4 rounded-xl border border-white/10 bg-[var(--color-surface)] p-5">
-        <h3 className="text-sm font-bold uppercase tracking-widest text-[var(--color-accent)]">
+      <div className="space-y-4 rounded-xl border border-white/10 bg-surface p-5">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-accent">
           {t("console.layout.instanceId")}
         </h3>
         <InfoRow label={t("console.layout.instanceId")} value={machine.id} />
-        <InfoRow label={t("console.layout.publicIp")} value={machine.publicIp} />
-        <InfoRow label={t("console.layout.privateIp")} value={machine.privateIp} />
-        <InfoRow label={t("console.layout.dockerPort")} value={String(machine.dockerPort)} />
+        <InfoRow
+          label={t("console.layout.publicIp")}
+          value={machine.publicIp}
+        />
+        <InfoRow
+          label={t("console.layout.privateIp")}
+          value={machine.privateIp}
+        />
+        <InfoRow
+          label={t("console.layout.dockerPort")}
+          value={String(machine.dockerPort)}
+        />
         <InfoRow
           label={t("console.layout.spec")}
           value={`${machine.cpuCores} cores / ${machine.memoryTier}`}
@@ -134,7 +140,9 @@ export function Dashboard() {
           isDisabled={restarting}
           onPress={handleRestart}
         >
-          <RotateCw className={cn("mr-2 h-4 w-4", restarting && "animate-spin")} />
+          <RotateCw
+            className={cn("mr-2 h-4 w-4", restarting && "animate-spin")}
+          />
           {restarting
             ? t("console.dashboard.restarting")
             : t("console.dashboard.restart")}
@@ -159,14 +167,12 @@ function ChartCard({
 }) {
   const latest = data.length > 0 ? data[data.length - 1] : 0;
   return (
-    <div className="rounded-xl border border-white/10 bg-[var(--color-surface)] p-4">
+    <div className="rounded-xl border border-white/10 bg-surface p-4">
       <div className="mb-2 flex items-baseline justify-between">
-        <span className="text-sm text-[var(--color-fg-muted)]">{title}</span>
-        <span className="font-mono text-lg font-bold text-[var(--color-fg)]">
+        <span className="text-sm text-fg-muted">{title}</span>
+        <span className="font-mono text-lg font-bold text-fg">
           {latest.toFixed(1)}
-          <span className="ml-1 text-xs font-normal text-[var(--color-fg-muted)]">
-            {unit}
-          </span>
+          <span className="ml-1 text-xs font-normal text-fg-muted">{unit}</span>
         </span>
       </div>
       <MiniChart data={data} color={color} max={max} />
@@ -177,8 +183,8 @@ function ChartCard({
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between text-sm">
-      <span className="text-[var(--color-fg-muted)]">{label}</span>
-      <span className="font-mono text-[var(--color-fg)]">{value}</span>
+      <span className="text-fg-muted">{label}</span>
+      <span className="font-mono text-fg">{value}</span>
     </div>
   );
 }

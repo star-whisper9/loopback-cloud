@@ -186,7 +186,11 @@ const zh = {
       groupB: "硬件规格",
       groupC: "系统与安全",
       groupD: "SLA 与备份",
-      f1: { label: "主机名", desc: "给你的虚拟机起个名字", placeholder: "loopback-1" },
+      f1: {
+        label: "主机名",
+        desc: "给你的虚拟机起个名字",
+        placeholder: "loopback-1",
+      },
       f2: { label: "区域", desc: "所有区域都在你电脑里" },
       f3: { label: "CPU 核数", desc: "你不是有几核就给几核吗" },
       f4: { label: "内存", desc: "你的物理内存，用多少算多少" },
@@ -307,7 +311,8 @@ const zh = {
       add: "添加",
     },
     toast: {
-      storageError: "存储写入失败，请检查浏览器是否处于隐私模式或本地存储已禁用",
+      storageError:
+        "存储写入失败，请检查浏览器是否处于隐私模式或本地存储已禁用",
       machineDeleted: "机器已删除",
       machineStopped: "实例已停机",
       machineStarted: "实例已启动",

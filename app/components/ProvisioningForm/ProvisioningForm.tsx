@@ -72,7 +72,13 @@ const POLICY_LABEL_KEYS: Record<FirewallInitialPolicy, string> = {
 };
 
 const COMMUNITY_MEMORY: MemoryTier[] = ["1GB", "2GB", "4GB", "all"];
-const ENTERPRISE_MEMORY: MemoryTier[] = ["1GB", "4GB", "16GB", "all", "virtual8x"];
+const ENTERPRISE_MEMORY: MemoryTier[] = [
+  "1GB",
+  "4GB",
+  "16GB",
+  "all",
+  "virtual8x",
+];
 
 const COMMUNITY_BANDWIDTH = [
   { id: "shared-100m", labelKey: "console.form.bandwidthShared100m" },
@@ -114,15 +120,20 @@ const BACKUP_LABEL_KEYS: Record<BackupStrategy, string> = {
   "hosts-double-mirror": "console.form.backupHostsDoubleMirror",
   "hosts-triple-mirror": "console.form.backupHostsTripleMirror",
   "eternal-redundancy": "console.form.backupEternalRedundancy",
-  "disabled": "console.form.backupHostsMirror",
+  disabled: "console.form.backupHostsMirror",
 };
 
-export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps) {
+export function ProvisioningForm({
+  mode,
+  open,
+  onClose,
+}: ProvisioningFormProps) {
   const t = useT();
   const navigate = useNavigate();
   const { createMachine } = useMachineActions();
   const isEnterprise = mode === "enterprise";
-  const cores = typeof navigator !== "undefined" ? navigator.hardwareConcurrency ?? 8 : 8;
+  const cores =
+    typeof navigator !== "undefined" ? (navigator.hardwareConcurrency ?? 8) : 8;
 
   const [hostname, setHostname] = useState("");
   const [region, setRegion] = useState<Region>("localhost-1A");
@@ -141,7 +152,16 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const cpuCores = isEnterprise
-    ? Math.round(cores * (cpuMode === "1.5x" ? 1.5 : cpuMode === "2x" ? 2 : cpuMode === "4x" ? 4 : 1))
+    ? Math.round(
+        cores *
+          (cpuMode === "1.5x"
+            ? 1.5
+            : cpuMode === "2x"
+              ? 2
+              : cpuMode === "4x"
+                ? 4
+                : 1),
+      )
     : cores;
 
   function validate(): boolean {
@@ -207,29 +227,33 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
             <Modal.Body className="space-y-6 p-6">
               {/* Group A */}
               <fieldset>
-                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupA")}
                 </legend>
                 <div className="space-y-4">
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f1.label")}
                     </Label>
                     <Input
                       value={hostname}
-                      onChange={(e) => setHostname((e.target as HTMLInputElement).value)}
+                      onChange={(e) =>
+                        setHostname((e.target as HTMLInputElement).value)
+                      }
                       placeholder={t("console.form.f1.placeholder")}
                       maxLength={isEnterprise ? 32 : 20}
                     />
                     {errors.hostname && (
-                      <p className="mt-1 text-xs text-red-400">{errors.hostname}</p>
+                      <p className="mt-1 text-xs text-red-400">
+                        {errors.hostname}
+                      </p>
                     )}
-                    <p className="mt-1 text-xs text-[var(--color-fg-muted)]">
+                    <p className="mt-1 text-xs text-fg-muted">
                       {t("console.form.f1.desc")}
                     </p>
                   </div>
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f2.label")}
                     </Label>
                     <Select
@@ -251,7 +275,7 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                         </ListBox>
                       </Select.Popover>
                     </Select>
-                    <p className="mt-1 text-xs text-[var(--color-fg-muted)]">
+                    <p className="mt-1 text-xs text-fg-muted">
                       {t("console.form.f2.desc")}
                     </p>
                   </div>
@@ -260,12 +284,12 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
 
               {/* Group B */}
               <fieldset>
-                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupB")}
                 </legend>
                 <div className="space-y-4">
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f3.label")}
                     </Label>
                     {isEnterprise ? (
@@ -281,9 +305,12 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                           <ListBox>
                             {ENTERPRISE_CPU.map((c) => (
                               <ListBox.Item key={c} id={c} textValue={c}>
-                                {t(`console.form.cpu${c.replace(".", "")}` as any, {
-                                  cores: String(cores),
-                                })}
+                                {t(
+                                  `console.form.cpu${c.replace(".", "")}` as any,
+                                  {
+                                    cores: String(cores),
+                                  },
+                                )}
                                 <ListBox.ItemIndicator />
                               </ListBox.Item>
                             ))}
@@ -291,16 +318,16 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                         </Select.Popover>
                       </Select>
                     ) : (
-                      <p className="text-sm text-[var(--color-fg)]">
+                      <p className="text-sm text-fg">
                         {t("console.form.cpuFixed", { cores: String(cores) })}
                       </p>
                     )}
-                    <p className="mt-1 text-xs text-[var(--color-fg-muted)]">
+                    <p className="mt-1 text-xs text-fg-muted">
                       {t("console.form.f3.desc")}
                     </p>
                   </div>
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f4.label")}
                     </Label>
                     <Select
@@ -313,24 +340,25 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                       </Select.Trigger>
                       <Select.Popover>
                         <ListBox>
-                          {(isEnterprise ? ENTERPRISE_MEMORY : COMMUNITY_MEMORY).map(
-                            (m) => (
-                              <ListBox.Item key={m} id={m} textValue={m}>
-                                {m === "all"
-                                  ? t("console.form.memoryAll")
-                                  : m === "virtual8x"
-                                    ? t("console.form.memoryVirtual8x")
-                                    : m}
-                                <ListBox.ItemIndicator />
-                              </ListBox.Item>
-                            ),
-                          )}
+                          {(isEnterprise
+                            ? ENTERPRISE_MEMORY
+                            : COMMUNITY_MEMORY
+                          ).map((m) => (
+                            <ListBox.Item key={m} id={m} textValue={m}>
+                              {m === "all"
+                                ? t("console.form.memoryAll")
+                                : m === "virtual8x"
+                                  ? t("console.form.memoryVirtual8x")
+                                  : m}
+                              <ListBox.ItemIndicator />
+                            </ListBox.Item>
+                          ))}
                         </ListBox>
                       </Select.Popover>
                     </Select>
                   </div>
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f5.label")}
                     </Label>
                     <Select
@@ -347,7 +375,11 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                             ? ENTERPRISE_BANDWIDTH
                             : COMMUNITY_BANDWIDTH
                           ).map((b) => (
-                            <ListBox.Item key={b.id} id={b.id} textValue={t(b.labelKey as any)}>
+                            <ListBox.Item
+                              key={b.id}
+                              id={b.id}
+                              textValue={t(b.labelKey as any)}
+                            >
                               {t(b.labelKey as any)}
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
@@ -361,12 +393,12 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
 
               {/* Group C */}
               <fieldset>
-                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+                <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupC")}
                 </legend>
                 <div className="space-y-4">
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f6.label")}
                     </Label>
                     <Select
@@ -380,7 +412,11 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                       <Select.Popover>
                         <ListBox>
                           {OS_LIST.map((o) => (
-                            <ListBox.Item key={o} id={o} textValue={OS_LABELS[o]}>
+                            <ListBox.Item
+                              key={o}
+                              id={o}
+                              textValue={OS_LABELS[o]}
+                            >
                               {OS_LABELS[o]}
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
@@ -390,7 +426,7 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                     </Select>
                   </div>
                   <div>
-                    <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                    <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f7.label")}
                     </Label>
                     <RadioGroup
@@ -415,12 +451,12 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
               {/* Group D — enterprise only */}
               {isEnterprise && (
                 <fieldset>
-                  <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-[var(--color-accent)]">
+                  <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                     {t("console.form.groupD")}
                   </legend>
                   <div className="space-y-4">
                     <div>
-                      <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                      <Label className="mb-1 block text-sm text-fg">
                         {t("console.form.f8.label")}
                       </Label>
                       <Select
@@ -444,12 +480,14 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
                       </Select>
                     </div>
                     <div>
-                      <Label className="mb-1 block text-sm text-[var(--color-fg)]">
+                      <Label className="mb-1 block text-sm text-fg">
                         {t("console.form.f9.label")}
                       </Label>
                       <Select
                         selectedKey={backup}
-                        onSelectionChange={(k) => setBackup(k as BackupStrategy)}
+                        onSelectionChange={(k) =>
+                          setBackup(k as BackupStrategy)
+                        }
                       >
                         <Select.Trigger>
                           <Select.Value />
@@ -492,9 +530,7 @@ export function ProvisioningForm({ mode, open, onClose }: ProvisioningFormProps)
               <Button slot="close" variant="outline">
                 {t("console.form.cancel")}
               </Button>
-              <Button onPress={handleSubmit}>
-                {t("console.form.submit")}
-              </Button>
+              <Button onPress={handleSubmit}>{t("console.form.submit")}</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </Modal.Container>

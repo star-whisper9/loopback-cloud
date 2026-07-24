@@ -5,7 +5,12 @@ interface MiniChartProps {
   height?: number;
 }
 
-export function MiniChart({ data, color, max = 100, height = 60 }: MiniChartProps) {
+export function MiniChart({
+  data,
+  color,
+  max = 100,
+  height = 60,
+}: MiniChartProps) {
   const width = 300;
   if (data.length < 2) {
     return <svg width={width} height={height} className="w-full" />;

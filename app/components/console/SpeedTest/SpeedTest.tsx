@@ -34,7 +34,10 @@ export function SpeedTest() {
   const runTest = useCallback(() => {
     if (!machine || isStopped) return;
     const pingMs = 0.01 + Math.random() * 0.04;
-    const deviceMem = typeof navigator !== "undefined" ? (navigator as any).deviceMemory ?? 8 : 8;
+    const deviceMem =
+      typeof navigator !== "undefined"
+        ? ((navigator as any).deviceMemory ?? 8)
+        : 8;
     const downloadMbps = deviceMem * 1024 + (Math.random() - 0.5) * 200;
     const uploadMbps = downloadMbps / 8 + (Math.random() - 0.5) * 50;
 
@@ -51,7 +54,9 @@ export function SpeedTest() {
         };
         setResult(r);
         setPhase("done");
-        const history = [...(machine.speedTestHistory ?? []), r].slice(-MAX_SPEED_HISTORY);
+        const history = [...(machine.speedTestHistory ?? []), r].slice(
+          -MAX_SPEED_HISTORY,
+        );
         patchMachine({ speedTestHistory: history });
         return;
       }
@@ -80,7 +85,7 @@ export function SpeedTest() {
   if (isStopped) {
     return (
       <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4">
-        <p className="text-xl font-bold text-[var(--color-fg)]">
+        <p className="text-xl font-bold text-fg">
           {t("console.speedTest.stoppedOverlay")}
         </p>
       </div>
@@ -100,15 +105,26 @@ export function SpeedTest() {
     <div className="flex flex-col items-center gap-8 py-8">
       {/* Big button / progress */}
       <div className="relative flex h-48 w-48 items-center justify-center">
-        <svg className="absolute inset-0 h-full w-full -rotate-90" viewBox="0 0 100 100">
+        <svg
+          className="absolute inset-0 h-full w-full -rotate-90"
+          viewBox="0 0 100 100"
+        >
           <circle
-            cx="50" cy="50" r="45"
-            fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="4"
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke="rgba(255,255,255,0.08)"
+            strokeWidth="4"
           />
           {(phase === "ping" || phase === "download" || phase === "upload") && (
             <circle
-              cx="50" cy="50" r="45"
-              fill="none" stroke="var(--color-accent)" strokeWidth="4"
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="var(--color-accent)"
+              strokeWidth="4"
               strokeLinecap="round"
               strokeDasharray={`${progress * 283} 283`}
             />
@@ -123,10 +139,10 @@ export function SpeedTest() {
           </Button>
         ) : (
           <div className="text-center">
-            <p className="text-xs uppercase tracking-widest text-[var(--color-fg-muted)]">
+            <p className="text-xs uppercase tracking-widest text-fg-muted">
               {phaseLabel}
             </p>
-            <p className="mt-1 font-mono text-2xl font-bold text-[var(--color-accent)]">
+            <p className="mt-1 font-mono text-2xl font-bold text-accent">
               {Math.round(progress * 100)}%
             </p>
           </div>
@@ -174,7 +190,7 @@ export function SpeedTest() {
                 }
               />
             </div>
-            <p className="text-center text-sm text-[var(--color-accent)]">
+            <p className="text-center text-sm text-accent">
               {t("console.speedTest.beat")}
             </p>
           </motion.div>
@@ -184,33 +200,38 @@ export function SpeedTest() {
       {/* History */}
       <div className="w-full max-w-md">
         <button
-          className="text-xs text-[var(--color-fg-muted)] underline hover:text-[var(--color-fg)]"
+          className="text-xs text-fg-muted underline hover:text-fg"
           onClick={() => setShowHistory((v) => !v)}
         >
           {t("console.speedTest.history")}
         </button>
         {showHistory &&
           ((machine.speedTestHistory?.length ?? 0) > 0 ? (
-            <ul className="mt-2 space-y-1 text-xs text-[var(--color-fg-muted)]">
+            <ul className="mt-2 space-y-1 text-xs text-fg-muted">
               {[...(machine.speedTestHistory ?? [])].reverse().map((r) => (
-                <li key={r.timestamp} className="flex justify-between font-mono">
+                <li
+                  key={r.timestamp}
+                  className="flex justify-between font-mono"
+                >
                   <span>{new Date(r.timestamp).toLocaleTimeString()}</span>
                   <span>
-                    {r.pingMs}{t("console.speedTest.unitMs")} / {
-                      r.downloadMbps >= 1000
-                        ? (r.downloadMbps / 1000).toFixed(1) + t("console.speedTest.unitGbps")
-                        : r.downloadMbps + t("console.speedTest.unitMbps")
-                    } / {
-                      r.uploadMbps >= 1000
-                        ? (r.uploadMbps / 1000).toFixed(1) + t("console.speedTest.unitGbps")
-                        : r.uploadMbps + t("console.speedTest.unitMbps")
-                    }
+                    {r.pingMs}
+                    {t("console.speedTest.unitMs")} /{" "}
+                    {r.downloadMbps >= 1000
+                      ? (r.downloadMbps / 1000).toFixed(1) +
+                        t("console.speedTest.unitGbps")
+                      : r.downloadMbps + t("console.speedTest.unitMbps")}{" "}
+                    /{" "}
+                    {r.uploadMbps >= 1000
+                      ? (r.uploadMbps / 1000).toFixed(1) +
+                        t("console.speedTest.unitGbps")
+                      : r.uploadMbps + t("console.speedTest.unitMbps")}
                   </span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="mt-2 text-xs text-[var(--color-fg-muted)]">
+            <p className="mt-2 text-xs text-fg-muted">
               {t("console.speedTest.noHistory")}
             </p>
           ))}
@@ -229,9 +250,9 @@ function ResultCard({
   unit: string;
 }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-[var(--color-surface)] p-4">
-      <p className="text-xs text-[var(--color-fg-muted)]">{label}</p>
-      <p className="mt-1 font-mono text-xl font-bold text-[var(--color-fg)]">
+    <div className="rounded-xl border border-white/10 bg-surface p-4">
+      <p className="text-xs text-fg-muted">{label}</p>
+      <p className="mt-1 font-mono text-xl font-bold text-fg">
         {value}
         <span className="ml-1 text-xs font-normal">{unit}</span>
       </p>

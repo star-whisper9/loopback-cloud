@@ -189,7 +189,8 @@ const en: Dict = {
       stop: "Stop",
       delete: "Delete",
       confirmDeleteTitle: "Confirm Delete",
-      confirmDeleteBody: "Data cannot be recovered after deletion. Are you sure you want to delete this machine?",
+      confirmDeleteBody:
+        "Data cannot be recovered after deletion. Are you sure you want to delete this machine?",
       back: "Back to Home",
       gotoConsole: "Enter Console",
       tabDashboard: "Dashboard",
@@ -212,16 +213,32 @@ const en: Dict = {
       groupB: "Hardware Spec",
       groupC: "System & Security",
       groupD: "SLA & Backup",
-      f1: { label: "Hostname", desc: "Give your VM a name", placeholder: "loopback-1" },
+      f1: {
+        label: "Hostname",
+        desc: "Give your VM a name",
+        placeholder: "loopback-1",
+      },
       f2: { label: "Region", desc: "All regions live inside your computer" },
-      f3: { label: "CPU Cores", desc: "You only get as many cores as you actually have" },
+      f3: {
+        label: "CPU Cores",
+        desc: "You only get as many cores as you actually have",
+      },
       f4: { label: "Memory", desc: "Your physical RAM — use what's left" },
-      f5: { label: "Bandwidth Plan", desc: "NIC cap = whatever your NIC can do" },
+      f5: {
+        label: "Bandwidth Plan",
+        desc: "NIC cap = whatever your NIC can do",
+      },
       f6: { label: "Operating System", desc: "Common cloud OS presets" },
-      f7: { label: "Initial Firewall Policy", desc: "Determines the pre-installed firewall rules" },
+      f7: {
+        label: "Initial Firewall Policy",
+        desc: "Determines the pre-installed firewall rules",
+      },
       f8: { label: "SLA Tier", desc: "References our SLA commitment" },
       f9: { label: "Backup Strategy", desc: "Mirrors your local hosts file" },
-      f10: { label: "I have read the Loopback Cloud Terms of Service", desc: "" },
+      f10: {
+        label: "I have read the Loopback Cloud Terms of Service",
+        desc: "",
+      },
       cancel: "Cancel",
       submit: "Provision Now",
       required: "Required",
@@ -319,8 +336,10 @@ const en: Dict = {
       toastAdded: "Rule added",
       toastDeleted: "Rule deleted (undo within 3 seconds)",
       undo: "Undo",
-      emptyWarnAllDrop: "No inbound ports open — the instance can't accept inbound TCP",
-      emptyWarnNoStrategy: "No firewall policy configured — the instance is unprotected",
+      emptyWarnAllDrop:
+        "No inbound ports open — the instance can't accept inbound TCP",
+      emptyWarnNoStrategy:
+        "No firewall policy configured — the instance is unprotected",
       stoppedOverlay: "Instance is stopped — firewall halted",
       honestyNote:
         "All rules only apply to local loopback traffic. Since Loopback routes directly on the local network stack, no inbound connection from anywhere can reach this instance without authorization.",
@@ -333,7 +352,8 @@ const en: Dict = {
       add: "Add",
     },
     toast: {
-      storageError: "Storage write failed — check whether your browser is in private mode or local storage is disabled",
+      storageError:
+        "Storage write failed — check whether your browser is in private mode or local storage is disabled",
       machineDeleted: "Machine deleted",
       machineStopped: "Instance stopped",
       machineStarted: "Instance started",

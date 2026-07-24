@@ -14,21 +14,14 @@ export type OperatingSystem =
   | "windows-server-2022";
 
 export type FirewallInitialPolicy =
-  | "default-ssh-http-https"
-  | "ssh-only"
-  | "deny-all"
-  | "no-policy";
+  "default-ssh-http-https" | "ssh-only" | "deny-all" | "no-policy";
 
 export type CpuMode = "fixed" | "1x" | "1.5x" | "2x" | "4x";
 
 export type MemoryTier = "1GB" | "2GB" | "4GB" | "16GB" | "all" | "virtual8x";
 
 export type SlaLevel =
-  | "best-effort"
-  | "sla-99-9"
-  | "sla-99-99"
-  | "sla-99-999"
-  | "sla-infinity";
+  "best-effort" | "sla-99-9" | "sla-99-99" | "sla-99-999" | "sla-infinity";
 
 export type BackupStrategy =
   | "disabled"

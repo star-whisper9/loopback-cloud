@@ -1,4 +1,8 @@
-import type { Machine, FirewallInitialPolicy, FirewallRule } from "./machineTypes";
+import type {
+  Machine,
+  FirewallInitialPolicy,
+  FirewallRule,
+} from "./machineTypes";
 
 const STORAGE_KEY = "loopback-cloud:state-v1";
 const SCHEMA_VERSION = 1;
@@ -50,7 +54,8 @@ function parse(raw: string | null): Snapshot | null {
     clearAll();
     return null;
   }
-  if (snap.machine === null) return { schemaVersion: SCHEMA_VERSION, machine: null };
+  if (snap.machine === null)
+    return { schemaVersion: SCHEMA_VERSION, machine: null };
   if (!isMachineValid(snap.machine)) {
     console.warn("[Loopback Cloud] machine schema invalid, resetting");
     clearAll();
@@ -114,13 +119,25 @@ export function convertInitialPolicyToRules(
   switch (policy) {
     case "default-ssh-http-https":
       return [
-        { ...base, id: makeRuleId(), name: "SSH", port: 22, source: "127.0.0.1/32" },
+        {
+          ...base,
+          id: makeRuleId(),
+          name: "SSH",
+          port: 22,
+          source: "127.0.0.1/32",
+        },
         { ...base, id: makeRuleId(), name: "HTTP", port: 80 },
         { ...base, id: makeRuleId(), name: "HTTPS", port: 443 },
       ];
     case "ssh-only":
       return [
-        { ...base, id: makeRuleId(), name: "SSH", port: 22, source: "127.0.0.1/32" },
+        {
+          ...base,
+          id: makeRuleId(),
+          name: "SSH",
+          port: 22,
+          source: "127.0.0.1/32",
+        },
       ];
     case "deny-all":
       return [];

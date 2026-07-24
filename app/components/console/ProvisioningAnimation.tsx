@@ -75,10 +75,10 @@ export function ProvisioningAnimation() {
                 key={i}
                 className={`flex items-center gap-3 text-sm transition-colors duration-300 ${
                   i < completedSteps
-                    ? "text-[var(--color-accent)]"
+                    ? "text-accent"
                     : i === completedSteps
-                      ? "text-[var(--color-fg)]"
-                      : "text-[var(--color-fg-muted)]/40"
+                      ? "text-fg"
+                      : "text-fg-muted/40"
                 }`}
               >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full border border-current text-[10px]">
@@ -95,13 +95,13 @@ export function ProvisioningAnimation() {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center"
           >
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-[var(--color-accent)] shadow-[0_0_40px_var(--color-accent)]">
-              <Check className="h-8 w-8 text-[var(--color-accent)]" />
+            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-accent shadow-[0_0_40px_var(--color-accent)]">
+              <Check className="h-8 w-8 text-accent" />
             </div>
-            <h2 className="text-2xl font-bold text-[var(--color-fg)]">
+            <h2 className="text-2xl font-bold text-fg">
               {t("console.provisioning.done")}
             </h2>
-            <p className="mt-2 text-sm text-[var(--color-fg-muted)]">
+            <p className="mt-2 text-sm text-fg-muted">
               {t("console.provisioning.countdown")} ({countdown}s)
             </p>
           </motion.div>

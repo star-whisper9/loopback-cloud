@@ -25,10 +25,18 @@ export function MachineProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const loaded = machineStore.read();
     if (loaded !== null && loaded.status === "provisioning") {
-      const elapsed = Date.now() - (loaded.provisioningStartedAt ?? loaded.createdAt);
+      const elapsed =
+        Date.now() - (loaded.provisioningStartedAt ?? loaded.createdAt);
       if (elapsed > 6000) {
-        machineStore.update({ status: "running", provisioningStartedAt: undefined });
-        setMachine({ ...loaded, status: "running", provisioningStartedAt: undefined });
+        machineStore.update({
+          status: "running",
+          provisioningStartedAt: undefined,
+        });
+        setMachine({
+          ...loaded,
+          status: "running",
+          provisioningStartedAt: undefined,
+        });
         return;
       }
     }
@@ -57,7 +65,13 @@ export function MachineProvider({ children }: { children: ReactNode }) {
 
   return (
     <MachineContext.Provider
-      value={{ machine, createMachine, updateStatus, deleteMachine, patchMachine }}
+      value={{
+        machine,
+        createMachine,
+        updateStatus,
+        deleteMachine,
+        patchMachine,
+      }}
     >
       {children}
     </MachineContext.Provider>
@@ -72,7 +86,8 @@ export function useMachine(): Machine | null {
 
 export function useMachineActions() {
   const ctx = useContext(MachineContext);
-  if (!ctx) throw new Error("useMachineActions must be used inside <MachineProvider>");
+  if (!ctx)
+    throw new Error("useMachineActions must be used inside <MachineProvider>");
   const { createMachine, updateStatus, deleteMachine, patchMachine } = ctx;
   return { createMachine, updateStatus, deleteMachine, patchMachine };
 }

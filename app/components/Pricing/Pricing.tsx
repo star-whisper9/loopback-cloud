@@ -15,7 +15,9 @@ export function Pricing() {
   const t = useT();
   const cores = useCores();
   const machine = useMachine();
-  const [formMode, setFormMode] = useState<"community" | "enterprise" | null>(null);
+  const [formMode, setFormMode] = useState<"community" | "enterprise" | null>(
+    null,
+  );
   const [ref, inView] = useInView<HTMLDivElement>();
   const enterpriseCpuRow =
     cores !== undefined
@@ -84,7 +86,10 @@ export function Pricing() {
       <div className="mt-7">
         {machine !== null ? (
           <Link to="/console" className="block">
-            <Button variant={popular ? "primary" : "outline"} className="w-full font-semibold">
+            <Button
+              variant={popular ? "primary" : "outline"}
+              className="w-full font-semibold"
+            >
               {t("console.layout.gotoConsole")}
             </Button>
           </Link>
