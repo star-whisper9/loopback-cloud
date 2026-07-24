@@ -5,6 +5,14 @@ import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
 
 const ICONS = [ShieldCheck, Gauge, Lock, Activity, Cpu, Footprints] as const;
+const IMAGES = [
+  "/ddos.jpg",
+  "/low-latency.jpg",
+  "/zero-trust.jpg",
+  "/sla.jpg",
+  "/hardware.jpg",
+  "/ops.jpg",
+];
 
 export function SellingPoints() {
   const t = useT();
@@ -48,12 +56,19 @@ export function SellingPoints() {
           return (
             <div key={idx} className="h-[220px]">
               <GlareCard className="h-full w-full">
-                <div className="flex h-full flex-col gap-3 p-6">
-                  <span className="text-[var(--color-accent)] drop-shadow-[0_0_8px_var(--color-accent)]">
+                <div className="relative flex h-full flex-col gap-3 p-6">
+                  <img
+                    src={IMAGES[idx]}
+                    alt=""
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-45"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
+                  <span className="relative z-[1] text-[var(--color-accent)] drop-shadow-[0_0_8px_var(--color-accent)]">
                     <Icon className="h-7 w-7" />
                   </span>
-                  <h3 className="text-lg font-semibold leading-tight text-[var(--color-fg)]">{title}</h3>
-                  <p className="mt-auto text-sm text-[var(--color-fg-muted)]">{principle}</p>
+                  <h3 className="relative z-[1] text-lg font-semibold leading-tight text-[var(--color-fg)] drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">{title}</h3>
+                  <p className="relative z-[1] mt-auto text-sm text-[var(--color-fg-muted)] drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">{principle}</p>
                 </div>
               </GlareCard>
             </div>
