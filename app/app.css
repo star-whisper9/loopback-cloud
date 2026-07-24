@@ -263,6 +263,11 @@ body {
   --ring: oklch(0.85 0.32 124);
 }
 
+@keyframes scan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
