@@ -1,6 +1,7 @@
 import { Check } from "lucide-react";
 import { Button } from "@heroui/react";
 import { EvervaultCard } from "@/components/ui/evervault-card";
+import { Button as MovingButton } from "@/components/ui/moving-border";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
@@ -84,14 +85,23 @@ export function Pricing() {
         ))}
       </ul>
       <div className="mt-7">
-        <a href="#cta">
-          <Button
-            variant={popular ? "primary" : "outline"}
-            className="w-full font-semibold"
+        {popular ? (
+          <MovingButton
+            as="a"
+            href="#cta"
+            containerClassName="w-full h-11 text-sm"
+            className="bg-[var(--color-accent)] text-black border-transparent font-semibold hover:brightness-110 transition"
+            borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
           >
             {c.cta}
-          </Button>
-        </a>
+          </MovingButton>
+        ) : (
+          <a href="#cta">
+            <Button variant="outline" className="w-full font-semibold">
+              {c.cta}
+            </Button>
+          </a>
+        )}
       </div>
     </div>
   );

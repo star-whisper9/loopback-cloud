@@ -1,5 +1,6 @@
 import { Button } from "@heroui/react";
 import { useT } from "~/i18n/useT";
+import { Button as MovingButton } from "@/components/ui/moving-border";
 import { HeroBanner } from "./HeroBanner";
 
 export function Hero() {
@@ -16,9 +17,15 @@ export function Hero() {
           </h1>
           <p className="mt-5 max-w-md text-base text-[var(--color-fg-muted)] md:text-lg">{t("hero.subtitle")}</p>
           <div className="mt-8 flex items-center gap-3">
-            <a href="#pricing">
-              <Button variant="primary" size="lg" className="font-semibold">{t("hero.ctaPrimary")}</Button>
-            </a>
+            <MovingButton
+              as="a"
+              href="#pricing"
+              containerClassName="w-40 h-12 text-base"
+              className="bg-[var(--color-accent)] text-black border-transparent font-semibold hover:brightness-110 transition"
+              borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+            >
+              {t("hero.ctaPrimary")}
+            </MovingButton>
             <a href="#docs">
               <Button variant="outline" size="lg" className="font-semibold">{t("hero.ctaSecondary")}</Button>
             </a>

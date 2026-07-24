@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "@heroui/react";
 import { useT } from "~/i18n/useT";
 import { LangSwitch } from "~/components/LangSwitch/LangSwitch";
+import { Button as MovingButton } from "@/components/ui/moving-border";
 import { cn } from "~/lib/utils";
 
 export function Navbar() {
@@ -18,25 +18,53 @@ export function Navbar() {
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-colors duration-300",
-        scrolled ? "border-b border-white/10 bg-[var(--color-bg)]/80 backdrop-blur-md" : "bg-transparent"
+        scrolled
+          ? "border-b border-white/10 bg-[var(--color-bg)]/80 backdrop-blur-md"
+          : "bg-transparent",
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-accent)] shadow-[0_0_12px_var(--color-accent)]" />
-          <span className="text-sm font-semibold tracking-tight text-[var(--color-fg)]">{t("brand")}</span>
-          <span className="hidden text-xs text-[var(--color-fg-muted)] sm:inline">{t("brandTagline")}</span>
+          <span className="text-sm font-semibold tracking-tight text-[var(--color-fg)]">
+            {t("brand")}
+          </span>
+          <span className="hidden text-xs text-[var(--color-fg-muted)] sm:inline">
+            {t("brandTagline")}
+          </span>
         </a>
         <div className="hidden items-center gap-6 md:flex">
-          <a href="#product" className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]">{t("nav.product")}</a>
-          <a href="#pricing" className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]">{t("nav.pricing")}</a>
-          <a href="#docs" className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]">{t("nav.docs")}</a>
+          <a
+            href="#product"
+            className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]"
+          >
+            {t("nav.product")}
+          </a>
+          <a
+            href="#pricing"
+            className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]"
+          >
+            {t("nav.pricing")}
+          </a>
+          <a
+            href="#docs"
+            className="text-sm text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]"
+          >
+            {t("nav.docs")}
+          </a>
         </div>
         <div className="flex items-center gap-3">
           <LangSwitch />
-          <a href="#pricing">
-            <Button variant="primary" size="sm" className="font-semibold">{t("nav.cta")}</Button>
-          </a>
+          <MovingButton
+            as="a"
+            href="#pricing"
+            borderRadius="9999px"
+            containerClassName="w-28 h-9 text-sm"
+            className="bg-[var(--color-accent)] text-black border-transparent font-semibold hover:brightness-110 transition"
+            borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+          >
+            {t("nav.cta")}
+          </MovingButton>
         </div>
       </nav>
     </header>

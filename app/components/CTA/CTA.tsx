@@ -1,4 +1,5 @@
 import { Button } from "@heroui/react";
+import { Button as MovingButton } from "@/components/ui/moving-border";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { cn } from "~/lib/utils";
@@ -23,11 +24,15 @@ export function CTA() {
           {t("cta.subtitle")}
         </p>
         <div className="mt-8 flex justify-center">
-          <a href="#pricing">
-            <Button variant="primary" size="lg" className="font-semibold">
-              {t("cta.button")}
-            </Button>
-          </a>
+          <MovingButton
+            as="a"
+            href="#pricing"
+            containerClassName="w-40 h-12 text-base"
+            className="bg-[var(--color-accent)] text-black border-transparent font-semibold hover:brightness-110 transition"
+            borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
+          >
+            {t("cta.button")}
+          </MovingButton>
         </div>
       </div>
     </section>
