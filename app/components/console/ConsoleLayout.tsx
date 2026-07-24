@@ -7,6 +7,7 @@ import { useMachine, useMachineActions } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
 import { ProvisioningAnimation } from "./ProvisioningAnimation";
 import { Dashboard } from "./Dashboard/Dashboard";
+import { SpeedTest } from "./SpeedTest/SpeedTest";
 
 const TABS = [
   { id: "dashboard", icon: Activity },
@@ -175,7 +176,7 @@ export function ConsoleLayout() {
           {/* Tab content */}
           <main className="mx-auto max-w-6xl px-6 py-8">
             {tab === "dashboard" && <Dashboard />}
-            {tab === "speedtest" && <div className="min-h-[50vh]" />}
+            {tab === "speedtest" && <SpeedTest />}
             {tab === "firewall" && <div className="min-h-[50vh]" />}
           </main>
         </>
