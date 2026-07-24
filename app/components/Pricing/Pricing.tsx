@@ -52,17 +52,9 @@ export function Pricing() {
     c: typeof community & { popularBadge?: string };
     popular?: boolean;
   }) => (
-    <div
-      className={cn(
-        "relative flex flex-col rounded-3xl border p-7 transition-all duration-500",
-        popular
-          ? "border-[var(--color-accent)]/60 bg-[var(--color-surface)] shadow-[0_0_40px_-12px_var(--color-accent)]"
-          : "border-white/10 bg-[var(--color-surface)]",
-        inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      )}
-    >
+    <div className="relative flex flex-col h-full p-7">
       {popular && (
-        <span className="absolute right-5 top-5 rounded-full bg-[var(--color-accent)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-black">
+        <span className="absolute right-5 top-5 rounded-full bg-[var(--color-accent)] px-2.5 py-1 text-[10px] font-bold tracking-wider text-black z-10">
           {c.popularBadge!}
         </span>
       )}
@@ -107,12 +99,26 @@ export function Pricing() {
         {t("pricing.subtitle")}
       </p>
       <div className="grid items-stretch gap-6 md:grid-cols-2">
-        <Card c={community} />
-        <Card c={enterprise} popular />
-      </div>
-
-      <div className="mx-auto mt-10 h-40 max-w-sm">
-        <EvervaultCard className="h-full w-full" text="LOOPBACK" />
+        <div
+          className={cn(
+            "transition-all duration-500",
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+        >
+          <EvervaultCard className="h-full w-full">
+            <Card c={community} />
+          </EvervaultCard>
+        </div>
+        <div
+          className={cn(
+            "transition-all duration-500",
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          )}
+        >
+          <EvervaultCard className="h-full w-full">
+            <Card c={enterprise} popular />
+          </EvervaultCard>
+        </div>
       </div>
     </section>
   );
