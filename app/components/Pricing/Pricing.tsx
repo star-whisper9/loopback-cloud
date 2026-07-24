@@ -7,14 +7,14 @@ import { Button as MovingButton } from "@/components/ui/moving-border";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
-import { useMachine } from "~/lib/useMachine";
+import { useHydratedMachine } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
 import { ProvisioningForm } from "~/components/ProvisioningForm/ProvisioningForm";
 
 export function Pricing() {
   const t = useT();
   const cores = useCores();
-  const machine = useMachine();
+  const machine = useHydratedMachine();
   const [formMode, setFormMode] = useState<"community" | "enterprise" | null>(
     null,
   );

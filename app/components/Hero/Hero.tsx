@@ -1,7 +1,7 @@
 import { Button } from "@heroui/react";
 import { Link } from "react-router";
 import { useT } from "~/i18n/useT";
-import { useMachine } from "~/lib/useMachine";
+import { useHydratedMachine } from "~/lib/useMachine";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { Spotlight } from "@/components/ui/spotlight";
 import { BackgroundBeams } from "@/components/ui/background-beams";
@@ -9,7 +9,7 @@ import { HeroBanner } from "./HeroBanner";
 
 export function Hero() {
   const t = useT();
-  const machine = useMachine();
+  const machine = useHydratedMachine();
   return (
     <section id="top" className="relative overflow-hidden">
       <BackgroundBeams />

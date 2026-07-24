@@ -2,13 +2,13 @@ import { Button } from "@heroui/react";
 import { Link } from "react-router";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { useT } from "~/i18n/useT";
-import { useMachine } from "~/lib/useMachine";
+import { useHydratedMachine } from "~/lib/useMachine";
 import { useInView } from "~/lib/useInView";
 import { cn } from "~/lib/utils";
 
 export function CTA() {
   const t = useT();
-  const machine = useMachine();
+  const machine = useHydratedMachine();
   const [ref, inView] = useInView<HTMLDivElement>();
   return (
     <section id="cta" ref={ref} className="mx-auto max-w-4xl px-6 py-24">

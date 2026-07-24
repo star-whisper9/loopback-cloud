@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useT } from "~/i18n/useT";
-import { useMachine } from "~/lib/useMachine";
+import { useHydratedMachine } from "~/lib/useMachine";
 import { LangSwitch } from "~/components/LangSwitch/LangSwitch";
 import { Button as MovingButton } from "@/components/ui/moving-border";
 import { cn } from "~/lib/utils";
 
 export function Navbar() {
   const t = useT();
-  const machine = useMachine();
+  const machine = useHydratedMachine();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);

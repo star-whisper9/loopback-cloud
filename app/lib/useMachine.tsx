@@ -114,6 +114,13 @@ export function useMachine(): Machine | null {
   return ctx.machine;
 }
 
+export function useHydratedMachine(): Machine | null {
+  const raw = useMachine();
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => { setHydrated(true); }, []);
+  return hydrated ? raw : null;
+}
+
 export function useMachineActions() {
   const ctx = useContext(MachineContext);
   if (!ctx)
