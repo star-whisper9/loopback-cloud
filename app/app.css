@@ -10,15 +10,35 @@
   --font-sans:
     "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    ui-monospace, "JetBrains Mono", "Geist Mono", monospace;
+
+  /* Loopback Cloud custom palette */
+  --color-bg: #050505;
+  --color-surface: #0a0a0a;
+  --color-border: rgba(255,255,255,0.08);
+  --color-fg: #f5f5f5;
+  --color-fg-muted: #888888;
+  --color-accent: #a1f50a;
+  --color-accent-hi: #d8ff7c;
+
+  /* Override HeroUI accent tokens so components inherit our green */
+  --heroui-color-accent: #a1f50a;
+  --heroui-color-accent-foreground: #050505;
+  --heroui-color-accent-700: #8ad406;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  color-scheme: dark;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+html.dark,
+body {
+  /* support HeroUI dark selector without toggle */
+  background-color: var(--color-bg);
 }
 
 @theme inline {
@@ -234,6 +254,13 @@ body {
     oklch(1 0 0 / 10%);
   --sidebar-ring:
     oklch(0.556 0 0);
+
+  /* Loopback green overrides */
+  --primary: oklch(0.85 0.32 124);       /* approx #a1f50a */
+  --primary-foreground: oklch(0.15 0.02 124);
+  --accent: oklch(0.85 0.32 124);
+  --accent-foreground: oklch(0.15 0.02 124);
+  --ring: oklch(0.85 0.32 124);
 }
 
 @layer base {
