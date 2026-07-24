@@ -11,8 +11,8 @@ import { Footer } from "~/components/Footer/Footer";
 import { useLocale } from "~/i18n/useT";
 
 export function meta({ matches }: Route.MetaArgs) {
-  const rootMatch = matches.find((m: any) => m.id === "root") as any;
-  const locale = (rootMatch?.loaderData as any)?.locale ?? "zh";
+  const rootMatch = matches.find((m) => m?.id === "root");
+  const locale = (rootMatch?.loaderData as { locale?: string } | undefined)?.locale ?? "zh";
   return [
     { title: locale === "en" ? "Loopback Cloud · Local-First Quantum Cloud" : "环回云 · Loopback Cloud" },
     {
