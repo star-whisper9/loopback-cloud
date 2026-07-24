@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Link } from "react-router";
 import { Check } from "lucide-react";
 import { Button } from "@heroui/react";
 import { EvervaultCard } from "@/components/ui/evervault-card";
@@ -5,11 +7,15 @@ import { Button as MovingButton } from "@/components/ui/moving-border";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
+import { useMachine } from "~/lib/useMachine";
 import { cn } from "~/lib/utils";
+import { ProvisioningForm } from "~/components/ProvisioningForm/ProvisioningForm";
 
 export function Pricing() {
   const t = useT();
   const cores = useCores();
+  const machine = useMachine();
+  const [formMode, setFormMode] = useState<"community" | "enterprise" | null>(null);
   const [ref, inView] = useInView<HTMLDivElement>();
   const enterpriseCpuRow =
     cores !== undefined
@@ -76,10 +82,16 @@ export function Pricing() {
         ))}
       </ul>
       <div className="mt-7">
-        {popular ? (
+        {machine !== null ? (
+          <Link to="/console" className="block">
+            <Button variant={popular ? "primary" : "outline"} className="w-full font-semibold">
+              {t("console.layout.gotoConsole")}
+            </Button>
+          </Link>
+        ) : popular ? (
           <MovingButton
-            as="a"
-            href="#cta"
+            as="button"
+            onClick={() => setFormMode("enterprise")}
             containerClassName="w-full h-11 text-sm"
             className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
             borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
@@ -87,11 +99,13 @@ export function Pricing() {
             {c.cta}
           </MovingButton>
         ) : (
-          <a href="#cta">
-            <Button variant="outline" className="w-full font-semibold">
-              {c.cta}
-            </Button>
-          </a>
+          <Button
+            variant="outline"
+            className="w-full font-semibold"
+            onPress={() => setFormMode("community")}
+          >
+            {c.cta}
+          </Button>
         )}
       </div>
     </div>
@@ -127,6 +141,12 @@ export function Pricing() {
           </EvervaultCard>
         </div>
       </div>
+      <ProvisioningForm
+        key={formMode ?? "community"}
+        mode={formMode ?? "community"}
+        open={formMode !== null}
+        onClose={() => setFormMode(null)}
+      />
     </section>
   );
 }
