@@ -72,6 +72,7 @@ export interface Machine {
   status: MachineStatus;
   createdAt: number;
   provisioningStartedAt?: number;
+  provisioningTarget?: "running" | "stopped";
   speedTestHistory: SpeedTestResult[];
 }
 

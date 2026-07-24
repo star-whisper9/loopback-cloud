@@ -13,6 +13,8 @@ interface MachineContextValue {
   machine: Machine | null;
   createMachine: (m: Machine) => void;
   updateStatus: (status: MachineStatus) => void;
+  startMachine: () => void;
+  stopMachine: () => void;
   deleteMachine: () => void;
   patchMachine: (patch: Partial<Machine>) => void;
 }
@@ -28,14 +30,17 @@ export function MachineProvider({ children }: { children: ReactNode }) {
       const elapsed =
         Date.now() - (loaded.provisioningStartedAt ?? loaded.createdAt);
       if (elapsed > 6000) {
+        const target = loaded.provisioningTarget ?? "running";
         machineStore.update({
-          status: "running",
+          status: target,
           provisioningStartedAt: undefined,
+          provisioningTarget: undefined,
         });
         setMachine({
           ...loaded,
-          status: "running",
+          status: target,
           provisioningStartedAt: undefined,
+          provisioningTarget: undefined,
         });
         return;
       }
@@ -51,6 +56,26 @@ export function MachineProvider({ children }: { children: ReactNode }) {
   const updateStatus = useCallback((status: MachineStatus) => {
     machineStore.update({ status });
     setMachine((prev) => (prev ? { ...prev, status } : prev));
+  }, []);
+
+  const startMachine = useCallback(() => {
+    const patch: Partial<Machine> = {
+      status: "provisioning",
+      provisioningStartedAt: Date.now(),
+      provisioningTarget: "running",
+    };
+    machineStore.update(patch);
+    setMachine((prev) => (prev ? { ...prev, ...patch } : prev));
+  }, []);
+
+  const stopMachine = useCallback(() => {
+    const patch: Partial<Machine> = {
+      status: "provisioning",
+      provisioningStartedAt: Date.now(),
+      provisioningTarget: "stopped",
+    };
+    machineStore.update(patch);
+    setMachine((prev) => (prev ? { ...prev, ...patch } : prev));
   }, []);
 
   const deleteMachine = useCallback(() => {
@@ -69,6 +94,8 @@ export function MachineProvider({ children }: { children: ReactNode }) {
         machine,
         createMachine,
         updateStatus,
+        startMachine,
+        stopMachine,
         deleteMachine,
         patchMachine,
       }}
@@ -88,6 +115,6 @@ export function useMachineActions() {
   const ctx = useContext(MachineContext);
   if (!ctx)
     throw new Error("useMachineActions must be used inside <MachineProvider>");
-  const { createMachine, updateStatus, deleteMachine, patchMachine } = ctx;
-  return { createMachine, updateStatus, deleteMachine, patchMachine };
+  const { createMachine, updateStatus, startMachine, stopMachine, deleteMachine, patchMachine } = ctx;
+  return { createMachine, updateStatus, startMachine, stopMachine, deleteMachine, patchMachine };
 }

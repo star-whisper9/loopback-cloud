@@ -21,7 +21,7 @@ function fmtUptime(ms: number): string {
 export function Dashboard() {
   const t = useT();
   const machine = useMachine();
-  const { updateStatus, patchMachine } = useMachineActions();
+  const { startMachine, patchMachine } = useMachineActions();
   const [cpuData, setCpuData] = useState<number[]>([]);
   const [memData, setMemData] = useState<number[]>([]);
   const [netData, setNetData] = useState<number[]>([]);
@@ -63,6 +63,7 @@ export function Dashboard() {
     patchMachine({
       status: "provisioning",
       provisioningStartedAt: Date.now(),
+      provisioningTarget: "running",
     });
   }, [machine, patchMachine]);
 
@@ -74,7 +75,7 @@ export function Dashboard() {
         <p className="text-xl font-bold text-fg">
           {t("console.dashboard.stoppedOverlay")}
         </p>
-        <Button onPress={() => updateStatus("running")}>
+        <Button onPress={startMachine}>
           <Play className="mr-2 h-4 w-4" />
           {t("console.dashboard.stoppedCta")}
         </Button>

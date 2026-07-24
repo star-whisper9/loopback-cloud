@@ -32,7 +32,7 @@ export function ConsoleLayout() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const machine = useMachine();
-  const { updateStatus, deleteMachine } = useMachineActions();
+  const { startMachine, stopMachine, deleteMachine } = useMachineActions();
 
   useEffect(() => {
     if (machine === null) navigate("/", { replace: true });
@@ -78,7 +78,7 @@ export function ConsoleLayout() {
               <Button
                 size="sm"
                 variant="outline"
-                onPress={() => updateStatus("stopped")}
+                onPress={stopMachine}
               >
                 <Square className="h-3 w-3" />
                 <span className="hidden sm:inline">{t("console.layout.stop")}</span>
@@ -88,7 +88,7 @@ export function ConsoleLayout() {
                 <Button
                   size="sm"
                   variant="outline"
-                  onPress={() => updateStatus("running")}
+                  onPress={startMachine}
                 >
                   <Play className="h-3 w-3" />
                   <span className="hidden sm:inline">{t("console.layout.start")}</span>
