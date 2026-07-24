@@ -215,7 +215,7 @@ export function ProvisioningForm({
     <Modal>
       <Modal.Backdrop isOpen={open} onOpenChange={(v) => !v && onClose()}>
         <Modal.Container scroll="inside">
-          <Modal.Dialog className="sm:max-w-lg">
+          <Modal.Dialog className="sm:max-w-3xl">
             <Modal.CloseTrigger />
             <Modal.Header>
               <Modal.Heading>
@@ -230,12 +230,14 @@ export function ProvisioningForm({
                 <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupA")}
                 </legend>
-                <div className="space-y-4">
+                <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
                   <div>
                     <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f1.label")}
                     </Label>
                     <Input
+                      variant="secondary"
+                      fullWidth
                       value={hostname}
                       onChange={(e) =>
                         setHostname((e.target as HTMLInputElement).value)
@@ -257,6 +259,7 @@ export function ProvisioningForm({
                       {t("console.form.f2.label")}
                     </Label>
                     <Select
+                      variant="secondary"
                       selectedKey={region}
                       onSelectionChange={(k) => setRegion(k as Region)}
                     >
@@ -287,13 +290,14 @@ export function ProvisioningForm({
                 <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupB")}
                 </legend>
-                <div className="space-y-4">
+                <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
                   <div>
                     <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f3.label")}
                     </Label>
                     {isEnterprise ? (
                       <Select
+                        variant="secondary"
                         selectedKey={cpuMode}
                         onSelectionChange={(k) => setCpuMode(k as CpuMode)}
                       >
@@ -331,6 +335,7 @@ export function ProvisioningForm({
                       {t("console.form.f4.label")}
                     </Label>
                     <Select
+                      variant="secondary"
                       selectedKey={memory}
                       onSelectionChange={(k) => setMemory(k as MemoryTier)}
                     >
@@ -357,11 +362,12 @@ export function ProvisioningForm({
                       </Select.Popover>
                     </Select>
                   </div>
-                  <div>
+                  <div className="md:col-span-2">
                     <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f5.label")}
                     </Label>
                     <Select
+                      variant="secondary"
                       selectedKey={bandwidth}
                       onSelectionChange={(k) => setBandwidth(k as string)}
                     >
@@ -396,12 +402,13 @@ export function ProvisioningForm({
                 <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                   {t("console.form.groupC")}
                 </legend>
-                <div className="space-y-4">
-                  <div>
+                <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
+                  <div className="md:col-span-2">
                     <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f6.label")}
                     </Label>
                     <Select
+                      variant="secondary"
                       selectedKey={os}
                       onSelectionChange={(k) => setOs(k as OperatingSystem)}
                     >
@@ -425,16 +432,17 @@ export function ProvisioningForm({
                       </Select.Popover>
                     </Select>
                   </div>
-                  <div>
+                  <div className="md:col-span-2">
                     <Label className="mb-1 block text-sm text-fg">
                       {t("console.form.f7.label")}
                     </Label>
                     <RadioGroup
                       value={policy}
                       onChange={(v) => setPolicy(v as FirewallInitialPolicy)}
+                      className="grid gap-2 sm:grid-cols-2 rounded-lg border border-white/10 bg-white/[0.02] p-4"
                     >
                       {POLICIES.map((p) => (
-                        <Radio key={p} value={p}>
+                        <Radio key={p} value={p} className={"mt-0"}>
                           <Radio.Content>
                             <Radio.Control>
                               <Radio.Indicator />
@@ -454,12 +462,14 @@ export function ProvisioningForm({
                   <legend className="mb-3 text-xs font-bold uppercase tracking-widest text-accent">
                     {t("console.form.groupD")}
                   </legend>
-                  <div className="space-y-4">
+                  <div className="grid gap-x-6 gap-y-4 md:grid-cols-2">
                     <div>
                       <Label className="mb-1 block text-sm text-fg">
                         {t("console.form.f8.label")}
                       </Label>
                       <Select
+                        variant="secondary"
+                        className="!bg-white/[0.04] !border-white/10"
                         selectedKey={sla}
                         onSelectionChange={(k) => setSla(k as SlaLevel)}
                       >
@@ -484,6 +494,8 @@ export function ProvisioningForm({
                         {t("console.form.f9.label")}
                       </Label>
                       <Select
+                        variant="secondary"
+                        className="!bg-white/[0.04] !border-white/10"
                         selectedKey={backup}
                         onSelectionChange={(k) =>
                           setBackup(k as BackupStrategy)
@@ -509,13 +521,21 @@ export function ProvisioningForm({
                 </fieldset>
               )}
 
-              {/* Terms */}
+              {/* Form-end divider + Terms */}
+              <div className="grow border-t border-white/10" />
               <div>
                 <Checkbox
                   isSelected={termsAccepted}
-                  onChange={(v) => setTermsAccepted(v as boolean)}
+                  onChange={setTermsAccepted}
+                  name="terms"
+                  className="items-start"
                 >
-                  {t("console.form.f10.label")}
+                  <Checkbox.Content>
+                    <Checkbox.Control>
+                      <Checkbox.Indicator />
+                    </Checkbox.Control>
+                    {t("console.form.f10.label")}
+                  </Checkbox.Content>
                 </Checkbox>
                 {errors.terms && (
                   <p className="mt-1 text-xs text-red-400">{errors.terms}</p>
