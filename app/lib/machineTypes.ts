@@ -10,7 +10,6 @@ export type OperatingSystem =
   | "debian-12"
   | "rocky-9"
   | "alpine-3.20"
-  | "amazon-linux-2023"
   | "windows-server-2022";
 
 export type FirewallInitialPolicy =

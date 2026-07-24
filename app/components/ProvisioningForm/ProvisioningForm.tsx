@@ -44,7 +44,6 @@ const OS_LIST: OperatingSystem[] = [
   "debian-12",
   "rocky-9",
   "alpine-3.20",
-  "amazon-linux-2023",
   "windows-server-2022",
 ];
 
@@ -53,8 +52,15 @@ const OS_LABELS: Record<OperatingSystem, string> = {
   "debian-12": "Debian 12",
   "rocky-9": "Rocky Linux 9",
   "alpine-3.20": "Alpine 3.20",
-  "amazon-linux-2023": "Amazon Linux 2023",
   "windows-server-2022": "Windows Server 2022",
+};
+
+const OS_ICONS: Record<OperatingSystem, string> = {
+  "ubuntu-24.04": "/ubuntu.svg",
+  "debian-12": "/debian.svg",
+  "rocky-9": "/rockylinux.svg",
+  "alpine-3.20": "/alpine.svg",
+  "windows-server-2022": "/windows.svg",
 };
 
 const POLICIES: FirewallInitialPolicy[] = [
@@ -424,7 +430,14 @@ export function ProvisioningForm({
                               id={o}
                               textValue={OS_LABELS[o]}
                             >
-                              {OS_LABELS[o]}
+                              <div className="flex items-center">
+                                <img
+                                  src={OS_ICONS[o]}
+                                  alt=""
+                                  className="mr-2 h-4 w-4 shrink-0"
+                                />
+                                {OS_LABELS[o]}
+                              </div>
                               <ListBox.ItemIndicator />
                             </ListBox.Item>
                           ))}
