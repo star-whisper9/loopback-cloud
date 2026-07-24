@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Machine, MachineStatus } from "./machineTypes";
+import { PROVISIONING_DURATION_MS } from "./machineTypes";
 import { machineStore } from "./machineStore";
 
 interface MachineContextValue {
@@ -22,14 +23,17 @@ interface MachineContextValue {
 const MachineContext = createContext<MachineContextValue | null>(null);
 
 export function MachineProvider({ children }: { children: ReactNode }) {
-  const [machine, setMachine] = useState<Machine | null>(null);
+  const [machine, setMachine] = useState<Machine | null>(() => {
+    if (typeof window === "undefined") return null;
+    return machineStore.read();
+  });
 
   useEffect(() => {
     const loaded = machineStore.read();
     if (loaded !== null && loaded.status === "provisioning") {
       const elapsed =
         Date.now() - (loaded.provisioningStartedAt ?? loaded.createdAt);
-      if (elapsed > 6000) {
+      if (elapsed > PROVISIONING_DURATION_MS) {
         const target = loaded.provisioningTarget ?? "running";
         machineStore.update({
           status: target,
@@ -45,7 +49,6 @@ export function MachineProvider({ children }: { children: ReactNode }) {
         return;
       }
     }
-    setMachine(loaded);
   }, []);
 
   const createMachine = useCallback((m: Machine) => {

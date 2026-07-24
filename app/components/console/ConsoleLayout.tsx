@@ -41,7 +41,13 @@ export function ConsoleLayout() {
   const tab = (searchParams.get("tab") as TabId) || "dashboard";
   const setTab = (id: TabId) => setSearchParams({ tab: id }, { replace: true });
 
-  if (machine === null) return null;
+  if (machine === null) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-accent border-t-transparent" />
+      </div>
+    );
+  }
 
   const isRunning = machine.status === "running";
 
