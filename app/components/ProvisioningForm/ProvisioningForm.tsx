@@ -223,7 +223,7 @@ export function ProvisioningForm({
       <Modal.Backdrop isOpen={open} onOpenChange={(v) => !v && onClose()}>
         <Modal.Container scroll="inside">
           <Modal.Dialog className="sm:max-w-3xl">
-            <Modal.CloseTrigger />
+            <Modal.CloseTrigger className="text-white" />
             <Modal.Header>
               <Modal.Heading>
                 {isEnterprise

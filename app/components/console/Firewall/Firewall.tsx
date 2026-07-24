@@ -264,7 +264,7 @@ export function Firewall() {
         >
           <Modal.Container>
             <Modal.Dialog className="sm:max-w-md">
-              <Modal.CloseTrigger />
+              <Modal.CloseTrigger className="text-white" />
               <Modal.Header>
                 <Modal.Heading>
                   {t("console.firewall.addModalTitle")}
