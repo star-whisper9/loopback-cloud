@@ -49,12 +49,12 @@ export function Navbar() {
           >
             {t("nav.pricing")}
           </a>
-          <a
-            href="#faq"
+          <Link
+            to="/docs"
             className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             {t("nav.docs")}
-          </a>
+          </Link>
         </div>
         <div className="flex items-center gap-3">
           <LangSwitch />
