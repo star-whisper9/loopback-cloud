@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   isRouteErrorResponse,
   Links,
@@ -52,6 +53,33 @@ export async function clientLoader({ request }: Route.ClientLoaderArgs) {
 type RootLoaderData = Awaited<ReturnType<typeof clientLoader>>;
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest<HTMLAnchorElement>(
+        'a[href^="#"]',
+      );
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const id = decodeURIComponent(href.slice(1));
+      if (id === "top") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        history.replaceState(null, "", href);
+        return;
+      }
+
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+      history.replaceState(null, "", href);
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
   return (
     <html lang="zh" className="dark">
       <head>
