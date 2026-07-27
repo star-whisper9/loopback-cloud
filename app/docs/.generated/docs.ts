@@ -38,8 +38,19 @@ export const trees: Record<DocLocale, DocTree> = {
                 "order": 1,
                 "navIgnore": false
               },
-              "html": "<h1>快速开始</h1>\n<h2>安装</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">pnpm add loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">npm i loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2>配置</h2>\n<p>:::details[展开查看配置文件示例]</p>\n<pre><code class=\"language-toml\">[loopback]\naddr = \"127.0.0.1\"\n</code></pre>\n<p>:::</p>\n<p>:::warning\n不要把 <code>addr</code> 改成本机物理网卡地址，否则\"绝对安全\"卖点会失效。\n:::</p>",
-              "anchors": []
+              "html": "<h1 id=\"快速开始\">快速开始</h1>\n<h2 id=\"安装\">安装</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2 id=\"配置\">配置</h2>\n<p>:::details[展开查看配置文件示例]</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">[</span><span style=\"color:#B392F0\">loopback</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">addr = </span><span style=\"color:#9ECBFF\">\"127.0.0.1\"</span></span></code></pre>\n<p>:::</p>\n<p>:::warning\n不要把 <code>addr</code> 改成本机物理网卡地址，否则\"绝对安全\"卖点会失效。\n:::</p>",
+              "anchors": [
+                {
+                  "id": "安装",
+                  "text": "安装",
+                  "level": 2
+                },
+                {
+                  "id": "配置",
+                  "text": "配置",
+                  "level": 2
+                }
+              ]
             },
             {
               "path": "software/zh-only",
@@ -49,7 +60,7 @@ export const trees: Record<DocLocale, DocTree> = {
                 "order": 9,
                 "navIgnore": false
               },
-              "html": "<h1>仅中文文档</h1>\n<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
+              "html": "<h1 id=\"仅中文文档\">仅中文文档</h1>\n<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
               "anchors": []
             }
           ]
@@ -64,8 +75,14 @@ export const trees: Record<DocLocale, DocTree> = {
         "description": "环回云文档中心",
         "navIgnore": true
       },
-      "html": "<h1>环回云文档</h1>\n<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2>导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<p>:::note\n本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。\n:::</p>",
-      "anchors": []
+      "html": "<h1 id=\"环回云文档\">环回云文档</h1>\n<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2 id=\"导览\">导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<p>:::note\n本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。\n:::</p>",
+      "anchors": [
+        {
+          "id": "导览",
+          "text": "导览",
+          "level": 2
+        }
+      ]
     }
   },
   "en": {
@@ -87,8 +104,19 @@ export const trees: Record<DocLocale, DocTree> = {
                 "order": 1,
                 "navIgnore": false
               },
-              "html": "<h1>Quick Start</h1>\n<h2>Install</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">pnpm add loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">npm i loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2>Configuration</h2>\n<p>:::details[Expand for an example config]</p>\n<pre><code class=\"language-toml\">[loopback]\naddr = \"127.0.0.1\"\n</code></pre>\n<p>:::</p>\n<p>:::warning\nDo not change <code>addr</code> to a physical NIC, or the \"absolutely secure\" claim breaks.\n:::</p>",
-              "anchors": []
+              "html": "<h1 id=\"quick-start\">Quick Start</h1>\n<h2 id=\"install\">Install</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2 id=\"configuration\">Configuration</h2>\n<p>:::details[Expand for an example config]</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">[</span><span style=\"color:#B392F0\">loopback</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">addr = </span><span style=\"color:#9ECBFF\">\"127.0.0.1\"</span></span></code></pre>\n<p>:::</p>\n<p>:::warning\nDo not change <code>addr</code> to a physical NIC, or the \"absolutely secure\" claim breaks.\n:::</p>",
+              "anchors": [
+                {
+                  "id": "install",
+                  "text": "Install",
+                  "level": 2
+                },
+                {
+                  "id": "configuration",
+                  "text": "Configuration",
+                  "level": 2
+                }
+              ]
             }
           ]
         }
@@ -102,8 +130,14 @@ export const trees: Record<DocLocale, DocTree> = {
         "description": "Loopback Cloud documentation",
         "navIgnore": true
       },
-      "html": "<h1>Loopback Cloud Docs</h1>\n<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2>Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
-      "anchors": []
+      "html": "<h1 id=\"loopback-cloud-docs\">Loopback Cloud Docs</h1>\n<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
+      "anchors": [
+        {
+          "id": "navigation",
+          "text": "Navigation",
+          "level": 2
+        }
+      ]
     }
   }
 };
@@ -118,8 +152,19 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "order": 1,
         "navIgnore": false
       },
-      "html": "<h1>快速开始</h1>\n<h2>安装</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">pnpm add loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">npm i loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2>配置</h2>\n<p>:::details[展开查看配置文件示例]</p>\n<pre><code class=\"language-toml\">[loopback]\naddr = \"127.0.0.1\"\n</code></pre>\n<p>:::</p>\n<p>:::warning\n不要把 <code>addr</code> 改成本机物理网卡地址，否则\"绝对安全\"卖点会失效。\n:::</p>",
-      "anchors": []
+      "html": "<h1 id=\"快速开始\">快速开始</h1>\n<h2 id=\"安装\">安装</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2 id=\"配置\">配置</h2>\n<p>:::details[展开查看配置文件示例]</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">[</span><span style=\"color:#B392F0\">loopback</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">addr = </span><span style=\"color:#9ECBFF\">\"127.0.0.1\"</span></span></code></pre>\n<p>:::</p>\n<p>:::warning\n不要把 <code>addr</code> 改成本机物理网卡地址，否则\"绝对安全\"卖点会失效。\n:::</p>",
+      "anchors": [
+        {
+          "id": "安装",
+          "text": "安装",
+          "level": 2
+        },
+        {
+          "id": "配置",
+          "text": "配置",
+          "level": 2
+        }
+      ]
     },
     "software/zh-only": {
       "path": "software/zh-only",
@@ -129,7 +174,7 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "order": 9,
         "navIgnore": false
       },
-      "html": "<h1>仅中文文档</h1>\n<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
+      "html": "<h1 id=\"仅中文文档\">仅中文文档</h1>\n<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
       "anchors": []
     },
     "": {
@@ -139,8 +184,14 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "description": "环回云文档中心",
         "navIgnore": true
       },
-      "html": "<h1>环回云文档</h1>\n<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2>导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<p>:::note\n本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。\n:::</p>",
-      "anchors": []
+      "html": "<h1 id=\"环回云文档\">环回云文档</h1>\n<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2 id=\"导览\">导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<p>:::note\n本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。\n:::</p>",
+      "anchors": [
+        {
+          "id": "导览",
+          "text": "导览",
+          "level": 2
+        }
+      ]
     }
   },
   "en": {
@@ -152,8 +203,19 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "order": 1,
         "navIgnore": false
       },
-      "html": "<h1>Quick Start</h1>\n<h2>Install</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">pnpm add loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre><code class=\"language-bash\">npm i loopback-cloud\n</code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2>Configuration</h2>\n<p>:::details[Expand for an example config]</p>\n<pre><code class=\"language-toml\">[loopback]\naddr = \"127.0.0.1\"\n</code></pre>\n<p>:::</p>\n<p>:::warning\nDo not change <code>addr</code> to a physical NIC, or the \"absolutely secure\" claim breaks.\n:::</p>",
-      "anchors": []
+      "html": "<h1 id=\"quick-start\">Quick Start</h1>\n<h2 id=\"install\">Install</h2>\n<p>::::code-tabs</p>\n<p>:::tab{label=\"pnpm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>:::tab{label=\"npm\" lang=\"bash\"}</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre>\n<p>:::</p>\n<p>::::</p>\n<h2 id=\"configuration\">Configuration</h2>\n<p>:::details[Expand for an example config]</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">[</span><span style=\"color:#B392F0\">loopback</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">addr = </span><span style=\"color:#9ECBFF\">\"127.0.0.1\"</span></span></code></pre>\n<p>:::</p>\n<p>:::warning\nDo not change <code>addr</code> to a physical NIC, or the \"absolutely secure\" claim breaks.\n:::</p>",
+      "anchors": [
+        {
+          "id": "install",
+          "text": "Install",
+          "level": 2
+        },
+        {
+          "id": "configuration",
+          "text": "Configuration",
+          "level": 2
+        }
+      ]
     },
     "": {
       "path": "",
@@ -162,8 +224,14 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "description": "Loopback Cloud documentation",
         "navIgnore": true
       },
-      "html": "<h1>Loopback Cloud Docs</h1>\n<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2>Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
-      "anchors": []
+      "html": "<h1 id=\"loopback-cloud-docs\">Loopback Cloud Docs</h1>\n<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
+      "anchors": [
+        {
+          "id": "navigation",
+          "text": "Navigation",
+          "level": 2
+        }
+      ]
     }
   }
 };

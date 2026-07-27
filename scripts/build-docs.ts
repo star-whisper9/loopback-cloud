@@ -1,6 +1,9 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
+import rehypeSlug from "rehype-slug";
+import rehypeShiki from "@shikijs/rehype";
 import rehypeStringify from "rehype-stringify";
 import matter from "gray-matter";
 import { globSync } from "tinyglobby";
@@ -21,13 +24,27 @@ const SRC_DIR = join(ROOT, "docs");
 const OUT_DIR = join(ROOT, "app/docs/.generated");
 const LOCALES: DocLocale[] = ["zh", "en"];
 
-function renderMarkdown(md: string): { html: string; anchors: DocAnchor[] } {
-  const result = unified()
+async function renderMarkdown(md: string): Promise<{ html: string; anchors: DocAnchor[] }> {
+  const file = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeShiki, { theme: "github-dark" })
     .use(rehypeStringify)
-    .processSync(md);
-  return { html: String(result), anchors: [] };
+    .process(md);
+  const html = String(file);
+
+  const anchors: DocAnchor[] = [];
+  const re = /<h([23])\s+id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(html)) !== null) {
+    const level = m[1] === "2" ? 2 : 3;
+    const text = m[3].replace(/<[^>]+>/g, "").trim();
+    anchors.push({ id: m[2], text, level });
+  }
+
+  return { html, anchors };
 }
 
 function parseFrontmatter(raw: string, relPath: string): { meta: DocMeta; body: string } {
@@ -56,11 +73,11 @@ function entryPath(localeRootAbs: string, fileAbs: string): string {
   return noExt;
 }
 
-function buildEntry(localeRootAbs: string, fileAbs: string): DocEntry {
+async function buildEntry(localeRootAbs: string, fileAbs: string): Promise<DocEntry> {
   const relPath = relative(localeRootAbs, fileAbs).split(sep).join("/");
   const raw = readFileSync(fileAbs, "utf8");
   const { meta, body } = parseFrontmatter(raw, relPath);
-  const { html, anchors } = renderMarkdown(body);
+  const { html, anchors } = await renderMarkdown(body);
   return { path: entryPath(localeRootAbs, fileAbs), meta, html, anchors };
 }
 
@@ -81,11 +98,11 @@ function readCategoryMeta(dirAbs: string): { title: string; order?: number } {
   }
 }
 
-function buildNode(
+async function buildNode(
   localeRootAbs: string,
   dirAbs: string,
   seenPaths: Set<string>,
-): DocCategoryNode {
+): Promise<DocCategoryNode> {
   const name =
     dirAbs === localeRootAbs ? "root" : (dirAbs.split(sep).pop() as string);
   const cat = readCategoryMeta(dirAbs);
@@ -103,7 +120,7 @@ function buildNode(
     if (ent === "_category.md") continue;
     if (ent === "index.md") continue;
     if (ent.endsWith(".md")) {
-      const e = buildEntry(localeRootAbs, abs);
+      const e = await buildEntry(localeRootAbs, abs);
       if (seenPaths.has(e.path)) {
         throw new Error(`docs path conflict: ${e.path || "<root>"}`);
       }
@@ -116,7 +133,7 @@ function buildNode(
     if (!st.isDirectory()) {
       throw new Error(`docs: unexpected non-md, non-directory entry: ${ent}`);
     }
-    children.push(buildNode(localeRootAbs, abs, seenPaths));
+    children.push(await buildNode(localeRootAbs, abs, seenPaths));
   }
 
   docs.sort(
@@ -138,15 +155,15 @@ function buildNode(
   };
 }
 
-function buildTree(locale: DocLocale): DocTree {
+async function buildTree(locale: DocLocale): Promise<DocTree> {
   const localeRootAbs = join(SRC_DIR, locale);
   const seenPaths = new Set<string>();
-  const root = buildNode(localeRootAbs, localeRootAbs, seenPaths);
+  const root = await buildNode(localeRootAbs, localeRootAbs, seenPaths);
 
   const indexFile = join(localeRootAbs, "index.md");
   let indexDoc: DocEntry | undefined;
   try {
-    indexDoc = buildEntry(localeRootAbs, indexFile);
+    indexDoc = await buildEntry(localeRootAbs, indexFile);
   } catch {
     if (locale === "zh") throw new Error("docs: zh/index.md required");
   }
@@ -191,7 +208,7 @@ export const allDocPaths: string[] = ${JSON.stringify(allDocPaths, null, 2)};
   writeFileSync(join(OUT_DIR, "docs.ts"), out, "utf8");
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const trees: Record<DocLocale, DocTree> = {
     zh: undefined as any,
     en: undefined as any,
@@ -202,7 +219,7 @@ function main(): void {
   };
 
   for (const loc of LOCALES) {
-    const tree = buildTree(loc);
+    const tree = await buildTree(loc);
     trees[loc] = tree;
 
     const walk = (node: DocCategoryNode): void => {
