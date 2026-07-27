@@ -7,24 +7,10 @@ export function meta() {
   return [{ name: "robots", content: "noindex" }];
 }
 
-export async function loader(_args: Route.LoaderArgs) {
-  return { locale: "zh" as const };
-}
-
-export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
-  const serverData = await serverLoader();
+export async function clientLoader(_args: Route.ClientLoaderArgs) {
   const machine = machineStore.read();
   if (machine === null) throw redirect("/");
-  return serverData;
-}
-clientLoader.hydrate = true;
-
-export function HydrateFallback() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="h-6 w-6 animate-spin rounded-full border-2 border-accent border-t-transparent" />
-    </div>
-  );
+  return null;
 }
 
 export default function ConsoleRoute() {

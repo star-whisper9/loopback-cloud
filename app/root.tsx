@@ -32,23 +32,24 @@ export const links: Route.LinksFunction = () => [
 
 const DICTS: Record<Locale, Dict> = { zh, en };
 
-export async function loader({ request }: Route.LoaderArgs) {
-  const url = new URL(request.url);
-  const cookieHeader = request.headers.get("Cookie") ?? "";
-  const cookieLang = cookieHeader
-    .split(";")
-    .map((s) => s.trim())
-    .find((s) => s.startsWith("loopback-lang="))
+function parseCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`))
     ?.split("=")[1];
-  const acceptLanguages = (request.headers.get("Accept-Language") ?? "")
-    .split(",")
-    .map((s) => s.split(";")[0].trim())
-    .filter(Boolean);
+}
+
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+  const url = new URL(request.url);
+  const cookieLang = parseCookie("loopback-lang");
+  const acceptLanguages =
+    typeof navigator !== "undefined" ? [...navigator.languages] : [];
   const locale = resolveLocale({ url, cookie: cookieLang, acceptLanguages });
   return { locale, dict: DICTS[locale] };
 }
 
-type RootLoaderData = Awaited<ReturnType<typeof loader>>;
+type RootLoaderData = Awaited<ReturnType<typeof clientLoader>>;
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -69,11 +70,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  const data = useRouteLoaderData<typeof loader>("root") as
+  const data = useRouteLoaderData<typeof clientLoader>("root") as
     RootLoaderData | undefined;
   if (!data) {
     throw new Error(
-      "TODO: root loader data missing — investigate SSR loader wiring",
+      "TODO: root clientLoader data missing — investigate SPA loader wiring",
     );
   }
   return (
