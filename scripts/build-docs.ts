@@ -1,6 +1,7 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
+import remarkDirective from "remark-directive";
 import remarkRehype from "remark-rehype";
 import rehypeSlug from "rehype-slug";
 import rehypeShiki from "@shikijs/rehype";
@@ -24,16 +25,183 @@ const SRC_DIR = join(ROOT, "docs");
 const OUT_DIR = join(ROOT, "app/docs/.generated");
 const LOCALES: DocLocale[] = ["zh", "en"];
 
-async function renderMarkdown(md: string): Promise<{ html: string; anchors: DocAnchor[] }> {
-  const file = await unified()
+const DEFAULT_CALLOUT_TITLE: Record<string, { zh: string; en: string }> = {
+  note: { zh: "注释", en: "Note" },
+  warning: { zh: "警告", en: "Warning" },
+  tip: { zh: "提示", en: "Tip" },
+  important: { zh: "重要", en: "Important" },
+};
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function inlineToMd(children: any[]): string {
+  return children
+    .map((c: any) => {
+      if (c.type === "text") return c.value;
+      if (c.type === "inlineCode") return "`" + c.value + "`";
+      if (c.type === "strong") return "**" + inlineToMd(c.children || []) + "**";
+      if (c.type === "emphasis") return "*" + inlineToMd(c.children || []) + "*";
+      if (c.type === "delete") return "~~" + inlineToMd(c.children || []) + "~~";
+      if (c.type === "link") return "[" + inlineToMd(c.children || []) + "](" + (c.url || "") + ")";
+      if (c.type === "image") return "![" + (c.alt || "") + "](" + (c.url || "") + ")";
+      if (c.type === "html") return c.value;
+      if (c.type === "break") return "\n";
+      throw new Error("TODO: unsupported inline node type in directive: " + c.type);
+    })
+    .join("");
+}
+
+function blockToMd(children: any[]): string {
+  return children
+    .map((c: any) => {
+      if (c.type === "code") {
+        const lang = c.lang || "";
+        return "```" + lang + "\n" + c.value + "\n```";
+      }
+      if (c.type === "paragraph") return inlineToMd(c.children || []);
+      if (c.type === "blockquote") return "> " + blockToMd(c.children || []).replace(/\n/g, "\n> ");
+      if (c.type === "list") {
+        return (c.children || [])
+          .map((item: any) => {
+            const prefix = c.ordered ? "1. " : "- ";
+            const body = (item.children || [])
+              .map((child: any) => {
+                if (child.type === "paragraph") return inlineToMd(child.children || []);
+                return blockToMd([child]);
+              })
+              .join("\n");
+            return prefix + body;
+          })
+          .join("\n");
+      }
+      if (c.type === "html") return c.value;
+      if (c.type === "heading") {
+        const level = c.depth || 1;
+        return "#".repeat(level) + " " + inlineToMd(c.children || []);
+      }
+      if (c.type === "thematicBreak") return "---";
+      throw new Error("TODO: unsupported block node type in directive: " + c.type);
+    })
+    .join("\n\n");
+}
+
+async function renderMarkdown(
+  locale: DocLocale,
+  md: string,
+): Promise<{ html: string; anchors: DocAnchor[] }> {
+  let tabsUid = 0;
+
+  async function nodeContentToHtml(children: any[]): Promise<string> {
+    if (children.length === 0) return "";
+    const mdString = blockToMd(children);
+    if (mdString.trim() === "") return "";
+    const result = await unified()
+      .use(remarkParse)
+      .use(remarkGfm)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypeShiki, { theme: "github-dark" })
+      .use(rehypeStringify, { allowDangerousHtml: true })
+      .process(mdString);
+    return String(result);
+  }
+
+  async function renderDirective(node: any): Promise<string> {
+    const name = node.name as string;
+
+    if (name === "details") {
+      const labelChild = (node.children || []).find((c: any) => c.data?.directiveLabel);
+      const summaryText = labelChild
+        ? (labelChild.children || []).map((t: any) => t.value || "").join("")
+        : "";
+      const contentChildren = (node.children || []).filter((c: any) => !c.data?.directiveLabel);
+      const inner = await nodeContentToHtml(contentChildren);
+      return `<details class="docs-details"><summary>${escapeHtml(summaryText)}</summary>${inner}</details>`;
+    }
+
+    if (name === "code-tabs") {
+      const tabs = (node.children || []).filter(
+        (c: any) => c.type === "containerDirective" && c.name === "tab",
+      ) as any[];
+      if (tabs.length > 3) {
+        throw new Error("TODO: docs-tabs supports at most 3 tabs");
+      }
+      tabsUid += 1;
+      const uid = tabsUid;
+      const labelsHtml = tabs
+        .map(
+          (t: any, i: number) =>
+            `<label><input type="radio" name="docs-tabs-${uid}" data-index="${i}"${i === 0 ? " checked" : ""}><span>${escapeHtml((t.attributes?.label as string) || "")}</span></label>`,
+        )
+        .join("");
+      const panelsHtml = (
+        await Promise.all(
+          tabs.map(
+            async (t: any, i: number) =>
+              `<div class="docs-tabs__panel" data-index="${i}"${i === 0 ? ' data-active=""' : ""}>${await nodeContentToHtml(t.children || [])}</div>`,
+          ),
+        )
+      ).join("");
+      return `<div class="docs-tabs" data-docs-tabs><div class="docs-tabs__labels">${labelsHtml}</div><div class="docs-tabs__panels">${panelsHtml}</div></div>`;
+    }
+
+    if (["note", "warning", "tip", "important"].includes(name)) {
+      const labelChild = (node.children || []).find((c: any) => c.data?.directiveLabel);
+      const title = labelChild
+        ? (labelChild.children || []).map((t: any) => t.value || "").join("")
+        : DEFAULT_CALLOUT_TITLE[name][locale];
+      const contentChildren = (node.children || []).filter((c: any) => !c.data?.directiveLabel);
+      const inner = await nodeContentToHtml(contentChildren);
+      return `<div class="docs-callout docs-callout--${escapeHtml(name)}"><p class="docs-callout__title">${escapeHtml(title)}</p>${inner}</div>`;
+    }
+
+    return "";
+  }
+
+  const KNOWN_DIRECTIVES = new Set(["details", "code-tabs", "tab", "note", "warning", "tip", "important"]);
+
+  async function processDirectives(parent: any): Promise<void> {
+    const children = parent.children;
+    if (!children) return;
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
+      if (child.type === "containerDirective") {
+        if (!KNOWN_DIRECTIVES.has(child.name)) continue;
+        if (child.name === "tab") continue;
+        await processDirectives(child);
+        const html = await renderDirective(child);
+        children[i] = { type: "html", value: html };
+        continue;
+      }
+      if (child.children) {
+        await processDirectives(child);
+      }
+    }
+  }
+
+  const tree = unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkDirective)
+    .parse(md);
+
+  await processDirectives(tree);
+
+  const hast = await unified()
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSlug)
     .use(rehypeShiki, { theme: "github-dark" })
-    .use(rehypeStringify)
-    .process(md);
-  const html = String(file);
+    .run(tree);
+
+  const html = unified()
+    .use(rehypeStringify, { allowDangerousHtml: true })
+    .stringify(hast as any);
 
   const anchors: DocAnchor[] = [];
   const re = /<h([23])\s+id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/g;
@@ -73,11 +241,15 @@ function entryPath(localeRootAbs: string, fileAbs: string): string {
   return noExt;
 }
 
-async function buildEntry(localeRootAbs: string, fileAbs: string): Promise<DocEntry> {
+async function buildEntry(
+  locale: DocLocale,
+  localeRootAbs: string,
+  fileAbs: string,
+): Promise<DocEntry> {
   const relPath = relative(localeRootAbs, fileAbs).split(sep).join("/");
   const raw = readFileSync(fileAbs, "utf8");
   const { meta, body } = parseFrontmatter(raw, relPath);
-  const { html, anchors } = await renderMarkdown(body);
+  const { html, anchors } = await renderMarkdown(locale, body);
   return { path: entryPath(localeRootAbs, fileAbs), meta, html, anchors };
 }
 
@@ -99,6 +271,7 @@ function readCategoryMeta(dirAbs: string): { title: string; order?: number } {
 }
 
 async function buildNode(
+  locale: DocLocale,
   localeRootAbs: string,
   dirAbs: string,
   seenPaths: Set<string>,
@@ -120,7 +293,7 @@ async function buildNode(
     if (ent === "_category.md") continue;
     if (ent === "index.md") continue;
     if (ent.endsWith(".md")) {
-      const e = await buildEntry(localeRootAbs, abs);
+      const e = await buildEntry(locale, localeRootAbs, abs);
       if (seenPaths.has(e.path)) {
         throw new Error(`docs path conflict: ${e.path || "<root>"}`);
       }
@@ -133,7 +306,7 @@ async function buildNode(
     if (!st.isDirectory()) {
       throw new Error(`docs: unexpected non-md, non-directory entry: ${ent}`);
     }
-    children.push(await buildNode(localeRootAbs, abs, seenPaths));
+    children.push(await buildNode(locale, localeRootAbs, abs, seenPaths));
   }
 
   docs.sort(
@@ -158,12 +331,12 @@ async function buildNode(
 async function buildTree(locale: DocLocale): Promise<DocTree> {
   const localeRootAbs = join(SRC_DIR, locale);
   const seenPaths = new Set<string>();
-  const root = await buildNode(localeRootAbs, localeRootAbs, seenPaths);
+  const root = await buildNode(locale, localeRootAbs, localeRootAbs, seenPaths);
 
   const indexFile = join(localeRootAbs, "index.md");
   let indexDoc: DocEntry | undefined;
   try {
-    indexDoc = await buildEntry(localeRootAbs, indexFile);
+    indexDoc = await buildEntry(locale, localeRootAbs, indexFile);
   } catch {
     if (locale === "zh") throw new Error("docs: zh/index.md required");
   }
