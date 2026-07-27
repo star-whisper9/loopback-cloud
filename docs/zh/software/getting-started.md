@@ -4,8 +4,6 @@ order: 1
 description: 五分钟上手环回云
 ---
 
-# 快速开始
-
 ## 安装
 
 ::::code-tabs

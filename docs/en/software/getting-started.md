@@ -4,8 +4,6 @@ order: 1
 description: Get going with Loopback Cloud in five minutes
 ---
 
-# Quick Start
-
 ## Install
 
 ::::code-tabs
