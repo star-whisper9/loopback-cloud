@@ -9,6 +9,7 @@
     display: grid;
     gap: 1.5rem;
     padding: 2rem 1.5rem;
+    width: 100%;
     max-width: 90rem;
     margin: 0 auto;
   }
@@ -21,7 +22,9 @@
 
   @media (min-width: 75rem) {
     .docs-grid {
-      grid-template-columns: 14rem minmax(0, 1fr) 15rem;
+      grid-template-columns: 14rem 40rem 15rem;
+      justify-content: center;
+      max-width: none;
     }
   }
 
@@ -123,7 +126,8 @@
   }
 
   .docs-prose {
-    max-width: 80ch;
+    width: 100%;
+    max-width: 40rem;
     color: var(--color-fg);
     font-size: 0.95rem;
     line-height: 1.7;

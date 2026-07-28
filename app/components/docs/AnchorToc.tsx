@@ -22,21 +22,23 @@ export function AnchorToc({ anchors }: { anchors: DocAnchor[] }) {
     return () => io.disconnect();
   }, [anchors]);
 
-  if (anchors.length === 0) return null;
-
   return (
     <div ref={rootRef} className="docs-anchor-toc">
       <nav>
-        {anchors.map((a) => (
-          <a
-            key={a.id}
-            href={`#${a.id}`}
-            className={a.level === 3 ? "docs-anchor-toc__h3" : undefined}
-            data-active={activeId === a.id ? "true" : "false"}
-          >
-            {a.text}
-          </a>
-        ))}
+        {anchors.length === 0 ? (
+          <span className="text-xs text-fg-muted">No outline</span>
+        ) : (
+          anchors.map((a) => (
+            <a
+              key={a.id}
+              href={`#${a.id}`}
+              className={a.level === 3 ? "docs-anchor-toc__h3" : undefined}
+              data-active={activeId === a.id ? "true" : "false"}
+            >
+              {a.text}
+            </a>
+          ))
+        )}
       </nav>
     </div>
   );
