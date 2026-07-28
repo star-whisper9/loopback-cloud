@@ -27,7 +27,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2">
+        <a href="/#top" className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_12px_var(--color-accent)]" />
           <span className="text-sm font-semibold tracking-tight text-fg">
             {t("brand")}
@@ -38,13 +38,13 @@ export function Navbar() {
         </a>
         <div className="hidden items-center gap-6 md:flex">
           <a
-            href="#product"
+            href="/#product"
             className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             {t("nav.product")}
           </a>
           <a
-            href="#pricing"
+            href="/#pricing"
             className="text-sm text-fg-muted transition-colors hover:text-fg"
           >
             {t("nav.pricing")}

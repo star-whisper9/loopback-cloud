@@ -44,7 +44,7 @@ export function Hero() {
               ) : (
                 <MovingButton
                   as="a"
-                  href="#pricing"
+                  href="/#pricing"
                   containerClassName="w-40 h-12 text-base"
                   className="bg-accent text-black border-transparent font-semibold hover:brightness-110 transition"
                   borderClassName="bg-[radial-gradient(var(--color-accent)_40%,transparent_60%)] opacity-[0.8]"
@@ -52,7 +52,7 @@ export function Hero() {
                   {t("hero.ctaPrimary")}
                 </MovingButton>
               )}
-              <a href="#docs">
+              <a href="/docs">
                 <Button variant="outline" size="lg" className="font-semibold">
                   {t("hero.ctaSecondary")}
                 </Button>
