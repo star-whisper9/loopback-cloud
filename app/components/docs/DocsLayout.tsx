@@ -8,8 +8,12 @@ import { DocsSidebar } from "./DocsSidebar";
 import { DocsContent } from "./DocsContent";
 import { AnchorToc } from "./AnchorToc";
 import { FallbackBanner } from "./FallbackBanner";
+import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 
-function findTopCategory(root: DocCategoryNode, path: string): DocCategoryNode | null {
+function findTopCategory(
+  root: DocCategoryNode,
+  path: string,
+): DocCategoryNode | null {
   for (const c of root.children) {
     if (path === "") return c;
     if (path.startsWith(c.name + "/") || contains(c, path)) return c;
@@ -42,7 +46,8 @@ export function DocsLayout({
   });
 
   const activeCategory = useMemo(
-    () => categories.find((c) => c.name === activeName) ?? categories[0] ?? null,
+    () =>
+      categories.find((c) => c.name === activeName) ?? categories[0] ?? null,
     [categories, activeName],
   );
 
@@ -55,7 +60,9 @@ export function DocsLayout({
         onSelect={setActiveName}
       />
       <div className="docs-grid">
-        {activeCategory ? <DocsSidebar node={activeCategory} currentPath={doc.path} /> : null}
+        {activeCategory ? (
+          <DocsSidebar node={activeCategory} currentPath={doc.path} />
+        ) : null}
         <main>
           {fallback ? <FallbackBanner /> : null}
           <DocsContent doc={doc} />
@@ -63,6 +70,7 @@ export function DocsLayout({
         <AnchorToc anchors={doc.anchors} />
       </div>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
