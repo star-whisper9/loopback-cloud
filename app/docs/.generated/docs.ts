@@ -71,6 +71,125 @@ export const trees: Record<DocLocale, DocTree> = {
           "order": 2,
           "children": [],
           "docs": []
+        },
+        {
+          "name": "contribution",
+          "title": "贡献指南",
+          "order": 3,
+          "children": [],
+          "docs": [
+            {
+              "path": "contribution/guide",
+              "meta": {
+                "title": "文档贡献指南",
+                "description": "贡献规则、Frontmatter 字段与 Markdown 扩展语法完整参考",
+                "order": 1,
+                "created": "2026-07-29T00:00:00.000Z",
+                "updated": "2026-07-29T00:00:00.000Z",
+                "author": [
+                  {
+                    "name": "星语",
+                    "email": "star@sotis.space",
+                    "url": "https://github.com/star-whisper9"
+                  }
+                ],
+                "navIgnore": false
+              },
+              "html": "<p>环回云文档是一份 <strong>社区驱动</strong> 的家里云（Home-Lab）知识库。本页是面向贡献者的完整参考，涵盖三部分：贡献规则、Frontmatter 字段全解、Markdown 与扩展语法全解。</p>\n<p>写作前请通读本页——本站文档构建管线对 Frontmatter 与语法有明确约束，不符合约束的内容会在构建时报错或被静默忽略。</p>\n<h2 id=\"贡献规则\">贡献规则</h2>\n<h3 id=\"内容范围\">内容范围</h3>\n<p>我们接受与家里云相关的 <strong>真实、可复现</strong> 的实践内容，例如：</p>\n<ul>\n<li>操作系统安装与配置（Windows / Linux / BSD）</li>\n<li>虚拟化方案（PVE、ESXi、Hyper-V 等）</li>\n<li>网络规划、内网穿透与防火墙</li>\n<li>存储方案与数据备份</li>\n<li>硬件选购、排障与维护</li>\n</ul>\n<p>谢绝：未经验证的纯转发内容、与家里云无关的推广、大段未标注的 AI 生成内容。</p>\n<h3 id=\"目录与文件\">目录与文件</h3>\n<ul>\n<li>一个分类对应语言目录下的一个子目录，目录内放 <code>_category.md</code> 声明分类标题与排序</li>\n<li>文章文件名为小写短横线命名（kebab-case），如 <code>getting-started.md</code></li>\n<li><strong>不要把文章命名为 <code>index.md</code></strong>——子目录中的 <code>index.md</code> 会被构建直接忽略</li>\n<li>不想出现在侧边栏导航中的文章，设置 <code>navIgnore: true</code>（页面仍可通过 URL 访问）</li>\n</ul>\n<h3 id=\"写作规范\">写作规范</h3>\n<ul>\n<li>页面标题由 Frontmatter 的 <code>title</code> 生成，正文从二级标题（<code>##</code>）开始，<strong>不要写一级标题</strong></li>\n<li>二级 / 三级标题会自动生成锚点并收录进右侧大纲，措辞请简短、适合做目录条目</li>\n<li>代码块必须标注语言，否则没有语法高亮</li>\n<li>可能损坏软硬件环境的操作（格式化磁盘、刷写固件、改动网络配置等）必须配 <code>:::warning</code> 提示</li>\n<li>图片请携带有意义的替代文本：<code>![替代文本](图片地址)</code></li>\n</ul>\n<h3 id=\"翻译规范\">翻译规范</h3>\n<ul>\n<li>英文版（<code>docs/en/</code>）为可选项；缺失时英文读者自动看到中文版，并显示回退提示</li>\n<li>英文目录结构与中文保持一致，构建会按条目逐一回退</li>\n<li>译文必须如实填写 <code>translator</code> 字段，标明机器翻译 / AI 翻译 / 人工翻译 / 混合</li>\n</ul>\n<h3 id=\"审核与免责\">审核与免责</h3>\n<ul>\n<li>我们对贡献内容仅做简单审核，不保证正确性与时效性</li>\n<li>环回云不对读者因阅读文档造成的损失负责——这条对贡献者本人同样适用</li>\n</ul>\n<h2 id=\"frontmatter-全解\">Frontmatter 全解</h2>\n<p>完整示例：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">---</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">title</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">快速开始</span><span style=\"color:#6A737D\">                  # 必填，页面标题</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">description</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">五分钟上手环回云</span><span style=\"color:#6A737D\">     # 可选，显示在标题下方的简介</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">order</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">1</span><span style=\"color:#6A737D\">                        # 可选，侧边栏排序，越小越靠前，默认 0</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">created</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">2026-07-29 13:16:13 +8</span><span style=\"color:#6A737D\"> # 可选，创建时间</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">updated</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">2026-07-29</span><span style=\"color:#6A737D\">             # 可选，最后更新时间</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">author</span><span style=\"color:#E1E4E8\">:                         </span><span style=\"color:#6A737D\"># 可选，作者列表</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">  - </span><span style=\"color:#85E89D\">name</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">星语</span><span style=\"color:#6A737D\">                  #   必填，超过 24 字符会截断显示</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    email</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">star@sotis.space</span><span style=\"color:#6A737D\">     #   可选，渲染为邮件图标</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    url</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">https://github.com/star-whisper9</span><span style=\"color:#6A737D\">  # 可选，作者名渲染为链接</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">translator</span><span style=\"color:#E1E4E8\">:                     </span><span style=\"color:#6A737D\"># 可选，译文信息，通常由英文版填写</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  type</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">mix</span><span style=\"color:#6A737D\">                     #   必填，machine | llm | human | mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  model</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">step-3.7-flash</span><span style=\"color:#6A737D\">         #   可选，type 为 llm / mix 时建议填写</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  human</span><span style=\"color:#E1E4E8\">:                        </span><span style=\"color:#6A737D\">#   可选，type 为 human / mix 时建议填写</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">    - </span><span style=\"color:#9ECBFF\">星语</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">navIgnore</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">false</span><span style=\"color:#6A737D\">                # 可选，true 时不出现在侧边栏导航</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">---</span></span></code></pre>\n<h3 id=\"字段一览\">字段一览</h3>\n<table>\n<thead>\n<tr>\n<th>字段</th>\n<th>类型</th>\n<th>必填</th>\n<th>说明</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>title</code></td>\n<td>string</td>\n<td>是</td>\n<td>页面标题，渲染为 h1</td>\n</tr>\n<tr>\n<td><code>description</code></td>\n<td>string</td>\n<td>否</td>\n<td>简介，显示在标题下方</td>\n</tr>\n<tr>\n<td><code>order</code></td>\n<td>number</td>\n<td>否</td>\n<td>侧边栏排序，越小越靠前，默认 0；相同时按路径排序</td>\n</tr>\n<tr>\n<td><code>created</code></td>\n<td>datetime</td>\n<td>否</td>\n<td>创建时间，见下文格式说明</td>\n</tr>\n<tr>\n<td><code>updated</code></td>\n<td>datetime</td>\n<td>否</td>\n<td>更新时间，格式同上</td>\n</tr>\n<tr>\n<td><code>author</code></td>\n<td>array</td>\n<td>否</td>\n<td>作者列表，见下文</td>\n</tr>\n<tr>\n<td><code>translator</code></td>\n<td>object</td>\n<td>否</td>\n<td>翻译信息，生成译文横幅</td>\n</tr>\n<tr>\n<td><code>navIgnore</code></td>\n<td>boolean</td>\n<td>否</td>\n<td>为 <code>true</code> 时不出现在侧边栏</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"时间格式\">时间格式</h3>\n<p><code>created</code> / <code>updated</code> 接受以下写法，构建时统一归一化为 ISO 8601（UTC）：</p>\n<table>\n<thead>\n<tr>\n<th>写法</th>\n<th>示例</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>ISO 8601</td>\n<td><code>2026-07-29T13:16:13Z</code>、<code>2026-07-29T13:16:13+08:00</code></td>\n</tr>\n<tr>\n<td>日期时间 + 时区</td>\n<td><code>2026-07-29 13:16:13 +8</code></td>\n</tr>\n<tr>\n<td>日期时间，无时区</td>\n<td><code>2026-07-29 13:16:13</code>（按 UTC 处理）</td>\n</tr>\n<tr>\n<td>省略分 / 秒</td>\n<td><code>2026-07-29 13:16</code>、<code>2026-07-29 13</code></td>\n</tr>\n<tr>\n<td>仅日期</td>\n<td><code>2026-07-29</code>（按 UTC 0 点处理）</td>\n</tr>\n</tbody>\n</table>\n<p>时区支持 <code>+8</code>、<code>+08</code>、<code>+0800</code>、<code>+08:00</code>、<code>Z</code> 等写法；展示时按访问者所在时区渲染。</p>\n<div class=\"docs-callout docs-callout--tip\"><p class=\"docs-callout__title\">建议</p><p>显式写出时区（如 <code>+8</code>）。不加引号的 YAML 时间值会按 YAML 1.1 时间戳解析，无时区时按 UTC 而非本地时间处理——期望本地时间语义时务必显式标注时区。</p></div>\n<h3 id=\"作者与译者\">作者与译者</h3>\n<p>作者显示规则：</p>\n<ul>\n<li><code>name</code> 必填，超过 24 字符会截断显示</li>\n<li><code>url</code> 存在时作者名渲染为外链；<code>email</code> 存在时渲染为邮件图标</li>\n</ul>\n<p>译者 <code>type</code> 决定页面译文横幅的文案：</p>\n<table>\n<thead>\n<tr>\n<th>type</th>\n<th>含义</th>\n<th>建议补充</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>machine</code></td>\n<td>机器翻译</td>\n<td>—</td>\n</tr>\n<tr>\n<td><code>llm</code></td>\n<td>AI 模型翻译</td>\n<td><code>model</code></td>\n</tr>\n<tr>\n<td><code>human</code></td>\n<td>人工翻译</td>\n<td><code>human</code> 名单</td>\n</tr>\n<tr>\n<td><code>mix</code></td>\n<td>AI 翻译 + 人工审校</td>\n<td><code>model</code> 与 <code>human</code> 名单</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"markdown-与扩展语法\">Markdown 与扩展语法</h2>\n<h3 id=\"基础语法commonmark--gfm\">基础语法（CommonMark + GFM）</h3>\n<p>支持标准 Markdown 与 GitHub Flavored Markdown 扩展：</p>\n<ul>\n<li>文本样式：<strong>粗体</strong>、<em>斜体</em>、<del>删除线</del>、<code>行内代码</code></li>\n<li>链接与图片：<code>[链接文本](地址)</code>、<code>![替代文本](图片地址)</code></li>\n<li>有序 / 无序列表、引用块、分割线</li>\n<li>表格（GFM）与任务列表（GFM）</li>\n</ul>\n<p>任务列表示例：</p>\n<ul class=\"contains-task-list\">\n<li class=\"task-list-item\"><input type=\"checkbox\" checked disabled> 安装系统</li>\n<li class=\"task-list-item\"><input type=\"checkbox\" disabled> 配置网络</li>\n</ul>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">注释</p><p>行内 HTML 会原样透传渲染，请谨慎使用——它绕过了构建管线的样式与转义。</p></div>\n<h3 id=\"代码块\">代码块</h3>\n<p>围栏代码块经 Shiki 以 <code>github-dark</code> 主题高亮，<strong>必须标注语言</strong>：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">ssh</span><span style=\"color:#9ECBFF\"> root@127.0.0.1</span></span></code></pre>\n<h3 id=\"标题锚点与大纲\">标题锚点与大纲</h3>\n<ul>\n<li>二级、三级标题自动生成 <code>id</code> 锚点，并收录进页面右侧大纲</li>\n<li>中文标题同样支持锚点；重复文案的标题会自动追加数字后缀</li>\n</ul>\n<h3 id=\"提示框callout\">提示框（Callout）</h3>\n<p>四种类型，默认标题随界面语言切换，也可用 <code>[标题]</code> 自定义：</p>\n<table>\n<thead>\n<tr>\n<th>指令</th>\n<th>默认标题</th>\n<th>用途</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>:::note</code></td>\n<td>注释</td>\n<td>补充说明</td>\n</tr>\n<tr>\n<td><code>:::warning</code></td>\n<td>警告</td>\n<td>可能造成损害的操作</td>\n</tr>\n<tr>\n<td><code>:::tip</code></td>\n<td>提示</td>\n<td>可选的技巧</td>\n</tr>\n<tr>\n<td><code>:::important</code></td>\n<td>重要</td>\n<td>必须知晓的信息</td>\n</tr>\n</tbody>\n</table>\n<p>写法与渲染效果：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::warning[</span><span style=\"color:#DBEDFF;text-decoration:underline\">高危操作</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">这条命令会清空磁盘，执行前再三确认。</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<div class=\"docs-callout docs-callout--warning\"><p class=\"docs-callout__title\">高危操作</p><p>这条命令会清空磁盘，执行前再三确认。</p></div>\n<h3 id=\"折叠块details\">折叠块（Details）</h3>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::details[</span><span style=\"color:#DBEDFF;text-decoration:underline\">展开查看配置文件示例</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">折叠内容，支持任意 Markdown。</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<details class=\"docs-details\"><summary>展开查看配置文件示例</summary><p>折叠内容，支持任意 Markdown。</p></details>\n<h3 id=\"代码标签页code-tabs\">代码标签页（Code Tabs）</h3>\n<p>外层四个冒号、内层三个冒号，<code>label</code> 为标签页标题，<strong>最多 3 个标签页</strong>：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">::::code-tabs</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"pnpm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"npm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">::::</span></span></code></pre>\n<p>渲染效果：</p>\n<div class=\"docs-tabs\" data-docs-tabs><div class=\"docs-tabs__labels\"><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"0\" checked><span>pnpm</span></label><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"1\"><span>npm</span></label></div><div class=\"docs-tabs__panels\"><div class=\"docs-tabs__panel\" data-index=\"0\" data-active=\"\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div><div class=\"docs-tabs__panel\" data-index=\"1\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div></div></div>\n<h3 id=\"嵌套与限制\">嵌套与限制</h3>\n<ul>\n<li>提示框、折叠块内部可嵌套普通 Markdown 与其他指令（如 details 内放 callout）</li>\n<li>代码标签页内只能放 <code>:::tab</code>，标签页内不能再嵌套指令容器</li>\n<li>未识别的指令名不会渲染为特殊样式，构建也不会报错——请以本页列出的指令为准</li>\n</ul>",
+              "anchors": [
+                {
+                  "id": "贡献规则",
+                  "text": "贡献规则",
+                  "level": 2
+                },
+                {
+                  "id": "内容范围",
+                  "text": "内容范围",
+                  "level": 3
+                },
+                {
+                  "id": "目录与文件",
+                  "text": "目录与文件",
+                  "level": 3
+                },
+                {
+                  "id": "写作规范",
+                  "text": "写作规范",
+                  "level": 3
+                },
+                {
+                  "id": "翻译规范",
+                  "text": "翻译规范",
+                  "level": 3
+                },
+                {
+                  "id": "审核与免责",
+                  "text": "审核与免责",
+                  "level": 3
+                },
+                {
+                  "id": "frontmatter-全解",
+                  "text": "Frontmatter 全解",
+                  "level": 2
+                },
+                {
+                  "id": "字段一览",
+                  "text": "字段一览",
+                  "level": 3
+                },
+                {
+                  "id": "时间格式",
+                  "text": "时间格式",
+                  "level": 3
+                },
+                {
+                  "id": "作者与译者",
+                  "text": "作者与译者",
+                  "level": 3
+                },
+                {
+                  "id": "markdown-与扩展语法",
+                  "text": "Markdown 与扩展语法",
+                  "level": 2
+                },
+                {
+                  "id": "基础语法commonmark--gfm",
+                  "text": "基础语法（CommonMark + GFM）",
+                  "level": 3
+                },
+                {
+                  "id": "代码块",
+                  "text": "代码块",
+                  "level": 3
+                },
+                {
+                  "id": "标题锚点与大纲",
+                  "text": "标题锚点与大纲",
+                  "level": 3
+                },
+                {
+                  "id": "提示框callout",
+                  "text": "提示框（Callout）",
+                  "level": 3
+                },
+                {
+                  "id": "折叠块details",
+                  "text": "折叠块（Details）",
+                  "level": 3
+                },
+                {
+                  "id": "代码标签页code-tabs",
+                  "text": "代码标签页（Code Tabs）",
+                  "level": 3
+                },
+                {
+                  "id": "嵌套与限制",
+                  "text": "嵌套与限制",
+                  "level": 3
+                }
+              ]
+            }
+          ]
         }
       ],
       "docs": []
@@ -80,6 +199,18 @@ export const trees: Record<DocLocale, DocTree> = {
       "meta": {
         "title": "文档首页",
         "description": "环回云文档中心",
+        "created": "2026-07-29T05:16:13.000Z",
+        "updated": "2026-07-29T05:16:13.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          },
+          {
+            "name": "VeryLongAuthorNameThatExceedsTheLimit"
+          }
+        ],
         "navIgnore": true
       },
       "html": "<p>欢迎来到环回云文档中心。</p>\n<p>环回云文档是一份 <strong>社区驱动</strong> 的真实的家里云构建指南，在这里，我们发布经过简单审核的家里云相关教程文档。</p>\n<p>从简单的 Windows 实体机，到 PVE 虚拟化方案，再到硬件推荐和硬件维护指南，我们致力于创建一个 <strong>真实有用</strong> 的家里云文档聚合。</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">重要</p><p>环回云的文档来自于 <strong>社区贡献</strong>，我们会对贡献内容进行简单审核，但不能保证文档质量、AI 生成内容管控，您应知悉。</p>\n<p>您在阅读本站文档时，请对所有标注了 <strong>重要</strong>、<strong>警告</strong> 等重点标记的指令、文段再三思考，这些内容有可能会损坏您的软硬件环境。环回云不对用户阅读文档做出的误操作负责，请保留自己的思考！</p></div>\n<h2 id=\"导览\">导览</h2>\n<p>环回云提供中文和英文两种语言文档，其中 <strong>中文文档为基准</strong>，英文文档大多经由翻译而来，您可以通过导航栏右上角的按钮切换。</p>\n<p>目前向您提供 <strong>软件</strong> 和 <strong>硬件</strong> 两类文档。顶栏可以在文档分类中切换，左侧栏则按分类浏览分好层级的文档，右侧栏在您的设备宽度足够时将会显示页内锚点导航。</p>\n<p>软件文档专注于 <strong>操作系统</strong>、<strong>工具软件</strong>、<strong>软件解决方案</strong> 的文档，硬件文档专注于 <strong>硬件设施维护</strong>、<strong>维护与调试实操指南</strong>、<strong>硬件选择与购买</strong> 的文档，您可以按需阅读。</p>",
@@ -144,6 +275,129 @@ export const trees: Record<DocLocale, DocTree> = {
           "order": 2,
           "children": [],
           "docs": []
+        },
+        {
+          "name": "contribution",
+          "title": "Contributing",
+          "order": 3,
+          "children": [],
+          "docs": [
+            {
+              "path": "contribution/guide",
+              "meta": {
+                "title": "Documentation Contribution Guide",
+                "description": "Contribution rules, full Frontmatter reference, and Markdown extension syntax",
+                "order": 1,
+                "created": "2026-07-29T00:00:00.000Z",
+                "updated": "2026-07-29T00:00:00.000Z",
+                "author": [
+                  {
+                    "name": "星语",
+                    "email": "star@sotis.space",
+                    "url": "https://github.com/star-whisper9"
+                  }
+                ],
+                "translator": {
+                  "type": "llm",
+                  "model": "qwen3.8-max-preview"
+                },
+                "navIgnore": false
+              },
+              "html": "<p>Loopback Cloud Docs is a <strong>community-driven</strong> home-lab knowledge base. This page is the complete reference for contributors, covering three parts: contribution rules, the full Frontmatter reference, and all supported Markdown and extension syntax.</p>\n<p>Please read this page before writing — the docs build pipeline has strict constraints on Frontmatter and syntax. Content that violates them will either fail the build or be silently ignored.</p>\n<h2 id=\"contribution-rules\">Contribution Rules</h2>\n<h3 id=\"scope\">Scope</h3>\n<p>We accept <strong>real, reproducible</strong> home-lab content, such as:</p>\n<ul>\n<li>OS installation and configuration (Windows / Linux / BSD)</li>\n<li>Virtualization (PVE, ESXi, Hyper-V, etc.)</li>\n<li>Network planning, tunneling, and firewalls</li>\n<li>Storage and backups</li>\n<li>Hardware selection, troubleshooting, and maintenance</li>\n</ul>\n<p>Not welcome: unverified reposts, promotion unrelated to home labs, large blocks of unlabeled AI-generated content.</p>\n<h3 id=\"directories-and-files\">Directories and Files</h3>\n<ul>\n<li>One category = one subdirectory under the locale root, containing a <code>_category.md</code> that declares its title and order</li>\n<li>Article file names use kebab-case, e.g. <code>getting-started.md</code></li>\n<li><strong>Do not name an article <code>index.md</code></strong> — an <code>index.md</code> inside a subdirectory is ignored by the build</li>\n<li>To hide an article from the sidebar navigation, set <code>navIgnore: true</code> (the page remains reachable by URL)</li>\n</ul>\n<h3 id=\"writing-conventions\">Writing Conventions</h3>\n<ul>\n<li>The page title comes from the <code>title</code> frontmatter field; body content starts at level-2 headings (<code>##</code>). <strong>Never write a level-1 heading</strong></li>\n<li>Level-2 / level-3 headings automatically generate anchors and appear in the on-page outline — keep them short and suitable as outline entries</li>\n<li>Code blocks must specify a language, or they get no syntax highlighting</li>\n<li>Operations that can damage software or hardware (formatting disks, flashing firmware, changing network configuration, etc.) must be accompanied by a <code>:::warning</code> callout</li>\n<li>Images must carry meaningful alt text: <code>![alt text](url)</code></li>\n</ul>\n<h3 id=\"translation-conventions\">Translation Conventions</h3>\n<ul>\n<li>The English version (<code>docs/en/</code>) is optional; when missing, English readers see the Chinese version with a fallback notice</li>\n<li>The English tree mirrors the Chinese one; the build falls back entry by entry</li>\n<li>Translations must fill in the <code>translator</code> field honestly: machine / LLM / human / mix</li>\n</ul>\n<h3 id=\"review-and-disclaimer\">Review and Disclaimer</h3>\n<ul>\n<li>Contributions receive only a light review; we do not guarantee correctness or freshness</li>\n<li>Loopback Cloud is not responsible for damage readers incur by following the docs — this applies to contributors themselves as well</li>\n</ul>\n<h2 id=\"frontmatter-reference\">Frontmatter Reference</h2>\n<p>Complete example:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">---</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">title</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">Getting Started</span><span style=\"color:#6A737D\">           # required, page title</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">description</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">Up and running in 5 minutes</span><span style=\"color:#6A737D\">  # optional, subtitle under the title</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">order</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">1</span><span style=\"color:#6A737D\">                         # optional, sidebar order, lower first, default 0</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">created</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">2026-07-29 13:16:13 +8</span><span style=\"color:#6A737D\">  # optional, creation time</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">updated</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">2026-07-29</span><span style=\"color:#6A737D\">              # optional, last update time</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">author</span><span style=\"color:#E1E4E8\">:                          </span><span style=\"color:#6A737D\"># optional, author list</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">  - </span><span style=\"color:#85E89D\">name</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">星语</span><span style=\"color:#6A737D\">                   #   required, truncated beyond 24 chars</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    email</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">star@sotis.space</span><span style=\"color:#6A737D\">      #   optional, rendered as a mail icon</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    url</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">https://github.com/star-whisper9</span><span style=\"color:#6A737D\">  # optional, name rendered as a link</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">translator</span><span style=\"color:#E1E4E8\">:                      </span><span style=\"color:#6A737D\"># optional, translation info, usually on en pages</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  type</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">mix</span><span style=\"color:#6A737D\">                      #   required, machine | llm | human | mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  model</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">step-3.7-flash</span><span style=\"color:#6A737D\">          #   optional, recommended for llm / mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  human</span><span style=\"color:#E1E4E8\">:                         </span><span style=\"color:#6A737D\">#   optional, recommended for human / mix</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">    - </span><span style=\"color:#9ECBFF\">星语</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">navIgnore</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">false</span><span style=\"color:#6A737D\">                 # optional, hide from sidebar when true</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">---</span></span></code></pre>\n<h3 id=\"field-overview\">Field Overview</h3>\n<table>\n<thead>\n<tr>\n<th>Field</th>\n<th>Type</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>title</code></td>\n<td>string</td>\n<td>yes</td>\n<td>Page title, rendered as h1</td>\n</tr>\n<tr>\n<td><code>description</code></td>\n<td>string</td>\n<td>no</td>\n<td>Subtitle shown under the title</td>\n</tr>\n<tr>\n<td><code>order</code></td>\n<td>number</td>\n<td>no</td>\n<td>Sidebar order, lower first, default 0; ties sorted by path</td>\n</tr>\n<tr>\n<td><code>created</code></td>\n<td>datetime</td>\n<td>no</td>\n<td>Creation time, see formats below</td>\n</tr>\n<tr>\n<td><code>updated</code></td>\n<td>datetime</td>\n<td>no</td>\n<td>Last update time, same formats</td>\n</tr>\n<tr>\n<td><code>author</code></td>\n<td>array</td>\n<td>no</td>\n<td>Author list, see below</td>\n</tr>\n<tr>\n<td><code>translator</code></td>\n<td>object</td>\n<td>no</td>\n<td>Translation info, renders a translator banner</td>\n</tr>\n<tr>\n<td><code>navIgnore</code></td>\n<td>boolean</td>\n<td>no</td>\n<td>Hidden from the sidebar when <code>true</code></td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"datetime-formats\">Datetime Formats</h3>\n<p><code>created</code> / <code>updated</code> accept the following forms, all normalized to ISO 8601 (UTC) at build time:</p>\n<table>\n<thead>\n<tr>\n<th>Form</th>\n<th>Example</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>ISO 8601</td>\n<td><code>2026-07-29T13:16:13Z</code>, <code>2026-07-29T13:16:13+08:00</code></td>\n</tr>\n<tr>\n<td>Datetime + timezone</td>\n<td><code>2026-07-29 13:16:13 +8</code></td>\n</tr>\n<tr>\n<td>Datetime, no timezone</td>\n<td><code>2026-07-29 13:16:13</code> (treated as UTC)</td>\n</tr>\n<tr>\n<td>Minutes / seconds omitted</td>\n<td><code>2026-07-29 13:16</code>, <code>2026-07-29 13</code></td>\n</tr>\n<tr>\n<td>Date only</td>\n<td><code>2026-07-29</code> (treated as UTC midnight)</td>\n</tr>\n</tbody>\n</table>\n<p>Timezones may be written as <code>+8</code>, <code>+08</code>, <code>+0800</code>, <code>+08:00</code>, or <code>Z</code>; times are rendered in the visitor's local timezone.</p>\n<div class=\"docs-callout docs-callout--tip\"><p class=\"docs-callout__title\">Recommendation</p><p>Write the timezone explicitly (e.g. <code>+8</code>). Unquoted YAML datetime values are parsed as YAML 1.1 timestamps, and values without a timezone are treated as UTC rather than local time — annotate the timezone explicitly if you mean local time.</p></div>\n<h3 id=\"authors-and-translators\">Authors and Translators</h3>\n<p>Author display rules:</p>\n<ul>\n<li><code>name</code> is required and is truncated beyond 24 characters</li>\n<li>When <code>url</code> is present the name renders as an external link; when <code>email</code> is present a mail icon is shown</li>\n</ul>\n<p>The translator <code>type</code> determines the banner text at the top of the page:</p>\n<table>\n<thead>\n<tr>\n<th>type</th>\n<th>Meaning</th>\n<th>Recommended extras</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>machine</code></td>\n<td>Machine translation</td>\n<td>—</td>\n</tr>\n<tr>\n<td><code>llm</code></td>\n<td>AI model translation</td>\n<td><code>model</code></td>\n</tr>\n<tr>\n<td><code>human</code></td>\n<td>Human translation</td>\n<td><code>human</code> list</td>\n</tr>\n<tr>\n<td><code>mix</code></td>\n<td>AI translation + human review</td>\n<td><code>model</code> and <code>human</code> list</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"markdown-and-extension-syntax\">Markdown and Extension Syntax</h2>\n<h3 id=\"basics-commonmark--gfm\">Basics (CommonMark + GFM)</h3>\n<p>Standard Markdown plus GitHub Flavored Markdown extensions are supported:</p>\n<ul>\n<li>Text styles: <strong>bold</strong>, <em>italic</em>, <del>strikethrough</del>, <code>inline code</code></li>\n<li>Links and images: <code>[text](url)</code>, <code>![alt text](url)</code></li>\n<li>Ordered / unordered lists, blockquotes, horizontal rules</li>\n<li>Tables (GFM) and task lists (GFM)</li>\n</ul>\n<p>Task list example:</p>\n<ul class=\"contains-task-list\">\n<li class=\"task-list-item\"><input type=\"checkbox\" checked disabled> Install the OS</li>\n<li class=\"task-list-item\"><input type=\"checkbox\" disabled> Configure the network</li>\n</ul>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">Note</p><p>Inline HTML passes through and renders as-is — use it with care, as it bypasses the pipeline's styling and escaping.</p></div>\n<h3 id=\"code-blocks\">Code Blocks</h3>\n<p>Fenced code blocks are highlighted by Shiki with the <code>github-dark</code> theme and <strong>must specify a language</strong>:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">ssh</span><span style=\"color:#9ECBFF\"> root@127.0.0.1</span></span></code></pre>\n<h3 id=\"heading-anchors-and-outline\">Heading Anchors and Outline</h3>\n<ul>\n<li>Level-2 and level-3 headings automatically get <code>id</code> anchors and appear in the on-page outline</li>\n<li>Non-ASCII (e.g. Chinese) headings are supported; duplicate heading texts get numeric suffixes</li>\n</ul>\n<h3 id=\"callouts\">Callouts</h3>\n<p>Four types, with default titles that follow the UI language; customize with <code>[Title]</code>:</p>\n<table>\n<thead>\n<tr>\n<th>Directive</th>\n<th>Default title</th>\n<th>Use for</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>:::note</code></td>\n<td>Note</td>\n<td>Supplementary information</td>\n</tr>\n<tr>\n<td><code>:::warning</code></td>\n<td>Warning</td>\n<td>Operations that can cause damage</td>\n</tr>\n<tr>\n<td><code>:::tip</code></td>\n<td>Tip</td>\n<td>Optional tricks</td>\n</tr>\n<tr>\n<td><code>:::important</code></td>\n<td>Important</td>\n<td>Must-know information</td>\n</tr>\n</tbody>\n</table>\n<p>Syntax and rendered result:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::warning[Dangerous operation]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">This command wipes the disk — double-check before running.</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<div class=\"docs-callout docs-callout--warning\"><p class=\"docs-callout__title\">Dangerous operation</p><p>This command wipes the disk — double-check before running.</p></div>\n<h3 id=\"details-collapsible-blocks\">Details (Collapsible Blocks)</h3>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::details[Click to expand the config example]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">Collapsed content; any Markdown is allowed.</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<details class=\"docs-details\"><summary>Click to expand the config example</summary><p>Collapsed content; any Markdown is allowed.</p></details>\n<h3 id=\"code-tabs\">Code Tabs</h3>\n<p>Four colons on the outside, three on the inside; <code>label</code> is the tab title, and <strong>at most 3 tabs</strong> are allowed:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">::::code-tabs</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"pnpm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"npm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">::::</span></span></code></pre>\n<p>Rendered result:</p>\n<div class=\"docs-tabs\" data-docs-tabs><div class=\"docs-tabs__labels\"><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"0\" checked><span>pnpm</span></label><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"1\"><span>npm</span></label></div><div class=\"docs-tabs__panels\"><div class=\"docs-tabs__panel\" data-index=\"0\" data-active=\"\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div><div class=\"docs-tabs__panel\" data-index=\"1\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div></div></div>\n<h3 id=\"nesting-and-limits\">Nesting and Limits</h3>\n<ul>\n<li>Callouts and details may contain normal Markdown and other directives (e.g. a callout inside details)</li>\n<li>Code tabs may only contain <code>:::tab</code>; tabs cannot nest further directive containers</li>\n<li>Unrecognized directive names render without special styling and do not fail the build — stick to the directives listed on this page</li>\n</ul>",
+              "anchors": [
+                {
+                  "id": "contribution-rules",
+                  "text": "Contribution Rules",
+                  "level": 2
+                },
+                {
+                  "id": "scope",
+                  "text": "Scope",
+                  "level": 3
+                },
+                {
+                  "id": "directories-and-files",
+                  "text": "Directories and Files",
+                  "level": 3
+                },
+                {
+                  "id": "writing-conventions",
+                  "text": "Writing Conventions",
+                  "level": 3
+                },
+                {
+                  "id": "translation-conventions",
+                  "text": "Translation Conventions",
+                  "level": 3
+                },
+                {
+                  "id": "review-and-disclaimer",
+                  "text": "Review and Disclaimer",
+                  "level": 3
+                },
+                {
+                  "id": "frontmatter-reference",
+                  "text": "Frontmatter Reference",
+                  "level": 2
+                },
+                {
+                  "id": "field-overview",
+                  "text": "Field Overview",
+                  "level": 3
+                },
+                {
+                  "id": "datetime-formats",
+                  "text": "Datetime Formats",
+                  "level": 3
+                },
+                {
+                  "id": "authors-and-translators",
+                  "text": "Authors and Translators",
+                  "level": 3
+                },
+                {
+                  "id": "markdown-and-extension-syntax",
+                  "text": "Markdown and Extension Syntax",
+                  "level": 2
+                },
+                {
+                  "id": "basics-commonmark--gfm",
+                  "text": "Basics (CommonMark + GFM)",
+                  "level": 3
+                },
+                {
+                  "id": "code-blocks",
+                  "text": "Code Blocks",
+                  "level": 3
+                },
+                {
+                  "id": "heading-anchors-and-outline",
+                  "text": "Heading Anchors and Outline",
+                  "level": 3
+                },
+                {
+                  "id": "callouts",
+                  "text": "Callouts",
+                  "level": 3
+                },
+                {
+                  "id": "details-collapsible-blocks",
+                  "text": "Details (Collapsible Blocks)",
+                  "level": 3
+                },
+                {
+                  "id": "code-tabs",
+                  "text": "Code Tabs",
+                  "level": 3
+                },
+                {
+                  "id": "nesting-and-limits",
+                  "text": "Nesting and Limits",
+                  "level": 3
+                }
+              ]
+            }
+          ]
         }
       ],
       "docs": []
@@ -151,11 +405,30 @@ export const trees: Record<DocLocale, DocTree> = {
     "indexDoc": {
       "path": "",
       "meta": {
-        "title": "Docs Home",
-        "description": "Loopback Cloud documentation",
+        "title": "Documentation Home",
+        "description": "Loopback Cloud Documentation Center",
+        "created": "2026-07-29T05:16:13.000Z",
+        "updated": "2026-07-29T05:16:13.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          },
+          {
+            "name": "VeryLongAuthorNameThatExceedsTheLimit"
+          }
+        ],
+        "translator": {
+          "type": "mix",
+          "model": "step-3.7-flash",
+          "human": [
+            "星语"
+          ]
+        },
         "navIgnore": true
       },
-      "html": "<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
+      "html": "<p>Welcome to the Loopback Cloud Documentation Center.</p>\n<p>Loopback Cloud Documentation is a <strong>community-driven</strong> guide to building real home servers. Here we publish home server tutorials after simple review.</p>\n<p>From simple Windows physical machines, to PVE virtualization solutions, to hardware recommendations and hardware maintenance guides, we are committed to creating a <strong>genuinely useful</strong> curated home server documentation.</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">Important</p><p>Loopback Cloud's documentation comes from <strong>community contributions</strong>. We conduct simple reviews of contributed content, but cannot guarantee documentation quality or control over AI-generated content. You should be aware of this.</p>\n<p>When reading documentation on this site, please think carefully about all instructions and passages marked with <strong>Important</strong>, <strong>Warning</strong>, and other emphasis markers. These contents may potentially damage your software and hardware environment. Loopback Cloud is not responsible for any misoperations caused by reading the documentation. Please use your own judgment!</p></div>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Loopback Cloud provides documentation in both Chinese and English. <strong>Chinese documentation serves as the baseline</strong>, and most English documentation is translated from it. You can switch languages using the button in the top-right corner of the navigation bar.</p>\n<p>Currently, we provide two categories of documentation: <strong>Software</strong> and <strong>Hardware</strong>. The top bar allows switching between documentation categories. The left sidebar allows browsing hierarchically organized documentation by category. The right sidebar will display in-page anchor navigation when your device width is sufficient.</p>\n<p>Software documentation focuses on <strong>Operating Systems</strong>, <strong>Utility Software</strong>, and <strong>Software Solutions</strong>. Hardware documentation focuses on <strong>Hardware Facility Maintenance</strong>, <strong>Maintenance and Debugging Practical Guides</strong>, and <strong>Hardware Selection and Purchasing</strong>. You can read as needed.</p>",
       "anchors": [
         {
           "id": "navigation",
@@ -202,11 +475,134 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
       "html": "<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
       "anchors": []
     },
+    "contribution/guide": {
+      "path": "contribution/guide",
+      "meta": {
+        "title": "文档贡献指南",
+        "description": "贡献规则、Frontmatter 字段与 Markdown 扩展语法完整参考",
+        "order": 1,
+        "created": "2026-07-29T00:00:00.000Z",
+        "updated": "2026-07-29T00:00:00.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          }
+        ],
+        "navIgnore": false
+      },
+      "html": "<p>环回云文档是一份 <strong>社区驱动</strong> 的家里云（Home-Lab）知识库。本页是面向贡献者的完整参考，涵盖三部分：贡献规则、Frontmatter 字段全解、Markdown 与扩展语法全解。</p>\n<p>写作前请通读本页——本站文档构建管线对 Frontmatter 与语法有明确约束，不符合约束的内容会在构建时报错或被静默忽略。</p>\n<h2 id=\"贡献规则\">贡献规则</h2>\n<h3 id=\"内容范围\">内容范围</h3>\n<p>我们接受与家里云相关的 <strong>真实、可复现</strong> 的实践内容，例如：</p>\n<ul>\n<li>操作系统安装与配置（Windows / Linux / BSD）</li>\n<li>虚拟化方案（PVE、ESXi、Hyper-V 等）</li>\n<li>网络规划、内网穿透与防火墙</li>\n<li>存储方案与数据备份</li>\n<li>硬件选购、排障与维护</li>\n</ul>\n<p>谢绝：未经验证的纯转发内容、与家里云无关的推广、大段未标注的 AI 生成内容。</p>\n<h3 id=\"目录与文件\">目录与文件</h3>\n<ul>\n<li>一个分类对应语言目录下的一个子目录，目录内放 <code>_category.md</code> 声明分类标题与排序</li>\n<li>文章文件名为小写短横线命名（kebab-case），如 <code>getting-started.md</code></li>\n<li><strong>不要把文章命名为 <code>index.md</code></strong>——子目录中的 <code>index.md</code> 会被构建直接忽略</li>\n<li>不想出现在侧边栏导航中的文章，设置 <code>navIgnore: true</code>（页面仍可通过 URL 访问）</li>\n</ul>\n<h3 id=\"写作规范\">写作规范</h3>\n<ul>\n<li>页面标题由 Frontmatter 的 <code>title</code> 生成，正文从二级标题（<code>##</code>）开始，<strong>不要写一级标题</strong></li>\n<li>二级 / 三级标题会自动生成锚点并收录进右侧大纲，措辞请简短、适合做目录条目</li>\n<li>代码块必须标注语言，否则没有语法高亮</li>\n<li>可能损坏软硬件环境的操作（格式化磁盘、刷写固件、改动网络配置等）必须配 <code>:::warning</code> 提示</li>\n<li>图片请携带有意义的替代文本：<code>![替代文本](图片地址)</code></li>\n</ul>\n<h3 id=\"翻译规范\">翻译规范</h3>\n<ul>\n<li>英文版（<code>docs/en/</code>）为可选项；缺失时英文读者自动看到中文版，并显示回退提示</li>\n<li>英文目录结构与中文保持一致，构建会按条目逐一回退</li>\n<li>译文必须如实填写 <code>translator</code> 字段，标明机器翻译 / AI 翻译 / 人工翻译 / 混合</li>\n</ul>\n<h3 id=\"审核与免责\">审核与免责</h3>\n<ul>\n<li>我们对贡献内容仅做简单审核，不保证正确性与时效性</li>\n<li>环回云不对读者因阅读文档造成的损失负责——这条对贡献者本人同样适用</li>\n</ul>\n<h2 id=\"frontmatter-全解\">Frontmatter 全解</h2>\n<p>完整示例：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">---</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">title</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">快速开始</span><span style=\"color:#6A737D\">                  # 必填，页面标题</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">description</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">五分钟上手环回云</span><span style=\"color:#6A737D\">     # 可选，显示在标题下方的简介</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">order</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">1</span><span style=\"color:#6A737D\">                        # 可选，侧边栏排序，越小越靠前，默认 0</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">created</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">2026-07-29 13:16:13 +8</span><span style=\"color:#6A737D\"> # 可选，创建时间</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">updated</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">2026-07-29</span><span style=\"color:#6A737D\">             # 可选，最后更新时间</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">author</span><span style=\"color:#E1E4E8\">:                         </span><span style=\"color:#6A737D\"># 可选，作者列表</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">  - </span><span style=\"color:#85E89D\">name</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">星语</span><span style=\"color:#6A737D\">                  #   必填，超过 24 字符会截断显示</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    email</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">star@sotis.space</span><span style=\"color:#6A737D\">     #   可选，渲染为邮件图标</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    url</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">https://github.com/star-whisper9</span><span style=\"color:#6A737D\">  # 可选，作者名渲染为链接</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">translator</span><span style=\"color:#E1E4E8\">:                     </span><span style=\"color:#6A737D\"># 可选，译文信息，通常由英文版填写</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  type</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">mix</span><span style=\"color:#6A737D\">                     #   必填，machine | llm | human | mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  model</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">step-3.7-flash</span><span style=\"color:#6A737D\">         #   可选，type 为 llm / mix 时建议填写</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  human</span><span style=\"color:#E1E4E8\">:                        </span><span style=\"color:#6A737D\">#   可选，type 为 human / mix 时建议填写</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">    - </span><span style=\"color:#9ECBFF\">星语</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">navIgnore</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">false</span><span style=\"color:#6A737D\">                # 可选，true 时不出现在侧边栏导航</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">---</span></span></code></pre>\n<h3 id=\"字段一览\">字段一览</h3>\n<table>\n<thead>\n<tr>\n<th>字段</th>\n<th>类型</th>\n<th>必填</th>\n<th>说明</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>title</code></td>\n<td>string</td>\n<td>是</td>\n<td>页面标题，渲染为 h1</td>\n</tr>\n<tr>\n<td><code>description</code></td>\n<td>string</td>\n<td>否</td>\n<td>简介，显示在标题下方</td>\n</tr>\n<tr>\n<td><code>order</code></td>\n<td>number</td>\n<td>否</td>\n<td>侧边栏排序，越小越靠前，默认 0；相同时按路径排序</td>\n</tr>\n<tr>\n<td><code>created</code></td>\n<td>datetime</td>\n<td>否</td>\n<td>创建时间，见下文格式说明</td>\n</tr>\n<tr>\n<td><code>updated</code></td>\n<td>datetime</td>\n<td>否</td>\n<td>更新时间，格式同上</td>\n</tr>\n<tr>\n<td><code>author</code></td>\n<td>array</td>\n<td>否</td>\n<td>作者列表，见下文</td>\n</tr>\n<tr>\n<td><code>translator</code></td>\n<td>object</td>\n<td>否</td>\n<td>翻译信息，生成译文横幅</td>\n</tr>\n<tr>\n<td><code>navIgnore</code></td>\n<td>boolean</td>\n<td>否</td>\n<td>为 <code>true</code> 时不出现在侧边栏</td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"时间格式\">时间格式</h3>\n<p><code>created</code> / <code>updated</code> 接受以下写法，构建时统一归一化为 ISO 8601（UTC）：</p>\n<table>\n<thead>\n<tr>\n<th>写法</th>\n<th>示例</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>ISO 8601</td>\n<td><code>2026-07-29T13:16:13Z</code>、<code>2026-07-29T13:16:13+08:00</code></td>\n</tr>\n<tr>\n<td>日期时间 + 时区</td>\n<td><code>2026-07-29 13:16:13 +8</code></td>\n</tr>\n<tr>\n<td>日期时间，无时区</td>\n<td><code>2026-07-29 13:16:13</code>（按 UTC 处理）</td>\n</tr>\n<tr>\n<td>省略分 / 秒</td>\n<td><code>2026-07-29 13:16</code>、<code>2026-07-29 13</code></td>\n</tr>\n<tr>\n<td>仅日期</td>\n<td><code>2026-07-29</code>（按 UTC 0 点处理）</td>\n</tr>\n</tbody>\n</table>\n<p>时区支持 <code>+8</code>、<code>+08</code>、<code>+0800</code>、<code>+08:00</code>、<code>Z</code> 等写法；展示时按访问者所在时区渲染。</p>\n<div class=\"docs-callout docs-callout--tip\"><p class=\"docs-callout__title\">建议</p><p>显式写出时区（如 <code>+8</code>）。不加引号的 YAML 时间值会按 YAML 1.1 时间戳解析，无时区时按 UTC 而非本地时间处理——期望本地时间语义时务必显式标注时区。</p></div>\n<h3 id=\"作者与译者\">作者与译者</h3>\n<p>作者显示规则：</p>\n<ul>\n<li><code>name</code> 必填，超过 24 字符会截断显示</li>\n<li><code>url</code> 存在时作者名渲染为外链；<code>email</code> 存在时渲染为邮件图标</li>\n</ul>\n<p>译者 <code>type</code> 决定页面译文横幅的文案：</p>\n<table>\n<thead>\n<tr>\n<th>type</th>\n<th>含义</th>\n<th>建议补充</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>machine</code></td>\n<td>机器翻译</td>\n<td>—</td>\n</tr>\n<tr>\n<td><code>llm</code></td>\n<td>AI 模型翻译</td>\n<td><code>model</code></td>\n</tr>\n<tr>\n<td><code>human</code></td>\n<td>人工翻译</td>\n<td><code>human</code> 名单</td>\n</tr>\n<tr>\n<td><code>mix</code></td>\n<td>AI 翻译 + 人工审校</td>\n<td><code>model</code> 与 <code>human</code> 名单</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"markdown-与扩展语法\">Markdown 与扩展语法</h2>\n<h3 id=\"基础语法commonmark--gfm\">基础语法（CommonMark + GFM）</h3>\n<p>支持标准 Markdown 与 GitHub Flavored Markdown 扩展：</p>\n<ul>\n<li>文本样式：<strong>粗体</strong>、<em>斜体</em>、<del>删除线</del>、<code>行内代码</code></li>\n<li>链接与图片：<code>[链接文本](地址)</code>、<code>![替代文本](图片地址)</code></li>\n<li>有序 / 无序列表、引用块、分割线</li>\n<li>表格（GFM）与任务列表（GFM）</li>\n</ul>\n<p>任务列表示例：</p>\n<ul class=\"contains-task-list\">\n<li class=\"task-list-item\"><input type=\"checkbox\" checked disabled> 安装系统</li>\n<li class=\"task-list-item\"><input type=\"checkbox\" disabled> 配置网络</li>\n</ul>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">注释</p><p>行内 HTML 会原样透传渲染，请谨慎使用——它绕过了构建管线的样式与转义。</p></div>\n<h3 id=\"代码块\">代码块</h3>\n<p>围栏代码块经 Shiki 以 <code>github-dark</code> 主题高亮，<strong>必须标注语言</strong>：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">ssh</span><span style=\"color:#9ECBFF\"> root@127.0.0.1</span></span></code></pre>\n<h3 id=\"标题锚点与大纲\">标题锚点与大纲</h3>\n<ul>\n<li>二级、三级标题自动生成 <code>id</code> 锚点，并收录进页面右侧大纲</li>\n<li>中文标题同样支持锚点；重复文案的标题会自动追加数字后缀</li>\n</ul>\n<h3 id=\"提示框callout\">提示框（Callout）</h3>\n<p>四种类型，默认标题随界面语言切换，也可用 <code>[标题]</code> 自定义：</p>\n<table>\n<thead>\n<tr>\n<th>指令</th>\n<th>默认标题</th>\n<th>用途</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>:::note</code></td>\n<td>注释</td>\n<td>补充说明</td>\n</tr>\n<tr>\n<td><code>:::warning</code></td>\n<td>警告</td>\n<td>可能造成损害的操作</td>\n</tr>\n<tr>\n<td><code>:::tip</code></td>\n<td>提示</td>\n<td>可选的技巧</td>\n</tr>\n<tr>\n<td><code>:::important</code></td>\n<td>重要</td>\n<td>必须知晓的信息</td>\n</tr>\n</tbody>\n</table>\n<p>写法与渲染效果：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::warning[</span><span style=\"color:#DBEDFF;text-decoration:underline\">高危操作</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">这条命令会清空磁盘，执行前再三确认。</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<div class=\"docs-callout docs-callout--warning\"><p class=\"docs-callout__title\">高危操作</p><p>这条命令会清空磁盘，执行前再三确认。</p></div>\n<h3 id=\"折叠块details\">折叠块（Details）</h3>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::details[</span><span style=\"color:#DBEDFF;text-decoration:underline\">展开查看配置文件示例</span><span style=\"color:#E1E4E8\">]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">折叠内容，支持任意 Markdown。</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<details class=\"docs-details\"><summary>展开查看配置文件示例</summary><p>折叠内容，支持任意 Markdown。</p></details>\n<h3 id=\"代码标签页code-tabs\">代码标签页（Code Tabs）</h3>\n<p>外层四个冒号、内层三个冒号，<code>label</code> 为标签页标题，<strong>最多 3 个标签页</strong>：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">::::code-tabs</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"pnpm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"npm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">::::</span></span></code></pre>\n<p>渲染效果：</p>\n<div class=\"docs-tabs\" data-docs-tabs><div class=\"docs-tabs__labels\"><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"0\" checked><span>pnpm</span></label><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"1\"><span>npm</span></label></div><div class=\"docs-tabs__panels\"><div class=\"docs-tabs__panel\" data-index=\"0\" data-active=\"\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div><div class=\"docs-tabs__panel\" data-index=\"1\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div></div></div>\n<h3 id=\"嵌套与限制\">嵌套与限制</h3>\n<ul>\n<li>提示框、折叠块内部可嵌套普通 Markdown 与其他指令（如 details 内放 callout）</li>\n<li>代码标签页内只能放 <code>:::tab</code>，标签页内不能再嵌套指令容器</li>\n<li>未识别的指令名不会渲染为特殊样式，构建也不会报错——请以本页列出的指令为准</li>\n</ul>",
+      "anchors": [
+        {
+          "id": "贡献规则",
+          "text": "贡献规则",
+          "level": 2
+        },
+        {
+          "id": "内容范围",
+          "text": "内容范围",
+          "level": 3
+        },
+        {
+          "id": "目录与文件",
+          "text": "目录与文件",
+          "level": 3
+        },
+        {
+          "id": "写作规范",
+          "text": "写作规范",
+          "level": 3
+        },
+        {
+          "id": "翻译规范",
+          "text": "翻译规范",
+          "level": 3
+        },
+        {
+          "id": "审核与免责",
+          "text": "审核与免责",
+          "level": 3
+        },
+        {
+          "id": "frontmatter-全解",
+          "text": "Frontmatter 全解",
+          "level": 2
+        },
+        {
+          "id": "字段一览",
+          "text": "字段一览",
+          "level": 3
+        },
+        {
+          "id": "时间格式",
+          "text": "时间格式",
+          "level": 3
+        },
+        {
+          "id": "作者与译者",
+          "text": "作者与译者",
+          "level": 3
+        },
+        {
+          "id": "markdown-与扩展语法",
+          "text": "Markdown 与扩展语法",
+          "level": 2
+        },
+        {
+          "id": "基础语法commonmark--gfm",
+          "text": "基础语法（CommonMark + GFM）",
+          "level": 3
+        },
+        {
+          "id": "代码块",
+          "text": "代码块",
+          "level": 3
+        },
+        {
+          "id": "标题锚点与大纲",
+          "text": "标题锚点与大纲",
+          "level": 3
+        },
+        {
+          "id": "提示框callout",
+          "text": "提示框（Callout）",
+          "level": 3
+        },
+        {
+          "id": "折叠块details",
+          "text": "折叠块（Details）",
+          "level": 3
+        },
+        {
+          "id": "代码标签页code-tabs",
+          "text": "代码标签页（Code Tabs）",
+          "level": 3
+        },
+        {
+          "id": "嵌套与限制",
+          "text": "嵌套与限制",
+          "level": 3
+        }
+      ]
+    },
     "": {
       "path": "",
       "meta": {
         "title": "文档首页",
         "description": "环回云文档中心",
+        "created": "2026-07-29T05:16:13.000Z",
+        "updated": "2026-07-29T05:16:13.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          },
+          {
+            "name": "VeryLongAuthorNameThatExceedsTheLimit"
+          }
+        ],
         "navIgnore": true
       },
       "html": "<p>欢迎来到环回云文档中心。</p>\n<p>环回云文档是一份 <strong>社区驱动</strong> 的真实的家里云构建指南，在这里，我们发布经过简单审核的家里云相关教程文档。</p>\n<p>从简单的 Windows 实体机，到 PVE 虚拟化方案，再到硬件推荐和硬件维护指南，我们致力于创建一个 <strong>真实有用</strong> 的家里云文档聚合。</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">重要</p><p>环回云的文档来自于 <strong>社区贡献</strong>，我们会对贡献内容进行简单审核，但不能保证文档质量、AI 生成内容管控，您应知悉。</p>\n<p>您在阅读本站文档时，请对所有标注了 <strong>重要</strong>、<strong>警告</strong> 等重点标记的指令、文段再三思考，这些内容有可能会损坏您的软硬件环境。环回云不对用户阅读文档做出的误操作负责，请保留自己的思考！</p></div>\n<h2 id=\"导览\">导览</h2>\n<p>环回云提供中文和英文两种语言文档，其中 <strong>中文文档为基准</strong>，英文文档大多经由翻译而来，您可以通过导航栏右上角的按钮切换。</p>\n<p>目前向您提供 <strong>软件</strong> 和 <strong>硬件</strong> 两类文档。顶栏可以在文档分类中切换，左侧栏则按分类浏览分好层级的文档，右侧栏在您的设备宽度足够时将会显示页内锚点导航。</p>\n<p>软件文档专注于 <strong>操作系统</strong>、<strong>工具软件</strong>、<strong>软件解决方案</strong> 的文档，硬件文档专注于 <strong>硬件设施维护</strong>、<strong>维护与调试实操指南</strong>、<strong>硬件选择与购买</strong> 的文档，您可以按需阅读。</p>",
@@ -242,14 +638,148 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         }
       ]
     },
+    "contribution/guide": {
+      "path": "contribution/guide",
+      "meta": {
+        "title": "Documentation Contribution Guide",
+        "description": "Contribution rules, full Frontmatter reference, and Markdown extension syntax",
+        "order": 1,
+        "created": "2026-07-29T00:00:00.000Z",
+        "updated": "2026-07-29T00:00:00.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          }
+        ],
+        "translator": {
+          "type": "llm",
+          "model": "qwen3.8-max-preview"
+        },
+        "navIgnore": false
+      },
+      "html": "<p>Loopback Cloud Docs is a <strong>community-driven</strong> home-lab knowledge base. This page is the complete reference for contributors, covering three parts: contribution rules, the full Frontmatter reference, and all supported Markdown and extension syntax.</p>\n<p>Please read this page before writing — the docs build pipeline has strict constraints on Frontmatter and syntax. Content that violates them will either fail the build or be silently ignored.</p>\n<h2 id=\"contribution-rules\">Contribution Rules</h2>\n<h3 id=\"scope\">Scope</h3>\n<p>We accept <strong>real, reproducible</strong> home-lab content, such as:</p>\n<ul>\n<li>OS installation and configuration (Windows / Linux / BSD)</li>\n<li>Virtualization (PVE, ESXi, Hyper-V, etc.)</li>\n<li>Network planning, tunneling, and firewalls</li>\n<li>Storage and backups</li>\n<li>Hardware selection, troubleshooting, and maintenance</li>\n</ul>\n<p>Not welcome: unverified reposts, promotion unrelated to home labs, large blocks of unlabeled AI-generated content.</p>\n<h3 id=\"directories-and-files\">Directories and Files</h3>\n<ul>\n<li>One category = one subdirectory under the locale root, containing a <code>_category.md</code> that declares its title and order</li>\n<li>Article file names use kebab-case, e.g. <code>getting-started.md</code></li>\n<li><strong>Do not name an article <code>index.md</code></strong> — an <code>index.md</code> inside a subdirectory is ignored by the build</li>\n<li>To hide an article from the sidebar navigation, set <code>navIgnore: true</code> (the page remains reachable by URL)</li>\n</ul>\n<h3 id=\"writing-conventions\">Writing Conventions</h3>\n<ul>\n<li>The page title comes from the <code>title</code> frontmatter field; body content starts at level-2 headings (<code>##</code>). <strong>Never write a level-1 heading</strong></li>\n<li>Level-2 / level-3 headings automatically generate anchors and appear in the on-page outline — keep them short and suitable as outline entries</li>\n<li>Code blocks must specify a language, or they get no syntax highlighting</li>\n<li>Operations that can damage software or hardware (formatting disks, flashing firmware, changing network configuration, etc.) must be accompanied by a <code>:::warning</code> callout</li>\n<li>Images must carry meaningful alt text: <code>![alt text](url)</code></li>\n</ul>\n<h3 id=\"translation-conventions\">Translation Conventions</h3>\n<ul>\n<li>The English version (<code>docs/en/</code>) is optional; when missing, English readers see the Chinese version with a fallback notice</li>\n<li>The English tree mirrors the Chinese one; the build falls back entry by entry</li>\n<li>Translations must fill in the <code>translator</code> field honestly: machine / LLM / human / mix</li>\n</ul>\n<h3 id=\"review-and-disclaimer\">Review and Disclaimer</h3>\n<ul>\n<li>Contributions receive only a light review; we do not guarantee correctness or freshness</li>\n<li>Loopback Cloud is not responsible for damage readers incur by following the docs — this applies to contributors themselves as well</li>\n</ul>\n<h2 id=\"frontmatter-reference\">Frontmatter Reference</h2>\n<p>Complete example:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">---</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">title</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">Getting Started</span><span style=\"color:#6A737D\">           # required, page title</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">description</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">Up and running in 5 minutes</span><span style=\"color:#6A737D\">  # optional, subtitle under the title</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">order</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">1</span><span style=\"color:#6A737D\">                         # optional, sidebar order, lower first, default 0</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">created</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">2026-07-29 13:16:13 +8</span><span style=\"color:#6A737D\">  # optional, creation time</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">updated</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">2026-07-29</span><span style=\"color:#6A737D\">              # optional, last update time</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">author</span><span style=\"color:#E1E4E8\">:                          </span><span style=\"color:#6A737D\"># optional, author list</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">  - </span><span style=\"color:#85E89D\">name</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">星语</span><span style=\"color:#6A737D\">                   #   required, truncated beyond 24 chars</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    email</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">star@sotis.space</span><span style=\"color:#6A737D\">      #   optional, rendered as a mail icon</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">    url</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">https://github.com/star-whisper9</span><span style=\"color:#6A737D\">  # optional, name rendered as a link</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">translator</span><span style=\"color:#E1E4E8\">:                      </span><span style=\"color:#6A737D\"># optional, translation info, usually on en pages</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  type</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">mix</span><span style=\"color:#6A737D\">                      #   required, machine | llm | human | mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  model</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#9ECBFF\">step-3.7-flash</span><span style=\"color:#6A737D\">          #   optional, recommended for llm / mix</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">  human</span><span style=\"color:#E1E4E8\">:                         </span><span style=\"color:#6A737D\">#   optional, recommended for human / mix</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">    - </span><span style=\"color:#9ECBFF\">星语</span></span>\n<span class=\"line\"><span style=\"color:#85E89D\">navIgnore</span><span style=\"color:#E1E4E8\">: </span><span style=\"color:#79B8FF\">false</span><span style=\"color:#6A737D\">                 # optional, hide from sidebar when true</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">---</span></span></code></pre>\n<h3 id=\"field-overview\">Field Overview</h3>\n<table>\n<thead>\n<tr>\n<th>Field</th>\n<th>Type</th>\n<th>Required</th>\n<th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>title</code></td>\n<td>string</td>\n<td>yes</td>\n<td>Page title, rendered as h1</td>\n</tr>\n<tr>\n<td><code>description</code></td>\n<td>string</td>\n<td>no</td>\n<td>Subtitle shown under the title</td>\n</tr>\n<tr>\n<td><code>order</code></td>\n<td>number</td>\n<td>no</td>\n<td>Sidebar order, lower first, default 0; ties sorted by path</td>\n</tr>\n<tr>\n<td><code>created</code></td>\n<td>datetime</td>\n<td>no</td>\n<td>Creation time, see formats below</td>\n</tr>\n<tr>\n<td><code>updated</code></td>\n<td>datetime</td>\n<td>no</td>\n<td>Last update time, same formats</td>\n</tr>\n<tr>\n<td><code>author</code></td>\n<td>array</td>\n<td>no</td>\n<td>Author list, see below</td>\n</tr>\n<tr>\n<td><code>translator</code></td>\n<td>object</td>\n<td>no</td>\n<td>Translation info, renders a translator banner</td>\n</tr>\n<tr>\n<td><code>navIgnore</code></td>\n<td>boolean</td>\n<td>no</td>\n<td>Hidden from the sidebar when <code>true</code></td>\n</tr>\n</tbody>\n</table>\n<h3 id=\"datetime-formats\">Datetime Formats</h3>\n<p><code>created</code> / <code>updated</code> accept the following forms, all normalized to ISO 8601 (UTC) at build time:</p>\n<table>\n<thead>\n<tr>\n<th>Form</th>\n<th>Example</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>ISO 8601</td>\n<td><code>2026-07-29T13:16:13Z</code>, <code>2026-07-29T13:16:13+08:00</code></td>\n</tr>\n<tr>\n<td>Datetime + timezone</td>\n<td><code>2026-07-29 13:16:13 +8</code></td>\n</tr>\n<tr>\n<td>Datetime, no timezone</td>\n<td><code>2026-07-29 13:16:13</code> (treated as UTC)</td>\n</tr>\n<tr>\n<td>Minutes / seconds omitted</td>\n<td><code>2026-07-29 13:16</code>, <code>2026-07-29 13</code></td>\n</tr>\n<tr>\n<td>Date only</td>\n<td><code>2026-07-29</code> (treated as UTC midnight)</td>\n</tr>\n</tbody>\n</table>\n<p>Timezones may be written as <code>+8</code>, <code>+08</code>, <code>+0800</code>, <code>+08:00</code>, or <code>Z</code>; times are rendered in the visitor's local timezone.</p>\n<div class=\"docs-callout docs-callout--tip\"><p class=\"docs-callout__title\">Recommendation</p><p>Write the timezone explicitly (e.g. <code>+8</code>). Unquoted YAML datetime values are parsed as YAML 1.1 timestamps, and values without a timezone are treated as UTC rather than local time — annotate the timezone explicitly if you mean local time.</p></div>\n<h3 id=\"authors-and-translators\">Authors and Translators</h3>\n<p>Author display rules:</p>\n<ul>\n<li><code>name</code> is required and is truncated beyond 24 characters</li>\n<li>When <code>url</code> is present the name renders as an external link; when <code>email</code> is present a mail icon is shown</li>\n</ul>\n<p>The translator <code>type</code> determines the banner text at the top of the page:</p>\n<table>\n<thead>\n<tr>\n<th>type</th>\n<th>Meaning</th>\n<th>Recommended extras</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>machine</code></td>\n<td>Machine translation</td>\n<td>—</td>\n</tr>\n<tr>\n<td><code>llm</code></td>\n<td>AI model translation</td>\n<td><code>model</code></td>\n</tr>\n<tr>\n<td><code>human</code></td>\n<td>Human translation</td>\n<td><code>human</code> list</td>\n</tr>\n<tr>\n<td><code>mix</code></td>\n<td>AI translation + human review</td>\n<td><code>model</code> and <code>human</code> list</td>\n</tr>\n</tbody>\n</table>\n<h2 id=\"markdown-and-extension-syntax\">Markdown and Extension Syntax</h2>\n<h3 id=\"basics-commonmark--gfm\">Basics (CommonMark + GFM)</h3>\n<p>Standard Markdown plus GitHub Flavored Markdown extensions are supported:</p>\n<ul>\n<li>Text styles: <strong>bold</strong>, <em>italic</em>, <del>strikethrough</del>, <code>inline code</code></li>\n<li>Links and images: <code>[text](url)</code>, <code>![alt text](url)</code></li>\n<li>Ordered / unordered lists, blockquotes, horizontal rules</li>\n<li>Tables (GFM) and task lists (GFM)</li>\n</ul>\n<p>Task list example:</p>\n<ul class=\"contains-task-list\">\n<li class=\"task-list-item\"><input type=\"checkbox\" checked disabled> Install the OS</li>\n<li class=\"task-list-item\"><input type=\"checkbox\" disabled> Configure the network</li>\n</ul>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">Note</p><p>Inline HTML passes through and renders as-is — use it with care, as it bypasses the pipeline's styling and escaping.</p></div>\n<h3 id=\"code-blocks\">Code Blocks</h3>\n<p>Fenced code blocks are highlighted by Shiki with the <code>github-dark</code> theme and <strong>must specify a language</strong>:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">ssh</span><span style=\"color:#9ECBFF\"> root@127.0.0.1</span></span></code></pre>\n<h3 id=\"heading-anchors-and-outline\">Heading Anchors and Outline</h3>\n<ul>\n<li>Level-2 and level-3 headings automatically get <code>id</code> anchors and appear in the on-page outline</li>\n<li>Non-ASCII (e.g. Chinese) headings are supported; duplicate heading texts get numeric suffixes</li>\n</ul>\n<h3 id=\"callouts\">Callouts</h3>\n<p>Four types, with default titles that follow the UI language; customize with <code>[Title]</code>:</p>\n<table>\n<thead>\n<tr>\n<th>Directive</th>\n<th>Default title</th>\n<th>Use for</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>:::note</code></td>\n<td>Note</td>\n<td>Supplementary information</td>\n</tr>\n<tr>\n<td><code>:::warning</code></td>\n<td>Warning</td>\n<td>Operations that can cause damage</td>\n</tr>\n<tr>\n<td><code>:::tip</code></td>\n<td>Tip</td>\n<td>Optional tricks</td>\n</tr>\n<tr>\n<td><code>:::important</code></td>\n<td>Important</td>\n<td>Must-know information</td>\n</tr>\n</tbody>\n</table>\n<p>Syntax and rendered result:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::warning[Dangerous operation]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">This command wipes the disk — double-check before running.</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<div class=\"docs-callout docs-callout--warning\"><p class=\"docs-callout__title\">Dangerous operation</p><p>This command wipes the disk — double-check before running.</p></div>\n<h3 id=\"details-collapsible-blocks\">Details (Collapsible Blocks)</h3>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">:::details[Click to expand the config example]</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">Collapsed content; any Markdown is allowed.</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span></code></pre>\n<details class=\"docs-details\"><summary>Click to expand the config example</summary><p>Collapsed content; any Markdown is allowed.</p></details>\n<h3 id=\"code-tabs\">Code Tabs</h3>\n<p>Four colons on the outside, three on the inside; <code>label</code> is the tab title, and <strong>at most 3 tabs</strong> are allowed:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#E1E4E8\">::::code-tabs</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"pnpm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::tab{label=\"npm\"}</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```bash</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">```</span></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">:::</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#E1E4E8\">::::</span></span></code></pre>\n<p>Rendered result:</p>\n<div class=\"docs-tabs\" data-docs-tabs><div class=\"docs-tabs__labels\"><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"0\" checked><span>pnpm</span></label><label><input type=\"radio\" name=\"docs-tabs-1\" data-index=\"1\"><span>npm</span></label></div><div class=\"docs-tabs__panels\"><div class=\"docs-tabs__panel\" data-index=\"0\" data-active=\"\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">pnpm</span><span style=\"color:#9ECBFF\"> add</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div><div class=\"docs-tabs__panel\" data-index=\"1\"><pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> i</span><span style=\"color:#9ECBFF\"> loopback-cloud</span></span></code></pre></div></div></div>\n<h3 id=\"nesting-and-limits\">Nesting and Limits</h3>\n<ul>\n<li>Callouts and details may contain normal Markdown and other directives (e.g. a callout inside details)</li>\n<li>Code tabs may only contain <code>:::tab</code>; tabs cannot nest further directive containers</li>\n<li>Unrecognized directive names render without special styling and do not fail the build — stick to the directives listed on this page</li>\n</ul>",
+      "anchors": [
+        {
+          "id": "contribution-rules",
+          "text": "Contribution Rules",
+          "level": 2
+        },
+        {
+          "id": "scope",
+          "text": "Scope",
+          "level": 3
+        },
+        {
+          "id": "directories-and-files",
+          "text": "Directories and Files",
+          "level": 3
+        },
+        {
+          "id": "writing-conventions",
+          "text": "Writing Conventions",
+          "level": 3
+        },
+        {
+          "id": "translation-conventions",
+          "text": "Translation Conventions",
+          "level": 3
+        },
+        {
+          "id": "review-and-disclaimer",
+          "text": "Review and Disclaimer",
+          "level": 3
+        },
+        {
+          "id": "frontmatter-reference",
+          "text": "Frontmatter Reference",
+          "level": 2
+        },
+        {
+          "id": "field-overview",
+          "text": "Field Overview",
+          "level": 3
+        },
+        {
+          "id": "datetime-formats",
+          "text": "Datetime Formats",
+          "level": 3
+        },
+        {
+          "id": "authors-and-translators",
+          "text": "Authors and Translators",
+          "level": 3
+        },
+        {
+          "id": "markdown-and-extension-syntax",
+          "text": "Markdown and Extension Syntax",
+          "level": 2
+        },
+        {
+          "id": "basics-commonmark--gfm",
+          "text": "Basics (CommonMark + GFM)",
+          "level": 3
+        },
+        {
+          "id": "code-blocks",
+          "text": "Code Blocks",
+          "level": 3
+        },
+        {
+          "id": "heading-anchors-and-outline",
+          "text": "Heading Anchors and Outline",
+          "level": 3
+        },
+        {
+          "id": "callouts",
+          "text": "Callouts",
+          "level": 3
+        },
+        {
+          "id": "details-collapsible-blocks",
+          "text": "Details (Collapsible Blocks)",
+          "level": 3
+        },
+        {
+          "id": "code-tabs",
+          "text": "Code Tabs",
+          "level": 3
+        },
+        {
+          "id": "nesting-and-limits",
+          "text": "Nesting and Limits",
+          "level": 3
+        }
+      ]
+    },
     "": {
       "path": "",
       "meta": {
-        "title": "Docs Home",
-        "description": "Loopback Cloud documentation",
+        "title": "Documentation Home",
+        "description": "Loopback Cloud Documentation Center",
+        "created": "2026-07-29T05:16:13.000Z",
+        "updated": "2026-07-29T05:16:13.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          },
+          {
+            "name": "VeryLongAuthorNameThatExceedsTheLimit"
+          }
+        ],
+        "translator": {
+          "type": "mix",
+          "model": "step-3.7-flash",
+          "human": [
+            "星语"
+          ]
+        },
         "navIgnore": true
       },
-      "html": "<p>Welcome to the Loopback Cloud documentation center.</p>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Browse categories in the left sidebar; the right sidebar shows anchors on the current page.</p>",
+      "html": "<p>Welcome to the Loopback Cloud Documentation Center.</p>\n<p>Loopback Cloud Documentation is a <strong>community-driven</strong> guide to building real home servers. Here we publish home server tutorials after simple review.</p>\n<p>From simple Windows physical machines, to PVE virtualization solutions, to hardware recommendations and hardware maintenance guides, we are committed to creating a <strong>genuinely useful</strong> curated home server documentation.</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">Important</p><p>Loopback Cloud's documentation comes from <strong>community contributions</strong>. We conduct simple reviews of contributed content, but cannot guarantee documentation quality or control over AI-generated content. You should be aware of this.</p>\n<p>When reading documentation on this site, please think carefully about all instructions and passages marked with <strong>Important</strong>, <strong>Warning</strong>, and other emphasis markers. These contents may potentially damage your software and hardware environment. Loopback Cloud is not responsible for any misoperations caused by reading the documentation. Please use your own judgment!</p></div>\n<h2 id=\"navigation\">Navigation</h2>\n<p>Loopback Cloud provides documentation in both Chinese and English. <strong>Chinese documentation serves as the baseline</strong>, and most English documentation is translated from it. You can switch languages using the button in the top-right corner of the navigation bar.</p>\n<p>Currently, we provide two categories of documentation: <strong>Software</strong> and <strong>Hardware</strong>. The top bar allows switching between documentation categories. The left sidebar allows browsing hierarchically organized documentation by category. The right sidebar will display in-page anchor navigation when your device width is sufficient.</p>\n<p>Software documentation focuses on <strong>Operating Systems</strong>, <strong>Utility Software</strong>, and <strong>Software Solutions</strong>. Hardware documentation focuses on <strong>Hardware Facility Maintenance</strong>, <strong>Maintenance and Debugging Practical Guides</strong>, and <strong>Hardware Selection and Purchasing</strong>. You can read as needed.</p>",
       "anchors": [
         {
           "id": "navigation",
@@ -263,6 +793,7 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
 
 export const allDocPaths: string[] = [
   "",
+  "contribution/guide",
   "software/getting-started",
   "software/zh-only"
 ];

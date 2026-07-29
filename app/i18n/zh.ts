@@ -156,7 +156,14 @@ const zh = {
   },
   docs: {
     noOutline: "本页无大纲",
+    metaAuthor: "作者",
+    metaCreated: "发布于",
+    metaUpdated: "更新于",
     fallback: "本文暂无对应语言译文，已为您回退到中文版本。",
+    translatorMachine: "本页内容由机器翻译，仅供参考。",
+    translatorLlm: "本页内容由 AI 模型（{{model}}）辅助翻译。",
+    translatorHuman: "本页由以下译者人工翻译：{{translators}}",
+    translatorMix: "本页内容由 AI 模型（{{model}}）辅助翻译，并由 {{translators}} 审校。",
   },
   console: {
     layout: {

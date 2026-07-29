@@ -182,8 +182,16 @@ const en: Dict = {
   },
   docs: {
     noOutline: "No outline",
+    metaAuthor: "Authors",
+    metaCreated: "Published",
+    metaUpdated: "Updated",
     fallback:
       "This article has no translation in your language; showing the Chinese version.",
+    translatorMachine: "This page was machine-translated and may contain inaccuracies.",
+    translatorLlm: "This page was AI-translated by {{model}}.",
+    translatorHuman: "This page was human-translated by: {{translators}}",
+    translatorMix:
+      "This page was AI-translated by {{model}} and reviewed by {{translators}}.",
   },
   console: {
     layout: {

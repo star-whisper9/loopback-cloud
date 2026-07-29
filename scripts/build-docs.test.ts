@@ -9,7 +9,13 @@ describe("build-docs generated output", () => {
 
   it("en tree has indexDoc", () => {
     expect(trees.en.indexDoc).toBeTruthy();
-    expect(trees.en.indexDoc!.meta.title).toBe("Docs Home");
+    expect(trees.en.indexDoc!.meta.title).toBe("Documentation Home");
+  });
+
+  it("keeps created/updated as ISO strings (YAML Date + string paths)", () => {
+    const d = docsByLocale.en[""];
+    expect(d.meta.created).toBe("2026-07-29T05:16:13.000Z");
+    expect(d.meta.updated).toBe("2026-07-29T05:16:13.000Z");
   });
 
   it("zh getting-started anchors contain 安装 + 配置", () => {

@@ -1,6 +1,17 @@
 ---
 title: Documentation Home
 description: Loopback Cloud Documentation Center
+created: 2026-07-29 13:16:13 +8
+updated: 2026-07-29 13:16:13 +8
+author:
+  - name: 星语
+    email: star@sotis.space
+    url: https://github.com/star-whisper9
+translator:
+  type: mix
+  model: step-3.7-flash
+  human:
+    - 星语
 ---
 
 Welcome to the Loopback Cloud Documentation Center.

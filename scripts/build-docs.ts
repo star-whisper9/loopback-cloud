@@ -13,12 +13,15 @@ import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import type {
   DocAnchor,
+  DocAuthor,
   DocCategoryNode,
   DocEntry,
   DocLocale,
   DocMeta,
+  DocTranslator,
   DocTree,
 } from "../app/lib/docs/types";
+import { normalizeDatetime } from "./normalizeDatetime";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SRC_DIR = join(ROOT, "docs");
@@ -215,6 +218,27 @@ async function renderMarkdown(
   return { html, anchors };
 }
 
+/**
+ * Coerces a frontmatter datetime value to an ISO 8601 UTC string.
+ *
+ * gray-matter (js-yaml, YAML 1.1) implicitly resolves unquoted timestamps
+ * such as `2026-07-29 13:16:13 +8` or `2026-07-29` to `Date` objects, while
+ * values YAML cannot recognize (e.g. `2026-07-29 13:16` without seconds, or
+ * quoted strings) arrive as strings — both paths must be supported.
+ */
+function toIsoDatetime(value: unknown, field: string, relPath: string): string {
+  if (value instanceof Date) {
+    if (isNaN(value.getTime())) {
+      throw new Error(`docs frontmatter ${field} is an invalid date: ${relPath}`);
+    }
+    return value.toISOString();
+  }
+  if (typeof value === "string") return normalizeDatetime(value);
+  throw new Error(
+    `docs frontmatter ${field} must be a datetime (got ${typeof value}): ${relPath}`,
+  );
+}
+
 function parseFrontmatter(raw: string, relPath: string): { meta: DocMeta; body: string } {
   const parsed = matter(raw);
   const fm = parsed.data as Record<string, unknown>;
@@ -225,6 +249,54 @@ function parseFrontmatter(raw: string, relPath: string): { meta: DocMeta; body: 
   const meta: DocMeta = { title };
   if (typeof fm.description === "string") meta.description = fm.description;
   if (typeof fm.order === "number") meta.order = fm.order;
+  if (fm.created !== undefined)
+    meta.created = toIsoDatetime(fm.created, "created", relPath);
+  if (fm.updated !== undefined)
+    meta.updated = toIsoDatetime(fm.updated, "updated", relPath);
+
+  if (fm.author !== undefined) {
+    if (!Array.isArray(fm.author)) {
+      throw new Error(`docs frontmatter author must be an array: ${relPath}`);
+    }
+    const authors: DocAuthor[] = [];
+    for (let i = 0; i < fm.author.length; i++) {
+      const item = fm.author[i] as Record<string, unknown>;
+      if (typeof item.name !== "string" || item.name.length === 0) {
+        throw new Error(
+          `docs frontmatter author[${i}].name required: ${relPath}`,
+        );
+      }
+      const author: DocAuthor = { name: item.name };
+      if (typeof item.email === "string") author.email = item.email;
+      if (typeof item.url === "string") author.url = item.url;
+      authors.push(author);
+    }
+    meta.author = authors;
+  }
+
+  if (fm.translator !== undefined) {
+    const tr = fm.translator as Record<string, unknown>;
+    const validTypes = ["machine", "llm", "human", "mix"];
+    if (
+      typeof tr.type !== "string" ||
+      !validTypes.includes(tr.type)
+    ) {
+      throw new Error(
+        `docs frontmatter translator.type must be one of ${validTypes.join(", ")}: ${relPath}`,
+      );
+    }
+    const translator: DocTranslator = {
+      type: tr.type as DocTranslator["type"],
+    };
+    if (typeof tr.model === "string") translator.model = tr.model;
+    if (Array.isArray(tr.human)) {
+      translator.human = tr.human.filter(
+        (h): h is string => typeof h === "string",
+      );
+    }
+    meta.translator = translator;
+  }
+
   const isIndex = relPath.endsWith("index.md");
   meta.navIgnore = typeof fm.navIgnore === "boolean" ? fm.navIgnore : isIndex;
   return { meta, body: parsed.content };
