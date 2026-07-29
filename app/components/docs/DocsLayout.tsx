@@ -57,7 +57,7 @@ export function DocsLayout({
       <div className="docs-grid">
         {activeCategory ? <DocsSidebar node={activeCategory} currentPath={doc.path} /> : null}
         <main>
-          {fallback ? <FallbackBanner locale={locale} /> : null}
+          {fallback ? <FallbackBanner /> : null}
           <DocsContent doc={doc} />
         </main>
         <AnchorToc anchors={doc.anchors} />

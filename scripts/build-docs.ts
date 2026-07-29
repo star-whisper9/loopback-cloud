@@ -344,6 +344,49 @@ async function buildTree(locale: DocLocale): Promise<DocTree> {
   return { root, ...(indexDoc ? { indexDoc } : {}) };
 }
 
+function mergeZhTree(target: DocTree, source: DocTree): void {
+  const targetDocs = new Set<string>();
+  const collectPaths = (node: DocCategoryNode): void => {
+    for (const d of node.docs) targetDocs.add(d.path);
+    for (const c of node.children) collectPaths(c);
+  };
+  collectPaths(target.root);
+
+  const mergeNode = (
+    targetNode: DocCategoryNode,
+    sourceNode: DocCategoryNode,
+  ): void => {
+    for (const sourceChild of sourceNode.children) {
+      const existing = targetNode.children.find(
+        (c) => c.name === sourceChild.name,
+      );
+      if (existing) {
+        mergeNode(existing, sourceChild);
+      } else {
+        targetNode.children.push({ ...sourceChild });
+      }
+    }
+
+    for (const sourceDoc of sourceNode.docs) {
+      if (!targetDocs.has(sourceDoc.path)) {
+        targetNode.docs.push(sourceDoc);
+      }
+    }
+
+    targetNode.children.sort(
+      (a, b) =>
+        (a.order ?? 0) - (b.order ?? 0) || a.name.localeCompare(b.name),
+    );
+    targetNode.docs.sort(
+      (a, b) =>
+        (a.meta.order ?? 0) - (b.meta.order ?? 0) ||
+        a.path.localeCompare(b.path),
+    );
+  };
+
+  mergeNode(target.root, source.root);
+}
+
 function emit(
   trees: Record<DocLocale, DocTree>,
   docsByLocale: Record<DocLocale, Record<string, DocEntry>>,
@@ -401,6 +444,11 @@ async function main(): Promise<void> {
     };
     walk(tree.root);
     if (tree.indexDoc) docsByLocale[loc][tree.indexDoc.path] = tree.indexDoc;
+  }
+
+  for (const loc of LOCALES) {
+    if (loc === "zh") continue;
+    mergeZhTree(trees[loc], trees.zh);
   }
 
   const allDocPaths = Object.keys(docsByLocale.zh).sort();

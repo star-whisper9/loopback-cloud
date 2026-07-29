@@ -180,6 +180,11 @@ const en: Dict = {
     disclaimer2: "HCP No. 2026-799325. All rights reserved locally.",
     links: { about: "About", blog: "Blog", status: "Status" },
   },
+  docs: {
+    noOutline: "No outline",
+    fallback:
+      "This article has no translation in your language; showing the Chinese version.",
+  },
   console: {
     layout: {
       statusRunning: "Running",

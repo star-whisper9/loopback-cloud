@@ -117,6 +117,17 @@ export const trees: Record<DocLocale, DocTree> = {
                   "level": 2
                 }
               ]
+            },
+            {
+              "path": "software/zh-only",
+              "meta": {
+                "title": "仅中文文档",
+                "description": "用于回退测试",
+                "order": 9,
+                "navIgnore": false
+              },
+              "html": "<p>本文档故意只在中文版提供，用于验证缺失英文时的回退渲染。</p>",
+              "anchors": []
             }
           ]
         }

@@ -154,6 +154,10 @@ const zh = {
     disclaimer2: "HCP 备 2026-799325 号，本地保留所有权利。",
     links: { about: "关于", blog: "博客", status: "状态" },
   },
+  docs: {
+    noOutline: "本页无大纲",
+    fallback: "本文暂无对应语言译文，已为您回退到中文版本。",
+  },
   console: {
     layout: {
       statusRunning: "运行中",

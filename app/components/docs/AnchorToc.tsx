@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { DocAnchor } from "~/lib/docs/types";
+import { useT } from "~/i18n/useT";
 
 export function AnchorToc({ anchors }: { anchors: DocAnchor[] }) {
+  const t = useT();
   const [activeId, setActiveId] = useState<string | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +28,7 @@ export function AnchorToc({ anchors }: { anchors: DocAnchor[] }) {
     <div ref={rootRef} className="docs-anchor-toc">
       <nav>
         {anchors.length === 0 ? (
-          <span className="text-xs text-fg-muted">No outline</span>
+          <span className="text-xs text-fg-muted">{t("docs.noOutline")}</span>
         ) : (
           anchors.map((a) => (
             <a
