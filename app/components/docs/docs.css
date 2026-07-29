@@ -153,10 +153,38 @@
     scroll-margin-top: 6.5rem;
   }
 
-  .docs-prose p,
+  .docs-prose p {
+    margin: 0 0 1rem;
+  }
+
   .docs-prose ul,
   .docs-prose ol {
     margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .docs-prose ul {
+    list-style: disc;
+  }
+
+  .docs-prose ul ul {
+    list-style: circle;
+  }
+
+  .docs-prose ul ul ul {
+    list-style: square;
+  }
+
+  .docs-prose ol {
+    list-style: decimal;
+  }
+
+  .docs-prose li {
+    margin: 0.15rem 0;
+  }
+
+  .docs-prose li:last-child {
+    margin-bottom: 0;
   }
 
   .docs-prose a {
@@ -385,8 +413,8 @@
     color: var(--color-accent);
   }
 
-  .docs-anchor-toc__h3 {
-    padding-left: 1rem;
+  .docs-anchor-toc a.docs-anchor-toc__h3 {
+    padding-left: 2rem;
     font-size: 0.75rem;
   }
 
