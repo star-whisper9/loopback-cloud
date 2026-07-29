@@ -64,6 +64,13 @@ export const trees: Record<DocLocale, DocTree> = {
               "anchors": []
             }
           ]
+        },
+        {
+          "name": "hardware",
+          "title": "硬件文档",
+          "order": 2,
+          "children": [],
+          "docs": []
         }
       ],
       "docs": []
@@ -75,7 +82,7 @@ export const trees: Record<DocLocale, DocTree> = {
         "description": "环回云文档中心",
         "navIgnore": true
       },
-      "html": "<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2 id=\"导览\">导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">注释</p><p>本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。</p></div>",
+      "html": "<p>欢迎来到环回云文档中心。</p>\n<p>环回云文档是一份 <strong>社区驱动</strong> 的真实的家里云构建指南，在这里，我们发布经过简单审核的家里云相关教程文档。</p>\n<p>从简单的 Windows 实体机，到 PVE 虚拟化方案，再到硬件推荐和硬件维护指南，我们致力于创建一个 <strong>真实有用</strong> 的家里云文档聚合。</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">重要</p><p>环回云的文档来自于 <strong>社区贡献</strong>，我们会对贡献内容进行简单审核，但不能保证文档质量、AI 生成内容管控，您应知悉。</p>\n<p>您在阅读本站文档时，请对所有标注了 <strong>重要</strong>、<strong>警告</strong> 等重点标记的指令、文段再三思考，这些内容有可能会损坏您的软硬件环境。环回云不对用户阅读文档做出的误操作负责，请保留自己的思考！</p></div>\n<h2 id=\"导览\">导览</h2>\n<p>环回云提供中文和英文两种语言文档，其中 <strong>中文文档为基准</strong>，英文文档大多经由翻译而来，您可以通过导航栏右上角的按钮切换。</p>\n<p>目前向您提供 <strong>软件</strong> 和 <strong>硬件</strong> 两类文档。顶栏可以在文档分类中切换，左侧栏则按分类浏览分好层级的文档，右侧栏在您的设备宽度足够时将会显示页内锚点导航。</p>\n<p>软件文档专注于 <strong>操作系统</strong>、<strong>工具软件</strong>、<strong>软件解决方案</strong> 的文档，硬件文档专注于 <strong>硬件设施维护</strong>、<strong>维护与调试实操指南</strong>、<strong>硬件选择与购买</strong> 的文档，您可以按需阅读。</p>",
       "anchors": [
         {
           "id": "导览",
@@ -130,6 +137,13 @@ export const trees: Record<DocLocale, DocTree> = {
               "anchors": []
             }
           ]
+        },
+        {
+          "name": "hardware",
+          "title": "Hardware Docs",
+          "order": 2,
+          "children": [],
+          "docs": []
         }
       ],
       "docs": []
@@ -195,7 +209,7 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
         "description": "环回云文档中心",
         "navIgnore": true
       },
-      "html": "<p>欢迎来到环回云文档中心。这里收录了产品使用指南、系统架构与开发文档。</p>\n<h2 id=\"导览\">导览</h2>\n<p>左侧栏按分类浏览，右侧栏显示当前页面锚点。</p>\n<div class=\"docs-callout docs-callout--note\"><p class=\"docs-callout__title\">注释</p><p>本站所有\"云服务\"均在 <code>127.0.0.1</code> 上运行。</p></div>",
+      "html": "<p>欢迎来到环回云文档中心。</p>\n<p>环回云文档是一份 <strong>社区驱动</strong> 的真实的家里云构建指南，在这里，我们发布经过简单审核的家里云相关教程文档。</p>\n<p>从简单的 Windows 实体机，到 PVE 虚拟化方案，再到硬件推荐和硬件维护指南，我们致力于创建一个 <strong>真实有用</strong> 的家里云文档聚合。</p>\n<div class=\"docs-callout docs-callout--important\"><p class=\"docs-callout__title\">重要</p><p>环回云的文档来自于 <strong>社区贡献</strong>，我们会对贡献内容进行简单审核，但不能保证文档质量、AI 生成内容管控，您应知悉。</p>\n<p>您在阅读本站文档时，请对所有标注了 <strong>重要</strong>、<strong>警告</strong> 等重点标记的指令、文段再三思考，这些内容有可能会损坏您的软硬件环境。环回云不对用户阅读文档做出的误操作负责，请保留自己的思考！</p></div>\n<h2 id=\"导览\">导览</h2>\n<p>环回云提供中文和英文两种语言文档，其中 <strong>中文文档为基准</strong>，英文文档大多经由翻译而来，您可以通过导航栏右上角的按钮切换。</p>\n<p>目前向您提供 <strong>软件</strong> 和 <strong>硬件</strong> 两类文档。顶栏可以在文档分类中切换，左侧栏则按分类浏览分好层级的文档，右侧栏在您的设备宽度足够时将会显示页内锚点导航。</p>\n<p>软件文档专注于 <strong>操作系统</strong>、<strong>工具软件</strong>、<strong>软件解决方案</strong> 的文档，硬件文档专注于 <strong>硬件设施维护</strong>、<strong>维护与调试实操指南</strong>、<strong>硬件选择与购买</strong> 的文档，您可以按需阅读。</p>",
       "anchors": [
         {
           "id": "导览",
