@@ -187,6 +187,8 @@ const en: Dict = {
     metaUpdated: "Updated",
     fallback:
       "This article has no translation in your language; showing the Chinese version.",
+    emptyTitle: "No articles yet",
+    emptyDescription: "This category does not have any articles yet.",
     translatorMachine: "This page was machine-translated and may contain inaccuracies.",
     translatorLlm: "This page was AI-translated by {{model}}.",
     translatorHuman: "This page was human-translated by: {{translators}}",

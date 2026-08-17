@@ -160,6 +160,8 @@ const zh = {
     metaCreated: "发布于",
     metaUpdated: "更新于",
     fallback: "本文暂无对应语言译文，已为您回退到中文版本。",
+    emptyTitle: "暂无文章",
+    emptyDescription: "此分类暂时还没有文章。",
     translatorMachine: "本页内容由机器翻译，仅供参考。",
     translatorLlm: "本页内容由 AI 模型（{{model}}）辅助翻译。",
     translatorHuman: "本页由以下译者人工翻译：{{translators}}",
