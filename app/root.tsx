@@ -17,9 +17,10 @@ import zh from "./i18n/zh";
 import en, { type Dict } from "./i18n/en";
 import { I18nProvider } from "./i18n/I18nProvider";
 import { MachineProvider } from "./lib/useMachine";
+import { publicAsset } from "./lib/publicAsset";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+  { rel: "icon", type: "image/svg+xml", href: publicAsset("favicon.svg") },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",

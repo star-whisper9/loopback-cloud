@@ -14,6 +14,7 @@ import {
 import { useT } from "~/i18n/useT";
 import { useMachineActions } from "~/lib/useMachine";
 import { convertInitialPolicyToRules } from "~/lib/machineStore";
+import { publicAsset } from "~/lib/publicAsset";
 import type {
   Machine,
   Region,
@@ -57,11 +58,11 @@ const OS_LABELS: Record<OperatingSystem, string> = {
 };
 
 const OS_ICONS: Record<OperatingSystem, string> = {
-  "ubuntu-24.04": "/ubuntu.svg",
-  "debian-12": "/debian.svg",
-  "rocky-9": "/rockylinux.svg",
-  "alpine-3.20": "/alpine.svg",
-  "windows-server-2022": "/windows.svg",
+  "ubuntu-24.04": publicAsset("ubuntu.svg"),
+  "debian-12": publicAsset("debian.svg"),
+  "rocky-9": publicAsset("rockylinux.svg"),
+  "alpine-3.20": publicAsset("alpine.svg"),
+  "windows-server-2022": publicAsset("windows.svg"),
 };
 
 const POLICIES: FirewallInitialPolicy[] = [

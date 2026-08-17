@@ -29,25 +29,7 @@ export const trees: Record<DocLocale, DocTree> = {
           "title": "软件文档",
           "order": 1,
           "children": [],
-          "docs": [
-            {
-              "path": "software/terminal-demo",
-              "meta": {
-                "title": "终端演示示例",
-                "description": "展示文档中的动态终端记录块",
-                "order": 2,
-                "navIgnore": false
-              },
-              "html": "<h2 id=\"动态终端\">动态终端</h2>\n<p>终端记录块只展示预先编写的命令和输出，不会在浏览器中执行任何命令。滚动到终端后，它会自动播放一次。</p>\n<figure class=\"docs-terminal\" data-docs-terminal data-terminal-locale=\"zh\" data-terminal-autoplay=\"visible\" data-terminal-speed=\"normal\" data-terminal-loop=\"false\" aria-label=\"检查 Docker 服务\"><figcaption class=\"docs-terminal__bar\"><span class=\"docs-terminal__lights\" aria-hidden=\"true\"><span></span><span></span><span></span></span><span class=\"docs-terminal__title\">检查 Docker 服务</span><span class=\"docs-terminal__badge\">终端演示</span></figcaption><div class=\"docs-terminal__screen\" data-terminal-screen tabindex=\"0\"><div class=\"docs-terminal__transcript\" data-terminal-transcript><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>compose \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>up \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>-d</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>[+] Running 3/3</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Network app_default  Created</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container database  Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container web        Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output></span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker ps</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>CONTAINER ID   IMAGE     STATUS</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>a1b2c3         nginx     Up 2 minutes</span></span></div><span class=\"docs-terminal__cursor\" data-terminal-cursor aria-hidden=\"true\"></span></div><div class=\"docs-terminal__controls\" data-terminal-controls><button type=\"button\" data-terminal-action=\"toggle\" data-terminal-label=\"play\">播放</button><button type=\"button\" data-terminal-action=\"replay\" data-terminal-label=\"replay\">重播</button><button type=\"button\" data-terminal-action=\"show-all\" data-terminal-label=\"showAll\">显示全部</button><button type=\"button\" data-terminal-action=\"copy\" data-terminal-label=\"copy\">复制命令</button></div></figure>",
-              "anchors": [
-                {
-                  "id": "动态终端",
-                  "text": "动态终端",
-                  "level": 2
-                }
-              ]
-            }
-          ]
+          "docs": []
         },
         {
           "name": "hardware",
@@ -62,6 +44,92 @@ export const trees: Record<DocLocale, DocTree> = {
           "order": 3,
           "children": [],
           "docs": [
+            {
+              "path": "contribution/contributing",
+              "meta": {
+                "title": "贡献规范",
+                "description": "面向代码、文档、翻译和问题反馈的统一贡献流程",
+                "order": 0,
+                "created": "2026-08-17T10:00:00.000Z",
+                "updated": "2026-08-17T10:00:00.000Z",
+                "author": [
+                  {
+                    "name": "星语",
+                    "email": "star@sotis.space",
+                    "url": "https://github.com/star-whisper9"
+                  }
+                ],
+                "navIgnore": false
+              },
+              "html": "<p>这是一份面向所有贡献者的规范性说明。提交代码、文档、翻译、资源或问题反馈前，请先阅读本页；文档的 Frontmatter 和 Markdown 扩展语法请继续参考<a href=\"guide\">文档格式与语法参考</a>。</p>\n<h2 id=\"项目原则\">项目原则</h2>\n<p>环回云是一个社区协作项目。我们更看重真实、可复现、可审阅的内容，而不是提交数量或文字数量。</p>\n<p>贡献内容应满足以下原则：</p>\n<ul>\n<li>有明确的使用场景和目标读者</li>\n<li>尽量提供验证环境、版本号、前置条件和预期结果</li>\n<li>不隐藏风险，不把未经验证的猜测写成确定结论</li>\n<li>不提交秘密、隐私数据、受限制的第三方内容或无法确认来源的材料</li>\n<li>保持变更范围清晰，避免在一个 Pull Request 中混入无关重构</li>\n</ul>\n<h2 id=\"可以贡献什么\">可以贡献什么</h2>\n<p>欢迎以下类型的贡献：</p>\n<ul>\n<li>修复页面、路由、静态资源和交互问题</li>\n<li>改进可访问性、移动端布局和错误提示</li>\n<li>增加或完善家里云相关的真实实践文档</li>\n<li>修正文档中的命令、版本、链接、事实和翻译</li>\n<li>补充测试、构建检查和开发者工具</li>\n<li>提交可复现的问题报告和改进建议</li>\n</ul>\n<h2 id=\"不接受什么\">不接受什么</h2>\n<p>以下内容不会被合并，或需要先补充充分证明：</p>\n<ul>\n<li>未经验证的整段转载、营销稿或与家里云无关的推广</li>\n<li>泄露密码、令牌、私钥、Cookie、个人信息或内网拓扑的内容</li>\n<li>将大段 AI 生成内容直接作为最终稿提交，且没有人工核对</li>\n<li>缺少风险说明的磁盘、网络、固件、权限和数据破坏操作</li>\n<li>绕过安全控制、侵犯他人权益或用于违法用途的内容</li>\n<li>仅为了个人风格而进行的大范围格式化或无关重命名</li>\n</ul>\n<h2 id=\"贡献流程\">贡献流程</h2>\n<h3 id=\"1-提交前确认\">1. 提交前确认</h3>\n<p>小型拼写修正可以直接创建分支。涉及新功能、目录调整、许可证、构建配置或大量文档时，建议先创建 Issue 说明目标和方案，避免重复工作。</p>\n<p>提交前先确认：</p>\n<ul>\n<li>是否已经存在相同问题或文章</li>\n<li>变更属于代码、文档、翻译还是第三方资源</li>\n<li>是否拥有提交内容的版权或再发布权限</li>\n<li>是否需要同步更新中文基准文档、英文译文或测试</li>\n</ul>\n<h3 id=\"2-创建分支\">2. 创建分支</h3>\n<p>从最新的 <code>main</code> 创建短期分支。推荐使用以下前缀：</p>\n<table>\n<thead>\n<tr>\n<th>前缀</th>\n<th>用途</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>docs/</code></td>\n<td>文档、示例和翻译</td>\n</tr>\n<tr>\n<td><code>fix/</code></td>\n<td>错误修复</td>\n</tr>\n<tr>\n<td><code>feat/</code></td>\n<td>新功能</td>\n</tr>\n<tr>\n<td><code>test/</code></td>\n<td>测试和验证</td>\n</tr>\n<tr>\n<td><code>chore/</code></td>\n<td>构建、依赖和维护</td>\n</tr>\n</tbody>\n</table>\n<p>一个分支应围绕一个目标，完成后尽快提交 Pull Request。</p>\n<h3 id=\"3-修改内容\">3. 修改内容</h3>\n<p>文档修改应遵守以下路径规则：</p>\n<ul>\n<li>中文基准文档放在 <code>docs/zh/</code>。</li>\n<li>英文译文放在 <code>docs/en/</code>，并与中文保持相同的文章路径。</li>\n<li>分类目录使用 <code>_category.md</code> 设置标题和排序。</li>\n<li>文章文件名使用小写 kebab-case，例如 <code>network-backup.md</code>。</li>\n<li>分类目录内不要使用 <code>index.md</code> 作为文章名；构建脚本会忽略它。</li>\n<li>文档元数据必须包含 <code>title</code>；时间字段建议明确写出时区。</li>\n<li>正文从 <code>##</code> 开始，危险操作使用 <code>:::warning</code>，代码块标注语言。</li>\n</ul>\n<p>代码修改应遵守以下规则：</p>\n<ul>\n<li>优先修复实际问题，不为简单逻辑增加不必要的抽象。</li>\n<li>浏览器专属 API 放在客户端代码路径中，不要让静态构建依赖运行时服务器。</li>\n<li>修改路由、基础路径或静态资源时，同时检查首页、控制台和文档深层 URL。</li>\n<li>不要删除或替换根目录 <code>components/</code> 中的上游许可证、来源说明或版权信息。</li>\n<li>如果复制或修改第三方 UI 组件，应在 Pull Request 中说明来源、改动范围和适用许可证。</li>\n</ul>\n<h3 id=\"4-本地验证\">4. 本地验证</h3>\n<p>文档或代码变更至少运行：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> ci</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build:docs</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> typecheck</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> test</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build</span></span></code></pre>\n<p>验证重点：</p>\n<ul>\n<li>构建没有 Frontmatter、类型或打包错误</li>\n<li>首页、<code>/console</code> 和 <code>/docs/...</code> 能够直接打开</li>\n<li>生产构建没有错误的根绝对资源路径</li>\n<li>文档目录顺序、标题锚点、代码高亮和语言回退正常</li>\n<li>危险操作带有清晰的警告、影响范围和恢复建议</li>\n</ul>\n<p><code>app/docs/.generated/docs.ts</code> 由 <code>scripts/build-docs.ts</code> 生成。不要手动编辑它；修改文档后运行 <code>npm run build:docs</code>，检查生成差异是否只包含本次文档变更。</p>\n<h3 id=\"5-提交-pull-request\">5. 提交 Pull Request</h3>\n<p>Pull Request 标题应直接说明目的，例如：</p>\n<ul>\n<li><code>[docs] 增加 ZFS 快照备份指南</code></li>\n<li><code>[fix] 修复文档深层链接加载失败</code></li>\n<li><code>[feat] 增加实例状态筛选</code></li>\n</ul>\n<p>描述中请包含：</p>\n<ul>\n<li>变更目的和主要内容</li>\n<li>影响的页面、文档路径或组件</li>\n<li>使用过的系统和软件版本（如果适用）</li>\n<li>已执行的验证命令及结果</li>\n<li>已知限制、兼容性问题或后续工作</li>\n</ul>\n<h3 id=\"6-审阅与合并\">6. 审阅与合并</h3>\n<p>审阅者会重点检查事实准确性、可复现性、风险提示、许可证边界、移动端表现和构建结果。贡献者应直接修正问题，不要通过删除测试、隐藏警告或放宽校验来绕过审阅。</p>\n<p>只有在检查通过、关键意见处理完毕且变更范围清晰时，Pull Request 才适合合并。合并后请删除临时分支。</p>\n<h2 id=\"翻译规范\">翻译规范</h2>\n<p>中文内容是事实和结构基准，英文翻译不是每篇文章都必须同步完成。翻译时：</p>\n<ul>\n<li>保持文章路径、命令、配置项、版本号和风险等级一致</li>\n<li>不要为了语言习惯改变技术结论或省略限制条件</li>\n<li>使用 <code>translator.type</code> 标记 <code>machine</code>、<code>llm</code>、<code>human</code> 或 <code>mix</code></li>\n<li>AI 翻译必须人工核对命令、路径、选项、错误信息和警告</li>\n<li>缺少英文文章时，站点会显示中文回退内容并提示读者</li>\n</ul>\n<h2 id=\"许可证与版权\">许可证与版权</h2>\n<ul>\n<li>项目自有代码（根目录 <code>components/</code> 中的上游 UI 组件除外）使用 GPL-3.0-or-later。</li>\n<li><code>README.md</code>、<code>docs/</code> 和项目自有文档素材使用 CC BY-SA 4.0。</li>\n<li>根目录 <code>components/</code> 中的 shadcn/ui、Aceternity UI 等上游组件不适用项目的统一许可证声明，必须保留并遵守各自来源的许可证。</li>\n<li>第三方依赖、字体、图标、图片和示例内容不因提交到本项目而自动转为项目许可证。</li>\n<li>贡献者保留原创贡献的版权；提交贡献表示你有权提交，并同意按照对应内容类型的许可证发布。</li>\n</ul>\n<p>项目目前不要求单独签署 CLA。如果你不能确认自己拥有某段代码、文字、图片或翻译的再发布权，请先不要提交，并在 Issue 中说明来源和授权情况。</p>\n<h2 id=\"问题反馈\">问题反馈</h2>\n<p>有效的问题报告应尽量包含复现步骤、期望结果、实际结果、浏览器和系统版本、相关 URL，以及不包含敏感信息的控制台错误。安全问题不要公开发布，请通过私下渠道联系维护者。</p>\n<p>感谢每一位让环回云更真实、更可复现、更容易维护的贡献者。</p>",
+              "anchors": [
+                {
+                  "id": "项目原则",
+                  "text": "项目原则",
+                  "level": 2
+                },
+                {
+                  "id": "可以贡献什么",
+                  "text": "可以贡献什么",
+                  "level": 2
+                },
+                {
+                  "id": "不接受什么",
+                  "text": "不接受什么",
+                  "level": 2
+                },
+                {
+                  "id": "贡献流程",
+                  "text": "贡献流程",
+                  "level": 2
+                },
+                {
+                  "id": "1-提交前确认",
+                  "text": "1. 提交前确认",
+                  "level": 3
+                },
+                {
+                  "id": "2-创建分支",
+                  "text": "2. 创建分支",
+                  "level": 3
+                },
+                {
+                  "id": "3-修改内容",
+                  "text": "3. 修改内容",
+                  "level": 3
+                },
+                {
+                  "id": "4-本地验证",
+                  "text": "4. 本地验证",
+                  "level": 3
+                },
+                {
+                  "id": "5-提交-pull-request",
+                  "text": "5. 提交 Pull Request",
+                  "level": 3
+                },
+                {
+                  "id": "6-审阅与合并",
+                  "text": "6. 审阅与合并",
+                  "level": 3
+                },
+                {
+                  "id": "翻译规范",
+                  "text": "翻译规范",
+                  "level": 2
+                },
+                {
+                  "id": "许可证与版权",
+                  "text": "许可证与版权",
+                  "level": 2
+                },
+                {
+                  "id": "问题反馈",
+                  "text": "问题反馈",
+                  "level": 2
+                }
+              ]
+            },
             {
               "path": "contribution/guide",
               "meta": {
@@ -219,25 +287,7 @@ export const trees: Record<DocLocale, DocTree> = {
           "title": "Software Docs",
           "order": 1,
           "children": [],
-          "docs": [
-            {
-              "path": "software/terminal-demo",
-              "meta": {
-                "title": "终端演示示例",
-                "description": "展示文档中的动态终端记录块",
-                "order": 2,
-                "navIgnore": false
-              },
-              "html": "<h2 id=\"动态终端\">动态终端</h2>\n<p>终端记录块只展示预先编写的命令和输出，不会在浏览器中执行任何命令。滚动到终端后，它会自动播放一次。</p>\n<figure class=\"docs-terminal\" data-docs-terminal data-terminal-locale=\"zh\" data-terminal-autoplay=\"visible\" data-terminal-speed=\"normal\" data-terminal-loop=\"false\" aria-label=\"检查 Docker 服务\"><figcaption class=\"docs-terminal__bar\"><span class=\"docs-terminal__lights\" aria-hidden=\"true\"><span></span><span></span><span></span></span><span class=\"docs-terminal__title\">检查 Docker 服务</span><span class=\"docs-terminal__badge\">终端演示</span></figcaption><div class=\"docs-terminal__screen\" data-terminal-screen tabindex=\"0\"><div class=\"docs-terminal__transcript\" data-terminal-transcript><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>compose \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>up \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>-d</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>[+] Running 3/3</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Network app_default  Created</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container database  Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container web        Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output></span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker ps</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>CONTAINER ID   IMAGE     STATUS</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>a1b2c3         nginx     Up 2 minutes</span></span></div><span class=\"docs-terminal__cursor\" data-terminal-cursor aria-hidden=\"true\"></span></div><div class=\"docs-terminal__controls\" data-terminal-controls><button type=\"button\" data-terminal-action=\"toggle\" data-terminal-label=\"play\">播放</button><button type=\"button\" data-terminal-action=\"replay\" data-terminal-label=\"replay\">重播</button><button type=\"button\" data-terminal-action=\"show-all\" data-terminal-label=\"showAll\">显示全部</button><button type=\"button\" data-terminal-action=\"copy\" data-terminal-label=\"copy\">复制命令</button></div></figure>",
-              "anchors": [
-                {
-                  "id": "动态终端",
-                  "text": "动态终端",
-                  "level": 2
-                }
-              ]
-            }
-          ]
+          "docs": []
         },
         {
           "name": "hardware",
@@ -252,6 +302,96 @@ export const trees: Record<DocLocale, DocTree> = {
           "order": 3,
           "children": [],
           "docs": [
+            {
+              "path": "contribution/contributing",
+              "meta": {
+                "title": "Contribution Policy",
+                "description": "A unified contribution process for code, documentation, translations, and issue reports",
+                "order": 0,
+                "created": "2026-08-17T10:00:00.000Z",
+                "updated": "2026-08-17T10:00:00.000Z",
+                "author": [
+                  {
+                    "name": "星语",
+                    "email": "star@sotis.space",
+                    "url": "https://github.com/star-whisper9"
+                  }
+                ],
+                "translator": {
+                  "type": "llm",
+                  "model": "gpt-5.6-luna"
+                },
+                "navIgnore": false
+              },
+              "html": "<p>This is the normative guide for all contributors. Read it before submitting code, documentation, translations, assets, or issue reports. For document Frontmatter and Markdown extensions, also see the <a href=\"guide\">documentation format and syntax reference</a>.</p>\n<h2 id=\"project-principles\">Project Principles</h2>\n<p>Loopback Cloud is a community project. We value content that is real, reproducible, and reviewable more than submission volume or word count.</p>\n<p>Contributions should follow these principles:</p>\n<ul>\n<li>Have a clear use case and target audience.</li>\n<li>Include the verification environment, versions, prerequisites, and expected results whenever possible.</li>\n<li>Do not hide risks or present unverified guesses as established facts.</li>\n<li>Do not submit secrets, private data, restricted third-party material, or content with an unverifiable source.</li>\n<li>Keep the change scope clear and avoid mixing unrelated refactors into one Pull Request.</li>\n</ul>\n<h2 id=\"what-you-can-contribute\">What You Can Contribute</h2>\n<p>The following contributions are welcome:</p>\n<ul>\n<li>Fixes for pages, routes, static assets, and interactions.</li>\n<li>Improvements to accessibility, mobile layouts, and error messages.</li>\n<li>New or improved real-world home-lab documentation.</li>\n<li>Corrections to commands, versions, links, facts, and translations in the docs.</li>\n<li>Tests, build checks, and developer tooling.</li>\n<li>Reproducible issue reports and improvement proposals.</li>\n</ul>\n<h2 id=\"what-we-do-not-accept\">What We Do Not Accept</h2>\n<p>The following content will not be merged, or requires sufficient evidence first:</p>\n<ul>\n<li>Unverified full-text reposts, marketing copy, or promotions unrelated to home labs.</li>\n<li>Passwords, tokens, private keys, cookies, personal information, or internal network topology.</li>\n<li>Large blocks of AI-generated content submitted as final copy without human verification.</li>\n<li>Disk, network, firmware, permission, or data-destructive operations without risk warnings.</li>\n<li>Content intended to bypass security controls, infringe on others' rights, or support illegal activity.</li>\n<li>Large formatting changes or unrelated renames made only for personal style.</li>\n</ul>\n<h2 id=\"contribution-workflow\">Contribution Workflow</h2>\n<h3 id=\"1-confirm-before-you-start\">1. Confirm Before You Start</h3>\n<p>Small spelling fixes can go directly into a branch. For new features, directory changes, licensing, build configuration, or substantial documentation, create an Issue describing the goal and proposed approach first to avoid duplicated work.</p>\n<p>Before submitting, confirm:</p>\n<ul>\n<li>Whether the same issue or article already exists.</li>\n<li>Whether the change is code, documentation, translation, or third-party material.</li>\n<li>Whether you own the copyright or redistribution rights for the content.</li>\n<li>Whether the Chinese baseline, English translation, or tests also need updating.</li>\n</ul>\n<h3 id=\"2-create-a-branch\">2. Create a Branch</h3>\n<p>Create a short-lived branch from the latest <code>main</code>. The following prefixes are recommended:</p>\n<table>\n<thead>\n<tr>\n<th>Prefix</th>\n<th>Use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>docs/</code></td>\n<td>Documentation, examples, and translations</td>\n</tr>\n<tr>\n<td><code>fix/</code></td>\n<td>Bug fixes</td>\n</tr>\n<tr>\n<td><code>feat/</code></td>\n<td>New features</td>\n</tr>\n<tr>\n<td><code>test/</code></td>\n<td>Tests and verification</td>\n</tr>\n<tr>\n<td><code>chore/</code></td>\n<td>Build, dependency, and maintenance work</td>\n</tr>\n</tbody>\n</table>\n<p>Keep one branch focused on one goal and open a Pull Request soon after the work is ready.</p>\n<h3 id=\"3-make-the-changes\">3. Make the Changes</h3>\n<p>Documentation changes should follow these path rules:</p>\n<ul>\n<li>Put the Chinese baseline in <code>docs/zh/</code>.</li>\n<li>Put English translations in <code>docs/en/</code> using the same article paths as the Chinese tree.</li>\n<li>Use <code>_category.md</code> to set category titles and ordering.</li>\n<li>Use lowercase kebab-case for article filenames, such as <code>network-backup.md</code>.</li>\n<li>Do not use <code>index.md</code> as an article name inside a category; the build script ignores it.</li>\n<li>Every document must have a <code>title</code> field; write an explicit timezone for date fields when possible.</li>\n<li>Start the body at <code>##</code>, use <code>:::warning</code> for dangerous operations, and specify a language for code blocks.</li>\n</ul>\n<p>Code changes should follow these rules:</p>\n<ul>\n<li>Fix the actual problem first; do not add unnecessary abstractions for simple logic.</li>\n<li>Keep browser-only APIs in client-side code paths; static builds must not depend on a runtime server.</li>\n<li>When changing routes, base paths, or static assets, check the home page, console, and deep documentation URLs together.</li>\n<li>Do not remove or replace upstream licenses, source notices, or copyright information in the root <code>components/</code> directory.</li>\n<li>If you copy or modify a third-party UI component, describe its source, the scope of your changes, and the applicable license in the Pull Request.</li>\n</ul>\n<h3 id=\"4-verify-locally\">4. Verify Locally</h3>\n<p>Run at least the following for documentation or code changes:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> ci</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build:docs</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> typecheck</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> test</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build</span></span></code></pre>\n<p>Check that:</p>\n<ul>\n<li>The build has no Frontmatter, type-checking, or bundling errors.</li>\n<li>The home page, <code>/console</code>, and <code>/docs/...</code> can be opened directly.</li>\n<li>The production build has no incorrect root-absolute asset paths.</li>\n<li>Documentation ordering, heading anchors, code highlighting, and language fallback work correctly.</li>\n<li>Dangerous operations include clear warnings, impact descriptions, and recovery advice.</li>\n</ul>\n<p><code>app/docs/.generated/docs.ts</code> is generated by <code>scripts/build-docs.ts</code>. Do not edit it by hand. After changing documentation, run <code>npm run build:docs</code> and check that the generated diff contains only the changes expected from your document edits.</p>\n<h3 id=\"5-open-a-pull-request\">5. Open a Pull Request</h3>\n<p>The Pull Request title should state the purpose directly, for example:</p>\n<ul>\n<li><code>[docs] Add a ZFS snapshot backup guide</code></li>\n<li><code>[fix] Fix deep-link loading for documentation pages</code></li>\n<li><code>[feat] Add instance status filtering</code></li>\n</ul>\n<p>Include the following in the description:</p>\n<ul>\n<li>The purpose and main contents of the change.</li>\n<li>The affected pages, documentation paths, or components.</li>\n<li>The systems and software versions used, when applicable.</li>\n<li>The verification commands that were run and their results.</li>\n<li>Known limitations, compatibility concerns, or follow-up work.</li>\n</ul>\n<h3 id=\"6-review-and-merge\">6. Review and Merge</h3>\n<p>Reviewers focus on factual accuracy, reproducibility, risk notices, license boundaries, mobile behavior, and build results. Fix issues directly instead of bypassing review by deleting tests, hiding warnings, or weakening validation.</p>\n<p>A Pull Request is ready to merge only after checks pass, important review comments are resolved, and the change scope is clear. Delete the temporary branch after merging.</p>\n<h2 id=\"translation-rules\">Translation Rules</h2>\n<p>Chinese is the factual and structural baseline. An English translation is not required for every article. When translating:</p>\n<ul>\n<li>Keep article paths, commands, configuration keys, versions, and risk levels consistent.</li>\n<li>Do not change technical conclusions or omit limitations for stylistic reasons.</li>\n<li>Use <code>translator.type</code> with <code>machine</code>, <code>llm</code>, <code>human</code>, or <code>mix</code>.</li>\n<li>AI translations must be manually checked, especially commands, paths, options, error messages, and warnings.</li>\n<li>When an English article is missing, the site displays Chinese fallback content and informs the reader.</li>\n</ul>\n<h2 id=\"licensing-and-copyright\">Licensing and Copyright</h2>\n<ul>\n<li>First-party project code, excluding upstream UI components in the root <code>components/</code> directory, is licensed under GPL-3.0-or-later.</li>\n<li><code>README.md</code>, <code>docs/</code>, and original project documentation material are licensed under CC BY-SA 4.0.</li>\n<li>Upstream components in the root <code>components/</code> directory, including material from shadcn/ui and Aceternity UI, are not covered by the project's blanket license and must retain the licenses from their respective sources.</li>\n<li>Third-party dependencies, fonts, icons, images, and examples keep their original licenses and do not become project-licensed merely by being submitted here.</li>\n<li>Contributors retain copyright in their original work. Submitting a contribution means that you have the right to submit it and agree to publish it under the license applicable to its content type.</li>\n</ul>\n<p>The project does not currently require a separate CLA. If you cannot confirm that you have the right to redistribute a piece of code, text, image, or translation, do not submit it yet; explain its source and authorization in an Issue first.</p>\n<h2 id=\"issue-reports\">Issue Reports</h2>\n<p>Useful issue reports include reproduction steps, expected and actual results, browser and system versions, relevant URLs, and console errors with sensitive information removed. Do not publish security issues publicly; contact the maintainer privately instead.</p>\n<p>Thank you to everyone who makes Loopback Cloud more real, reproducible, and maintainable.</p>",
+              "anchors": [
+                {
+                  "id": "project-principles",
+                  "text": "Project Principles",
+                  "level": 2
+                },
+                {
+                  "id": "what-you-can-contribute",
+                  "text": "What You Can Contribute",
+                  "level": 2
+                },
+                {
+                  "id": "what-we-do-not-accept",
+                  "text": "What We Do Not Accept",
+                  "level": 2
+                },
+                {
+                  "id": "contribution-workflow",
+                  "text": "Contribution Workflow",
+                  "level": 2
+                },
+                {
+                  "id": "1-confirm-before-you-start",
+                  "text": "1. Confirm Before You Start",
+                  "level": 3
+                },
+                {
+                  "id": "2-create-a-branch",
+                  "text": "2. Create a Branch",
+                  "level": 3
+                },
+                {
+                  "id": "3-make-the-changes",
+                  "text": "3. Make the Changes",
+                  "level": 3
+                },
+                {
+                  "id": "4-verify-locally",
+                  "text": "4. Verify Locally",
+                  "level": 3
+                },
+                {
+                  "id": "5-open-a-pull-request",
+                  "text": "5. Open a Pull Request",
+                  "level": 3
+                },
+                {
+                  "id": "6-review-and-merge",
+                  "text": "6. Review and Merge",
+                  "level": 3
+                },
+                {
+                  "id": "translation-rules",
+                  "text": "Translation Rules",
+                  "level": 2
+                },
+                {
+                  "id": "licensing-and-copyright",
+                  "text": "Licensing and Copyright",
+                  "level": 2
+                },
+                {
+                  "id": "issue-reports",
+                  "text": "Issue Reports",
+                  "level": 2
+                }
+              ]
+            },
             {
               "path": "contribution/guide",
               "meta": {
@@ -414,19 +554,88 @@ export const trees: Record<DocLocale, DocTree> = {
 
 export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
   "zh": {
-    "software/terminal-demo": {
-      "path": "software/terminal-demo",
+    "contribution/contributing": {
+      "path": "contribution/contributing",
       "meta": {
-        "title": "终端演示示例",
-        "description": "展示文档中的动态终端记录块",
-        "order": 2,
+        "title": "贡献规范",
+        "description": "面向代码、文档、翻译和问题反馈的统一贡献流程",
+        "order": 0,
+        "created": "2026-08-17T10:00:00.000Z",
+        "updated": "2026-08-17T10:00:00.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          }
+        ],
         "navIgnore": false
       },
-      "html": "<h2 id=\"动态终端\">动态终端</h2>\n<p>终端记录块只展示预先编写的命令和输出，不会在浏览器中执行任何命令。滚动到终端后，它会自动播放一次。</p>\n<figure class=\"docs-terminal\" data-docs-terminal data-terminal-locale=\"zh\" data-terminal-autoplay=\"visible\" data-terminal-speed=\"normal\" data-terminal-loop=\"false\" aria-label=\"检查 Docker 服务\"><figcaption class=\"docs-terminal__bar\"><span class=\"docs-terminal__lights\" aria-hidden=\"true\"><span></span><span></span><span></span></span><span class=\"docs-terminal__title\">检查 Docker 服务</span><span class=\"docs-terminal__badge\">终端演示</span></figcaption><div class=\"docs-terminal__screen\" data-terminal-screen tabindex=\"0\"><div class=\"docs-terminal__transcript\" data-terminal-transcript><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>compose \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>up \\</span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">&gt;</span><span class=\"docs-terminal__command\" data-terminal-command>-d</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>[+] Running 3/3</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Network app_default  Created</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container database  Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output> ✔ Container web        Started</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output></span></span><span class=\"docs-terminal__line docs-terminal__line--command\" data-terminal-line data-terminal-kind=\"command\"><span class=\"docs-terminal__prompt\">$</span><span class=\"docs-terminal__command\" data-terminal-command>docker ps</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>CONTAINER ID   IMAGE     STATUS</span></span><span class=\"docs-terminal__line docs-terminal__line--output\" data-terminal-line data-terminal-kind=\"output\"><span data-terminal-output>a1b2c3         nginx     Up 2 minutes</span></span></div><span class=\"docs-terminal__cursor\" data-terminal-cursor aria-hidden=\"true\"></span></div><div class=\"docs-terminal__controls\" data-terminal-controls><button type=\"button\" data-terminal-action=\"toggle\" data-terminal-label=\"play\">播放</button><button type=\"button\" data-terminal-action=\"replay\" data-terminal-label=\"replay\">重播</button><button type=\"button\" data-terminal-action=\"show-all\" data-terminal-label=\"showAll\">显示全部</button><button type=\"button\" data-terminal-action=\"copy\" data-terminal-label=\"copy\">复制命令</button></div></figure>",
+      "html": "<p>这是一份面向所有贡献者的规范性说明。提交代码、文档、翻译、资源或问题反馈前，请先阅读本页；文档的 Frontmatter 和 Markdown 扩展语法请继续参考<a href=\"guide\">文档格式与语法参考</a>。</p>\n<h2 id=\"项目原则\">项目原则</h2>\n<p>环回云是一个社区协作项目。我们更看重真实、可复现、可审阅的内容，而不是提交数量或文字数量。</p>\n<p>贡献内容应满足以下原则：</p>\n<ul>\n<li>有明确的使用场景和目标读者</li>\n<li>尽量提供验证环境、版本号、前置条件和预期结果</li>\n<li>不隐藏风险，不把未经验证的猜测写成确定结论</li>\n<li>不提交秘密、隐私数据、受限制的第三方内容或无法确认来源的材料</li>\n<li>保持变更范围清晰，避免在一个 Pull Request 中混入无关重构</li>\n</ul>\n<h2 id=\"可以贡献什么\">可以贡献什么</h2>\n<p>欢迎以下类型的贡献：</p>\n<ul>\n<li>修复页面、路由、静态资源和交互问题</li>\n<li>改进可访问性、移动端布局和错误提示</li>\n<li>增加或完善家里云相关的真实实践文档</li>\n<li>修正文档中的命令、版本、链接、事实和翻译</li>\n<li>补充测试、构建检查和开发者工具</li>\n<li>提交可复现的问题报告和改进建议</li>\n</ul>\n<h2 id=\"不接受什么\">不接受什么</h2>\n<p>以下内容不会被合并，或需要先补充充分证明：</p>\n<ul>\n<li>未经验证的整段转载、营销稿或与家里云无关的推广</li>\n<li>泄露密码、令牌、私钥、Cookie、个人信息或内网拓扑的内容</li>\n<li>将大段 AI 生成内容直接作为最终稿提交，且没有人工核对</li>\n<li>缺少风险说明的磁盘、网络、固件、权限和数据破坏操作</li>\n<li>绕过安全控制、侵犯他人权益或用于违法用途的内容</li>\n<li>仅为了个人风格而进行的大范围格式化或无关重命名</li>\n</ul>\n<h2 id=\"贡献流程\">贡献流程</h2>\n<h3 id=\"1-提交前确认\">1. 提交前确认</h3>\n<p>小型拼写修正可以直接创建分支。涉及新功能、目录调整、许可证、构建配置或大量文档时，建议先创建 Issue 说明目标和方案，避免重复工作。</p>\n<p>提交前先确认：</p>\n<ul>\n<li>是否已经存在相同问题或文章</li>\n<li>变更属于代码、文档、翻译还是第三方资源</li>\n<li>是否拥有提交内容的版权或再发布权限</li>\n<li>是否需要同步更新中文基准文档、英文译文或测试</li>\n</ul>\n<h3 id=\"2-创建分支\">2. 创建分支</h3>\n<p>从最新的 <code>main</code> 创建短期分支。推荐使用以下前缀：</p>\n<table>\n<thead>\n<tr>\n<th>前缀</th>\n<th>用途</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>docs/</code></td>\n<td>文档、示例和翻译</td>\n</tr>\n<tr>\n<td><code>fix/</code></td>\n<td>错误修复</td>\n</tr>\n<tr>\n<td><code>feat/</code></td>\n<td>新功能</td>\n</tr>\n<tr>\n<td><code>test/</code></td>\n<td>测试和验证</td>\n</tr>\n<tr>\n<td><code>chore/</code></td>\n<td>构建、依赖和维护</td>\n</tr>\n</tbody>\n</table>\n<p>一个分支应围绕一个目标，完成后尽快提交 Pull Request。</p>\n<h3 id=\"3-修改内容\">3. 修改内容</h3>\n<p>文档修改应遵守以下路径规则：</p>\n<ul>\n<li>中文基准文档放在 <code>docs/zh/</code>。</li>\n<li>英文译文放在 <code>docs/en/</code>，并与中文保持相同的文章路径。</li>\n<li>分类目录使用 <code>_category.md</code> 设置标题和排序。</li>\n<li>文章文件名使用小写 kebab-case，例如 <code>network-backup.md</code>。</li>\n<li>分类目录内不要使用 <code>index.md</code> 作为文章名；构建脚本会忽略它。</li>\n<li>文档元数据必须包含 <code>title</code>；时间字段建议明确写出时区。</li>\n<li>正文从 <code>##</code> 开始，危险操作使用 <code>:::warning</code>，代码块标注语言。</li>\n</ul>\n<p>代码修改应遵守以下规则：</p>\n<ul>\n<li>优先修复实际问题，不为简单逻辑增加不必要的抽象。</li>\n<li>浏览器专属 API 放在客户端代码路径中，不要让静态构建依赖运行时服务器。</li>\n<li>修改路由、基础路径或静态资源时，同时检查首页、控制台和文档深层 URL。</li>\n<li>不要删除或替换根目录 <code>components/</code> 中的上游许可证、来源说明或版权信息。</li>\n<li>如果复制或修改第三方 UI 组件，应在 Pull Request 中说明来源、改动范围和适用许可证。</li>\n</ul>\n<h3 id=\"4-本地验证\">4. 本地验证</h3>\n<p>文档或代码变更至少运行：</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> ci</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build:docs</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> typecheck</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> test</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build</span></span></code></pre>\n<p>验证重点：</p>\n<ul>\n<li>构建没有 Frontmatter、类型或打包错误</li>\n<li>首页、<code>/console</code> 和 <code>/docs/...</code> 能够直接打开</li>\n<li>生产构建没有错误的根绝对资源路径</li>\n<li>文档目录顺序、标题锚点、代码高亮和语言回退正常</li>\n<li>危险操作带有清晰的警告、影响范围和恢复建议</li>\n</ul>\n<p><code>app/docs/.generated/docs.ts</code> 由 <code>scripts/build-docs.ts</code> 生成。不要手动编辑它；修改文档后运行 <code>npm run build:docs</code>，检查生成差异是否只包含本次文档变更。</p>\n<h3 id=\"5-提交-pull-request\">5. 提交 Pull Request</h3>\n<p>Pull Request 标题应直接说明目的，例如：</p>\n<ul>\n<li><code>[docs] 增加 ZFS 快照备份指南</code></li>\n<li><code>[fix] 修复文档深层链接加载失败</code></li>\n<li><code>[feat] 增加实例状态筛选</code></li>\n</ul>\n<p>描述中请包含：</p>\n<ul>\n<li>变更目的和主要内容</li>\n<li>影响的页面、文档路径或组件</li>\n<li>使用过的系统和软件版本（如果适用）</li>\n<li>已执行的验证命令及结果</li>\n<li>已知限制、兼容性问题或后续工作</li>\n</ul>\n<h3 id=\"6-审阅与合并\">6. 审阅与合并</h3>\n<p>审阅者会重点检查事实准确性、可复现性、风险提示、许可证边界、移动端表现和构建结果。贡献者应直接修正问题，不要通过删除测试、隐藏警告或放宽校验来绕过审阅。</p>\n<p>只有在检查通过、关键意见处理完毕且变更范围清晰时，Pull Request 才适合合并。合并后请删除临时分支。</p>\n<h2 id=\"翻译规范\">翻译规范</h2>\n<p>中文内容是事实和结构基准，英文翻译不是每篇文章都必须同步完成。翻译时：</p>\n<ul>\n<li>保持文章路径、命令、配置项、版本号和风险等级一致</li>\n<li>不要为了语言习惯改变技术结论或省略限制条件</li>\n<li>使用 <code>translator.type</code> 标记 <code>machine</code>、<code>llm</code>、<code>human</code> 或 <code>mix</code></li>\n<li>AI 翻译必须人工核对命令、路径、选项、错误信息和警告</li>\n<li>缺少英文文章时，站点会显示中文回退内容并提示读者</li>\n</ul>\n<h2 id=\"许可证与版权\">许可证与版权</h2>\n<ul>\n<li>项目自有代码（根目录 <code>components/</code> 中的上游 UI 组件除外）使用 GPL-3.0-or-later。</li>\n<li><code>README.md</code>、<code>docs/</code> 和项目自有文档素材使用 CC BY-SA 4.0。</li>\n<li>根目录 <code>components/</code> 中的 shadcn/ui、Aceternity UI 等上游组件不适用项目的统一许可证声明，必须保留并遵守各自来源的许可证。</li>\n<li>第三方依赖、字体、图标、图片和示例内容不因提交到本项目而自动转为项目许可证。</li>\n<li>贡献者保留原创贡献的版权；提交贡献表示你有权提交，并同意按照对应内容类型的许可证发布。</li>\n</ul>\n<p>项目目前不要求单独签署 CLA。如果你不能确认自己拥有某段代码、文字、图片或翻译的再发布权，请先不要提交，并在 Issue 中说明来源和授权情况。</p>\n<h2 id=\"问题反馈\">问题反馈</h2>\n<p>有效的问题报告应尽量包含复现步骤、期望结果、实际结果、浏览器和系统版本、相关 URL，以及不包含敏感信息的控制台错误。安全问题不要公开发布，请通过私下渠道联系维护者。</p>\n<p>感谢每一位让环回云更真实、更可复现、更容易维护的贡献者。</p>",
       "anchors": [
         {
-          "id": "动态终端",
-          "text": "动态终端",
+          "id": "项目原则",
+          "text": "项目原则",
+          "level": 2
+        },
+        {
+          "id": "可以贡献什么",
+          "text": "可以贡献什么",
+          "level": 2
+        },
+        {
+          "id": "不接受什么",
+          "text": "不接受什么",
+          "level": 2
+        },
+        {
+          "id": "贡献流程",
+          "text": "贡献流程",
+          "level": 2
+        },
+        {
+          "id": "1-提交前确认",
+          "text": "1. 提交前确认",
+          "level": 3
+        },
+        {
+          "id": "2-创建分支",
+          "text": "2. 创建分支",
+          "level": 3
+        },
+        {
+          "id": "3-修改内容",
+          "text": "3. 修改内容",
+          "level": 3
+        },
+        {
+          "id": "4-本地验证",
+          "text": "4. 本地验证",
+          "level": 3
+        },
+        {
+          "id": "5-提交-pull-request",
+          "text": "5. 提交 Pull Request",
+          "level": 3
+        },
+        {
+          "id": "6-审阅与合并",
+          "text": "6. 审阅与合并",
+          "level": 3
+        },
+        {
+          "id": "翻译规范",
+          "text": "翻译规范",
+          "level": 2
+        },
+        {
+          "id": "许可证与版权",
+          "text": "许可证与版权",
+          "level": 2
+        },
+        {
+          "id": "问题反馈",
+          "text": "问题反馈",
           "level": 2
         }
       ]
@@ -574,6 +783,96 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
     }
   },
   "en": {
+    "contribution/contributing": {
+      "path": "contribution/contributing",
+      "meta": {
+        "title": "Contribution Policy",
+        "description": "A unified contribution process for code, documentation, translations, and issue reports",
+        "order": 0,
+        "created": "2026-08-17T10:00:00.000Z",
+        "updated": "2026-08-17T10:00:00.000Z",
+        "author": [
+          {
+            "name": "星语",
+            "email": "star@sotis.space",
+            "url": "https://github.com/star-whisper9"
+          }
+        ],
+        "translator": {
+          "type": "llm",
+          "model": "gpt-5.6-luna"
+        },
+        "navIgnore": false
+      },
+      "html": "<p>This is the normative guide for all contributors. Read it before submitting code, documentation, translations, assets, or issue reports. For document Frontmatter and Markdown extensions, also see the <a href=\"guide\">documentation format and syntax reference</a>.</p>\n<h2 id=\"project-principles\">Project Principles</h2>\n<p>Loopback Cloud is a community project. We value content that is real, reproducible, and reviewable more than submission volume or word count.</p>\n<p>Contributions should follow these principles:</p>\n<ul>\n<li>Have a clear use case and target audience.</li>\n<li>Include the verification environment, versions, prerequisites, and expected results whenever possible.</li>\n<li>Do not hide risks or present unverified guesses as established facts.</li>\n<li>Do not submit secrets, private data, restricted third-party material, or content with an unverifiable source.</li>\n<li>Keep the change scope clear and avoid mixing unrelated refactors into one Pull Request.</li>\n</ul>\n<h2 id=\"what-you-can-contribute\">What You Can Contribute</h2>\n<p>The following contributions are welcome:</p>\n<ul>\n<li>Fixes for pages, routes, static assets, and interactions.</li>\n<li>Improvements to accessibility, mobile layouts, and error messages.</li>\n<li>New or improved real-world home-lab documentation.</li>\n<li>Corrections to commands, versions, links, facts, and translations in the docs.</li>\n<li>Tests, build checks, and developer tooling.</li>\n<li>Reproducible issue reports and improvement proposals.</li>\n</ul>\n<h2 id=\"what-we-do-not-accept\">What We Do Not Accept</h2>\n<p>The following content will not be merged, or requires sufficient evidence first:</p>\n<ul>\n<li>Unverified full-text reposts, marketing copy, or promotions unrelated to home labs.</li>\n<li>Passwords, tokens, private keys, cookies, personal information, or internal network topology.</li>\n<li>Large blocks of AI-generated content submitted as final copy without human verification.</li>\n<li>Disk, network, firmware, permission, or data-destructive operations without risk warnings.</li>\n<li>Content intended to bypass security controls, infringe on others' rights, or support illegal activity.</li>\n<li>Large formatting changes or unrelated renames made only for personal style.</li>\n</ul>\n<h2 id=\"contribution-workflow\">Contribution Workflow</h2>\n<h3 id=\"1-confirm-before-you-start\">1. Confirm Before You Start</h3>\n<p>Small spelling fixes can go directly into a branch. For new features, directory changes, licensing, build configuration, or substantial documentation, create an Issue describing the goal and proposed approach first to avoid duplicated work.</p>\n<p>Before submitting, confirm:</p>\n<ul>\n<li>Whether the same issue or article already exists.</li>\n<li>Whether the change is code, documentation, translation, or third-party material.</li>\n<li>Whether you own the copyright or redistribution rights for the content.</li>\n<li>Whether the Chinese baseline, English translation, or tests also need updating.</li>\n</ul>\n<h3 id=\"2-create-a-branch\">2. Create a Branch</h3>\n<p>Create a short-lived branch from the latest <code>main</code>. The following prefixes are recommended:</p>\n<table>\n<thead>\n<tr>\n<th>Prefix</th>\n<th>Use</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td><code>docs/</code></td>\n<td>Documentation, examples, and translations</td>\n</tr>\n<tr>\n<td><code>fix/</code></td>\n<td>Bug fixes</td>\n</tr>\n<tr>\n<td><code>feat/</code></td>\n<td>New features</td>\n</tr>\n<tr>\n<td><code>test/</code></td>\n<td>Tests and verification</td>\n</tr>\n<tr>\n<td><code>chore/</code></td>\n<td>Build, dependency, and maintenance work</td>\n</tr>\n</tbody>\n</table>\n<p>Keep one branch focused on one goal and open a Pull Request soon after the work is ready.</p>\n<h3 id=\"3-make-the-changes\">3. Make the Changes</h3>\n<p>Documentation changes should follow these path rules:</p>\n<ul>\n<li>Put the Chinese baseline in <code>docs/zh/</code>.</li>\n<li>Put English translations in <code>docs/en/</code> using the same article paths as the Chinese tree.</li>\n<li>Use <code>_category.md</code> to set category titles and ordering.</li>\n<li>Use lowercase kebab-case for article filenames, such as <code>network-backup.md</code>.</li>\n<li>Do not use <code>index.md</code> as an article name inside a category; the build script ignores it.</li>\n<li>Every document must have a <code>title</code> field; write an explicit timezone for date fields when possible.</li>\n<li>Start the body at <code>##</code>, use <code>:::warning</code> for dangerous operations, and specify a language for code blocks.</li>\n</ul>\n<p>Code changes should follow these rules:</p>\n<ul>\n<li>Fix the actual problem first; do not add unnecessary abstractions for simple logic.</li>\n<li>Keep browser-only APIs in client-side code paths; static builds must not depend on a runtime server.</li>\n<li>When changing routes, base paths, or static assets, check the home page, console, and deep documentation URLs together.</li>\n<li>Do not remove or replace upstream licenses, source notices, or copyright information in the root <code>components/</code> directory.</li>\n<li>If you copy or modify a third-party UI component, describe its source, the scope of your changes, and the applicable license in the Pull Request.</li>\n</ul>\n<h3 id=\"4-verify-locally\">4. Verify Locally</h3>\n<p>Run at least the following for documentation or code changes:</p>\n<pre class=\"shiki github-dark\" style=\"background-color:#24292e;color:#e1e4e8\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> ci</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build:docs</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> typecheck</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> test</span></span>\n<span class=\"line\"><span style=\"color:#B392F0\">npm</span><span style=\"color:#9ECBFF\"> run</span><span style=\"color:#9ECBFF\"> build</span></span></code></pre>\n<p>Check that:</p>\n<ul>\n<li>The build has no Frontmatter, type-checking, or bundling errors.</li>\n<li>The home page, <code>/console</code>, and <code>/docs/...</code> can be opened directly.</li>\n<li>The production build has no incorrect root-absolute asset paths.</li>\n<li>Documentation ordering, heading anchors, code highlighting, and language fallback work correctly.</li>\n<li>Dangerous operations include clear warnings, impact descriptions, and recovery advice.</li>\n</ul>\n<p><code>app/docs/.generated/docs.ts</code> is generated by <code>scripts/build-docs.ts</code>. Do not edit it by hand. After changing documentation, run <code>npm run build:docs</code> and check that the generated diff contains only the changes expected from your document edits.</p>\n<h3 id=\"5-open-a-pull-request\">5. Open a Pull Request</h3>\n<p>The Pull Request title should state the purpose directly, for example:</p>\n<ul>\n<li><code>[docs] Add a ZFS snapshot backup guide</code></li>\n<li><code>[fix] Fix deep-link loading for documentation pages</code></li>\n<li><code>[feat] Add instance status filtering</code></li>\n</ul>\n<p>Include the following in the description:</p>\n<ul>\n<li>The purpose and main contents of the change.</li>\n<li>The affected pages, documentation paths, or components.</li>\n<li>The systems and software versions used, when applicable.</li>\n<li>The verification commands that were run and their results.</li>\n<li>Known limitations, compatibility concerns, or follow-up work.</li>\n</ul>\n<h3 id=\"6-review-and-merge\">6. Review and Merge</h3>\n<p>Reviewers focus on factual accuracy, reproducibility, risk notices, license boundaries, mobile behavior, and build results. Fix issues directly instead of bypassing review by deleting tests, hiding warnings, or weakening validation.</p>\n<p>A Pull Request is ready to merge only after checks pass, important review comments are resolved, and the change scope is clear. Delete the temporary branch after merging.</p>\n<h2 id=\"translation-rules\">Translation Rules</h2>\n<p>Chinese is the factual and structural baseline. An English translation is not required for every article. When translating:</p>\n<ul>\n<li>Keep article paths, commands, configuration keys, versions, and risk levels consistent.</li>\n<li>Do not change technical conclusions or omit limitations for stylistic reasons.</li>\n<li>Use <code>translator.type</code> with <code>machine</code>, <code>llm</code>, <code>human</code>, or <code>mix</code>.</li>\n<li>AI translations must be manually checked, especially commands, paths, options, error messages, and warnings.</li>\n<li>When an English article is missing, the site displays Chinese fallback content and informs the reader.</li>\n</ul>\n<h2 id=\"licensing-and-copyright\">Licensing and Copyright</h2>\n<ul>\n<li>First-party project code, excluding upstream UI components in the root <code>components/</code> directory, is licensed under GPL-3.0-or-later.</li>\n<li><code>README.md</code>, <code>docs/</code>, and original project documentation material are licensed under CC BY-SA 4.0.</li>\n<li>Upstream components in the root <code>components/</code> directory, including material from shadcn/ui and Aceternity UI, are not covered by the project's blanket license and must retain the licenses from their respective sources.</li>\n<li>Third-party dependencies, fonts, icons, images, and examples keep their original licenses and do not become project-licensed merely by being submitted here.</li>\n<li>Contributors retain copyright in their original work. Submitting a contribution means that you have the right to submit it and agree to publish it under the license applicable to its content type.</li>\n</ul>\n<p>The project does not currently require a separate CLA. If you cannot confirm that you have the right to redistribute a piece of code, text, image, or translation, do not submit it yet; explain its source and authorization in an Issue first.</p>\n<h2 id=\"issue-reports\">Issue Reports</h2>\n<p>Useful issue reports include reproduction steps, expected and actual results, browser and system versions, relevant URLs, and console errors with sensitive information removed. Do not publish security issues publicly; contact the maintainer privately instead.</p>\n<p>Thank you to everyone who makes Loopback Cloud more real, reproducible, and maintainable.</p>",
+      "anchors": [
+        {
+          "id": "project-principles",
+          "text": "Project Principles",
+          "level": 2
+        },
+        {
+          "id": "what-you-can-contribute",
+          "text": "What You Can Contribute",
+          "level": 2
+        },
+        {
+          "id": "what-we-do-not-accept",
+          "text": "What We Do Not Accept",
+          "level": 2
+        },
+        {
+          "id": "contribution-workflow",
+          "text": "Contribution Workflow",
+          "level": 2
+        },
+        {
+          "id": "1-confirm-before-you-start",
+          "text": "1. Confirm Before You Start",
+          "level": 3
+        },
+        {
+          "id": "2-create-a-branch",
+          "text": "2. Create a Branch",
+          "level": 3
+        },
+        {
+          "id": "3-make-the-changes",
+          "text": "3. Make the Changes",
+          "level": 3
+        },
+        {
+          "id": "4-verify-locally",
+          "text": "4. Verify Locally",
+          "level": 3
+        },
+        {
+          "id": "5-open-a-pull-request",
+          "text": "5. Open a Pull Request",
+          "level": 3
+        },
+        {
+          "id": "6-review-and-merge",
+          "text": "6. Review and Merge",
+          "level": 3
+        },
+        {
+          "id": "translation-rules",
+          "text": "Translation Rules",
+          "level": 2
+        },
+        {
+          "id": "licensing-and-copyright",
+          "text": "Licensing and Copyright",
+          "level": 2
+        },
+        {
+          "id": "issue-reports",
+          "text": "Issue Reports",
+          "level": 2
+        }
+      ]
+    },
     "contribution/guide": {
       "path": "contribution/guide",
       "meta": {
@@ -731,6 +1030,6 @@ export const docsByLocale: Record<DocLocale, Record<string, DocEntry>> = {
 
 export const allDocPaths: string[] = [
   "",
-  "contribution/guide",
-  "software/terminal-demo"
+  "contribution/contributing",
+  "contribution/guide"
 ];

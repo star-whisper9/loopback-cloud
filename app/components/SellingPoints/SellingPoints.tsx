@@ -10,16 +10,17 @@ import { GlareCard } from "@/components/ui/glare-card";
 import { useT } from "~/i18n/useT";
 import { useInView } from "~/lib/useInView";
 import { useCores } from "~/lib/useCores";
+import { publicAsset } from "~/lib/publicAsset";
 
 const ICONS = [ShieldCheck, Gauge, Lock, Activity, Cpu, Footprints] as const;
 const IMAGES = [
-  "/ddos.jpg",
-  "/low-latency.jpg",
-  "/zero-trust.jpg",
-  "/sla.jpg",
-  "/hardware.jpg",
-  "/ops.jpg",
-];
+  "ddos.jpg",
+  "low-latency.jpg",
+  "zero-trust.jpg",
+  "sla.jpg",
+  "hardware.jpg",
+  "ops.jpg",
+].map(publicAsset);
 
 export function SellingPoints() {
   const t = useT();
