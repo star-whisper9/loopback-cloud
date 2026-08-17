@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { CalendarDays, History, Mail, Users } from "lucide-react";
 import type { DocAuthor, DocEntry } from "~/lib/docs/types";
 import { useLocale, useT } from "~/i18n/useT";
 import type { Locale } from "~/i18n/types";
 import { TranslatorBanner } from "./TranslatorBanner";
+import { initializeTerminalDemos } from "./terminalPlayer";
 
 const AUTHOR_NAME_MAX = 24;
 
@@ -80,8 +81,15 @@ function DocAuthors({ authors }: { authors: DocAuthor[] }) {
 export function DocsContent({ doc }: { doc: DocEntry }) {
   const t = useT();
   const locale = useLocale();
+  const contentRef = useRef<HTMLDivElement>(null);
   const { description, author, created, updated } = doc.meta;
   const hasMeta = Boolean(author?.length || created || updated);
+
+  useEffect(() => {
+    const root = contentRef.current;
+    if (!root) return;
+    return initializeTerminalDemos(root, locale);
+  }, [doc.html, locale]);
 
   return (
     <article className="docs-prose">
@@ -121,7 +129,7 @@ export function DocsContent({ doc }: { doc: DocEntry }) {
       {doc.meta.translator ? (
         <TranslatorBanner translator={doc.meta.translator} />
       ) : null}
-      <div dangerouslySetInnerHTML={{ __html: doc.html }} />
+      <div ref={contentRef} dangerouslySetInnerHTML={{ __html: doc.html }} />
     </article>
   );
 }

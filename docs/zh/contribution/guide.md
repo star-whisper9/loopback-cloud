@@ -153,6 +153,40 @@ navIgnore: false # 可选，true 时不出现在侧边栏导航
 ssh root@127.0.0.1
 ```
 
+### 终端演示块（Terminal Replay）
+
+使用 `terminal` 语言可以展示带命令提示符和输出的动态终端记录。它只回放预先写入文档的内容，不会在浏览器中执行命令：
+
+```terminal title="检查 Docker 服务" speed="normal"
+$ docker compose up -d
+[+] Running 3/3
+ ✔ Network app_default  Created
+ ✔ Container database  Started
+ ✔ Container web        Started
+
+$ docker ps
+CONTAINER ID   IMAGE     STATUS
+a1b2c3         nginx     Up 2 minutes
+```
+
+终端块支持以下可选属性：
+
+| 属性 | 可选值 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `title` | 任意文本 | `终端演示` | 顶部标题栏显示的名称 |
+| `autoplay` | `visible` / `load` / `manual` | `visible` | 播放触发方式；`visible` 在滚动到可视区域时播放 |
+| `speed` | `fast` / `normal` / `slow` | `normal` | 命令打字和输出回放速度 |
+| `loop` | `true` / `false` | `false` | 播放完成后是否循环 |
+
+书写规则：
+
+- 以 `$`、`#`、`%`、`>` 或常见 Shell 提示符开头的行会被识别为命令
+- 命令后的连续行会被识别为输出，空行会被保留
+- 复制按钮只复制命令内容，不包含提示符和输出
+- 播放器提供播放 / 暂停、重播、显示全部和复制命令操作
+- 用户开启“减少动态效果”后，终端会直接显示完整内容
+- 较长的演示建议使用 `autoplay="manual"`，避免打断读者阅读
+
 ### 标题锚点与大纲
 
 - 二级、三级标题自动生成 `id` 锚点，并收录进页面右侧大纲

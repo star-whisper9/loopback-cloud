@@ -21,6 +21,11 @@ import type {
   DocTranslator,
   DocTree,
 } from "../app/lib/docs/types";
+import {
+  parseTerminalConfig,
+  parseTerminalTranscript,
+  type TerminalLine,
+} from "../app/lib/docs/terminal";
 import { normalizeDatetime } from "./normalizeDatetime";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
@@ -33,6 +38,32 @@ const DEFAULT_CALLOUT_TITLE: Record<string, { zh: string; en: string }> = {
   warning: { zh: "警告", en: "Warning" },
   tip: { zh: "提示", en: "Tip" },
   important: { zh: "重要", en: "Important" },
+};
+
+const TERMINAL_LABELS: Record<DocLocale, {
+  demo: string;
+  play: string;
+  pause: string;
+  replay: string;
+  showAll: string;
+  copy: string;
+}> = {
+  zh: {
+    demo: "终端演示",
+    play: "播放",
+    pause: "暂停",
+    replay: "重播",
+    showAll: "显示全部",
+    copy: "复制命令",
+  },
+  en: {
+    demo: "Terminal demo",
+    play: "Play",
+    pause: "Pause",
+    replay: "Replay",
+    showAll: "Show all",
+    copy: "Copy commands",
+  },
 };
 
 function escapeHtml(s: string): string {
@@ -93,6 +124,27 @@ function blockToMd(children: any[]): string {
       throw new Error("TODO: unsupported block node type in directive: " + c.type);
     })
     .join("\n\n");
+}
+
+function renderTerminalLine(line: TerminalLine): string {
+  if (line.kind === "command") {
+    return `<span class="docs-terminal__line docs-terminal__line--command" data-terminal-line data-terminal-kind="command"><span class="docs-terminal__prompt">${escapeHtml(line.prompt)}</span><span class="docs-terminal__command" data-terminal-command>${escapeHtml(line.text)}</span></span>`;
+  }
+
+  return `<span class="docs-terminal__line docs-terminal__line--output" data-terminal-line data-terminal-kind="output"><span data-terminal-output>${escapeHtml(line.text)}</span></span>`;
+}
+
+function renderTerminalBlock(
+  locale: DocLocale,
+  value: string,
+  meta: string | null | undefined,
+): string {
+  const labels = TERMINAL_LABELS[locale];
+  const config = parseTerminalConfig(meta, labels.demo);
+  const lines = parseTerminalTranscript(value);
+  const linesHtml = lines.map(renderTerminalLine).join("");
+
+  return `<figure class="docs-terminal" data-docs-terminal data-terminal-locale="${locale}" data-terminal-autoplay="${config.autoplay}" data-terminal-speed="${config.speed}" data-terminal-loop="${config.loop}" aria-label="${escapeHtml(config.title)}"><figcaption class="docs-terminal__bar"><span class="docs-terminal__lights" aria-hidden="true"><span></span><span></span><span></span></span><span class="docs-terminal__title">${escapeHtml(config.title)}</span><span class="docs-terminal__badge">${escapeHtml(labels.demo)}</span></figcaption><div class="docs-terminal__screen" data-terminal-screen tabindex="0"><div class="docs-terminal__transcript" data-terminal-transcript>${linesHtml}</div><span class="docs-terminal__cursor" data-terminal-cursor aria-hidden="true"></span></div><div class="docs-terminal__controls" data-terminal-controls><button type="button" data-terminal-action="toggle" data-terminal-label="play">${escapeHtml(labels.play)}</button><button type="button" data-terminal-action="replay" data-terminal-label="replay">${escapeHtml(labels.replay)}</button><button type="button" data-terminal-action="show-all" data-terminal-label="showAll">${escapeHtml(labels.showAll)}</button><button type="button" data-terminal-action="copy" data-terminal-label="copy">${escapeHtml(labels.copy)}</button></div></figure>`;
 }
 
 async function renderMarkdown(
@@ -174,6 +226,13 @@ async function renderMarkdown(
     if (!children) return;
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
+      if (child.type === "code" && child.lang === "terminal") {
+        children[i] = {
+          type: "html",
+          value: renderTerminalBlock(locale, child.value, child.meta),
+        };
+        continue;
+      }
       if (child.type === "containerDirective") {
         if (!KNOWN_DIRECTIVES.has(child.name)) continue;
         if (child.name === "tab") continue;

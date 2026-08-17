@@ -156,6 +156,40 @@ Fenced code blocks are highlighted by Shiki with the `github-dark` theme and **m
 ssh root@127.0.0.1
 ```
 
+### Terminal Replay Blocks
+
+Use the `terminal` language to show a dynamic terminal transcript with prompts and command output. It only replays content written in the document; it never executes commands in the browser:
+
+```terminal title="Inspect Docker services" speed="normal"
+$ docker compose up -d
+[+] Running 3/3
+ ✔ Network app_default  Created
+ ✔ Container database  Started
+ ✔ Container web        Started
+
+$ docker ps
+CONTAINER ID   IMAGE     STATUS
+a1b2c3         nginx     Up 2 minutes
+```
+
+The terminal block supports these optional attributes:
+
+| Attribute | Values | Default | Description |
+| --- | --- | --- | --- |
+| `title` | Any text | `Terminal demo` | Name shown in the title bar |
+| `autoplay` | `visible` / `load` / `manual` | `visible` | Playback trigger; `visible` starts when scrolled into view |
+| `speed` | `fast` / `normal` / `slow` | `normal` | Command typing and output playback speed |
+| `loop` | `true` / `false` | `false` | Whether to replay after completion |
+
+Authoring rules:
+
+- Lines starting with `$`, `#`, `%`, `>`, or a common shell prompt are treated as commands
+- Consecutive lines after a command are treated as output, and blank lines are preserved
+- The copy button copies commands only, without prompts or output
+- The player provides play / pause, replay, show all, and copy commands controls
+- When the user prefers reduced motion, the terminal immediately shows the complete transcript
+- Use `autoplay="manual"` for long demos so they do not interrupt reading
+
 ### Heading Anchors and Outline
 
 - Level-2 and level-3 headings automatically get `id` anchors and appear in the on-page outline
