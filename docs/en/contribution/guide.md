@@ -3,7 +3,6 @@ title: Documentation Contribution Guide
 description: Contribution rules, full Frontmatter reference, and Markdown extension syntax
 order: 1
 created: 2026-07-29
-updated: 2026-07-29
 author:
   - name: 星语
     email: star@sotis.space
@@ -67,7 +66,6 @@ title: Getting Started           # required, page title
 description: Up and running in 5 minutes  # optional, subtitle under the title
 order: 1                         # optional, sidebar order, lower first, default 0
 created: 2026-07-29 13:16:13 +8  # optional, creation time
-updated: 2026-07-29              # optional, last update time
 author:                          # optional, author list
   - name: 星语                   #   required, truncated beyond 24 chars
     email: star@sotis.space      #   optional, rendered as a mail icon
@@ -89,14 +87,14 @@ navIgnore: false                 # optional, hide from sidebar when true
 | `description` | string | no | Subtitle shown under the title |
 | `order` | number | no | Sidebar order, lower first, default 0; ties sorted by path |
 | `created` | datetime | no | Creation time, see formats below |
-| `updated` | datetime | no | Last update time, same formats |
+| `updated` | datetime | no | Generated from the latest Git commit during the build; no need to write it manually |
 | `author` | array | no | Author list, see below |
 | `translator` | object | no | Translation info, renders a translator banner |
 | `navIgnore` | boolean | no | Hidden from the sidebar when `true` |
 
 ### Datetime Formats
 
-`created` / `updated` accept the following forms, all normalized to ISO 8601 (UTC) at build time:
+`created` accepts the following forms and is normalized to ISO 8601 (UTC) at build time. `updated` is generated from the latest Git commit for this document; when Git history is unavailable during local development, an explicitly supplied value is kept as a fallback.
 
 | Form | Example |
 | --- | --- |

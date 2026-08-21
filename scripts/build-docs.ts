@@ -8,6 +8,7 @@ import rehypeShiki from "@shikijs/rehype";
 import rehypeStringify from "rehype-stringify";
 import matter from "gray-matter";
 import { globSync } from "tinyglobby";
+import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -32,6 +33,7 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SRC_DIR = join(ROOT, "docs");
 const OUT_DIR = join(ROOT, "app/docs/.generated");
 const LOCALES: DocLocale[] = ["zh", "en"];
+const gitUpdatedCache = new Map<string, string | undefined>();
 
 const DEFAULT_CALLOUT_TITLE: Record<string, { zh: string; en: string }> = {
   note: { zh: "注释", en: "Note" },
@@ -73,6 +75,30 @@ function escapeHtml(s: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function readGitUpdated(fileAbs: string): string | undefined {
+  if (gitUpdatedCache.has(fileAbs)) return gitUpdatedCache.get(fileAbs);
+
+  let raw: string;
+  try {
+    raw = execFileSync(
+      "git",
+      ["log", "--follow", "-1", "--format=%cI", "--", fileAbs],
+      {
+        cwd: ROOT,
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "ignore"],
+      },
+    ).trim();
+  } catch {
+    gitUpdatedCache.set(fileAbs, undefined);
+    return undefined;
+  }
+
+  const updated = raw === "" ? undefined : normalizeDatetime(raw);
+  gitUpdatedCache.set(fileAbs, updated);
+  return updated;
 }
 
 function inlineToMd(children: any[]): string {
@@ -380,6 +406,8 @@ async function buildEntry(
   const relPath = relative(localeRootAbs, fileAbs).split(sep).join("/");
   const raw = readFileSync(fileAbs, "utf8");
   const { meta, body } = parseFrontmatter(raw, relPath);
+  const gitUpdated = readGitUpdated(fileAbs);
+  if (gitUpdated) meta.updated = gitUpdated;
   const { html, anchors } = await renderMarkdown(locale, body);
   return { path: entryPath(localeRootAbs, fileAbs), meta, html, anchors };
 }

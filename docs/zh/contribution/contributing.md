@@ -3,7 +3,6 @@ title: 贡献规范
 description: 面向代码、文档、翻译和问题反馈的统一贡献流程
 order: 0
 created: 2026-08-17 18:00 +8
-updated: 2026-08-17 18:00 +8
 author:
   - name: 星语
     email: star@sotis.space

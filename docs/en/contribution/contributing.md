@@ -3,7 +3,6 @@ title: Contribution Policy
 description: A unified contribution process for code, documentation, translations, and issue reports
 order: 0
 created: 2026-08-17 18:00 +8
-updated: 2026-08-17 18:00 +8
 author:
   - name: 星语
     email: star@sotis.space

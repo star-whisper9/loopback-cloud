@@ -3,7 +3,6 @@ title: 文档贡献指南
 description: 贡献规则、Frontmatter 字段与 Markdown 扩展语法完整参考
 order: 1
 created: 2026-07-29
-updated: 2026-07-29
 author:
   - name: 星语
     email: star@sotis.space
@@ -64,7 +63,6 @@ title: 快速开始 # 必填，页面标题
 description: 五分钟上手环回云 # 可选，显示在标题下方的简介
 order: 1 # 可选，侧边栏排序，越小越靠前，默认 0
 created: 2026-07-29 13:16:13 +8 # 可选，创建时间
-updated: 2026-07-29 # 可选，最后更新时间
 author: # 可选，作者列表
   - name: 星语 #   必填，超过 24 字符会截断显示
     email: star@sotis.space #   可选，渲染为邮件图标
@@ -86,14 +84,14 @@ navIgnore: false # 可选，true 时不出现在侧边栏导航
 | `description` | string   | 否   | 简介，显示在标题下方                             |
 | `order`       | number   | 否   | 侧边栏排序，越小越靠前，默认 0；相同时按路径排序 |
 | `created`     | datetime | 否   | 创建时间，见下文格式说明                         |
-| `updated`     | datetime | 否   | 更新时间，格式同上                               |
+| `updated`     | datetime | 否   | 构建时自动取本文最近一次 Git 提交时间，无需手写     |
 | `author`      | array    | 否   | 作者列表，见下文                                 |
 | `translator`  | object   | 否   | 翻译信息，生成译文横幅                           |
 | `navIgnore`   | boolean  | 否   | 为 `true` 时不出现在侧边栏                       |
 
 ### 时间格式
 
-`created` / `updated` 接受以下写法，构建时统一归一化为 ISO 8601（UTC）：
+`created` 接受以下写法，构建时统一归一化为 ISO 8601（UTC）。`updated` 会自动取本文最近一次 Git 提交时间；本地开发无法读取 Git 历史时，如果手写了该字段则保留为回退值。
 
 | 写法             | 示例                                                |
 | ---------------- | --------------------------------------------------- |

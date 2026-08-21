@@ -2,7 +2,6 @@
 title: Documentation Home
 description: Loopback Cloud Documentation Center
 created: 2026-07-29 13:16:13 +8
-updated: 2026-07-29 13:16:13 +8
 author:
   - name: 星语
     email: star@sotis.space
