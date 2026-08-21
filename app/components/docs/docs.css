@@ -14,6 +14,10 @@
     margin: 0 auto;
   }
 
+  .docs-grid > main {
+    min-width: 0;
+  }
+
   @media (min-width: 64rem) {
     .docs-grid {
       grid-template-columns: 14rem minmax(0, 1fr);
@@ -37,11 +41,19 @@
   }
 
   .docs-sidebar {
-    position: sticky;
-    top: 6.5rem;
-    max-height: calc(100vh - 7rem);
-    overflow-y: auto;
+    position: static;
+    max-height: none;
+    overflow: visible;
     padding-right: 0.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    .docs-sidebar {
+      position: sticky;
+      top: 6.5rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+    }
   }
 
   .docs-sidebar__group {
@@ -136,6 +148,7 @@
   .docs-prose {
     width: 100%;
     max-width: 40rem;
+    min-width: 0;
     color: var(--color-fg);
     font-size: 0.95rem;
     line-height: 1.7;
@@ -489,7 +502,10 @@
   }
 
   .docs-prose table {
+    display: block;
     width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
     border-collapse: collapse;
     margin: 1rem 0;
   }
