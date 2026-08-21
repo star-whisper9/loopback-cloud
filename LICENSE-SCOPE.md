@@ -3,9 +3,9 @@
 This file explains which repository materials are covered by the license
 files. It is a scope notice, not an additional license.
 
-## GNU GPL v3.0 or later
+## GNU AGPL v3.0 or later
 
-The GNU GPL applies to first-party source code maintained as part of this
+The GNU AGPL applies to first-party source code maintained as part of this
 project, including:
 
 - `app/` (except generated documentation data under `app/docs/.generated/`)
