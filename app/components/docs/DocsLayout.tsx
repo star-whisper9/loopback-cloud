@@ -17,8 +17,9 @@ function findTopCategory(
   root: DocCategoryNode,
   path: string,
 ): DocCategoryNode | null {
+  if (path === "") return null;
+
   for (const c of root.children) {
-    if (path === "") return c;
     if (path.startsWith(c.name + "/") || contains(c, path)) return c;
   }
   return root.children[0] ?? null;
@@ -57,24 +58,33 @@ export function DocsLayout({
   const zhTree = trees.zh;
   const useTree = tree.root.children.length > 0 ? tree : zhTree;
   const categories = useTree.root.children;
+  const homeDoc = tree.indexDoc ?? zhTree.indexDoc;
+  if (!homeDoc) throw new Error("TODO: docs indexDoc missing for both locales");
 
   const [activeName, setActiveName] = useState<string | null>(() => {
     const top = findTopCategory(useTree.root, doc.path);
-    return top?.name ?? categories[0]?.name ?? null;
+    return top?.name ?? null;
   });
 
   useEffect(() => {
     const top = findTopCategory(useTree.root, doc.path);
-    setActiveName(top?.name ?? categories[0]?.name ?? null);
+    setActiveName(top?.name ?? null);
   }, [categories, doc.path, useTree]);
 
   const activeCategory = useMemo(
     () =>
-      categories.find((c) => c.name === activeName) ?? categories[0] ?? null,
+      activeName === null
+        ? null
+        : (categories.find((c) => c.name === activeName) ?? null),
     [categories, activeName],
   );
   const firstDoc = activeCategory ? findFirstDoc(activeCategory) : null;
-  const showEmptyCategory = activeCategory !== null && firstDoc === null;
+  const showEmptyCategory =
+    activeName !== null && activeCategory !== null && firstDoc === null;
+
+  function handleHomeSelect() {
+    setActiveName(null);
+  }
 
   function handleCategorySelect(name: string) {
     const category = categories.find((c) => c.name === name);
@@ -97,9 +107,12 @@ export function DocsLayout({
       <DocsTopBar
         categories={categories}
         activeName={activeName}
+        homeTitle={homeDoc.meta.title}
+        isHome={doc.path === "" && activeName === null}
+        onHome={handleHomeSelect}
         onSelect={handleCategorySelect}
       />
-      <div className="docs-grid">
+      <div className={`docs-grid${activeCategory ? "" : " docs-grid--home"}`}>
         {activeCategory ? (
           <DocsSidebar node={activeCategory} currentPath={doc.path} />
         ) : null}
